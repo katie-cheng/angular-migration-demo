@@ -1,0 +1,6 @@
+<button type="button" class="bk-account-tile" (click)="opened.emit()">
+  <span class="bk-account-tile__name">{{ accountName }}</span>
+  <span class="bk-account-tile__number">{{ maskedNumber }}</span>
+  <span class="bk-account-tile__balance">{{ balance | currency }}</span>
+  <span class="bk-account-tile__available">{{ available | currency }} available</span>
+</button>
