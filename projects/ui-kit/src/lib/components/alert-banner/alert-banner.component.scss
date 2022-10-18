@@ -1,0 +1,12 @@
+.bk-alert-banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 3px;
+  &--info { background: #f0f4f8; }
+  &--success { background: #e3f9e5; }
+  &--warn { background: #fffaeb; }
+  &--error { background: #ffe3e3; }
+  &__close { margin-left: auto; border: 0; background: none; cursor: pointer; font-size: 18px; }
+}

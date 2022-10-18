@@ -1,0 +1,5 @@
+<div class="bk-alert-banner bk-alert-banner--{{ tone }}" role="status">
+  <mat-icon class="bk-alert-banner__icon">{{ iconName }}</mat-icon>
+  <span class="bk-alert-banner__message">{{ message }}</span>
+  <button *ngIf="dismissible" class="bk-alert-banner__close" type="button" (click)="dismissed.emit()">&times;</button>
+</div>
