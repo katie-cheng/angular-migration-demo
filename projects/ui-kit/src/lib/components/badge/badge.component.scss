@@ -1,0 +1,10 @@
+.bk-badge {
+  display: inline-block;
+  min-width: 18px;
+  padding: 1px 5px;
+  border-radius: 9px;
+  font-size: 11px;
+  text-align: center;
+  background: #cbd2d9;
+  &--alert { background: #a3232b; color: #ffffff; }
+}
