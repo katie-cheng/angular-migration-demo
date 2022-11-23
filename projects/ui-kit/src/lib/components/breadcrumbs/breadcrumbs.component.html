@@ -1,0 +1,6 @@
+<nav class="bk-breadcrumbs" aria-label="Breadcrumb">
+  <span *ngFor="let crumb of crumbs; let last = last">
+    <a class="bk-breadcrumbs__link" (click)="navigated.emit(crumb.route)">{{ crumb.label }}</a>
+    <span class="bk-breadcrumbs__sep" *ngIf="!last">/</span>
+  </span>
+</nav>
