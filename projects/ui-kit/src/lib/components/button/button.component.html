@@ -1,0 +1,8 @@
+<button mat-raised-button
+        class="bk-button bk-button--{{ variant }}"
+        [class.bk-button--loading]="loading"
+        [disabled]="disabled || loading"
+        (click)="onClick($event)">
+  <mat-icon *ngIf="icon" class="bk-button__icon">{{ icon }}</mat-icon>
+  <ng-content></ng-content>
+</button>

@@ -1,0 +1,17 @@
+.bk-button {
+  font-family: var(--bk-font-body);
+  letter-spacing: 0.2px;
+
+  // Design-system paint applied straight onto the Material internals.
+  .mat-button-wrapper {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    line-height: 20px;
+  }
+
+  &--primary .mat-button-wrapper { color: #ffffff; }
+  &--ghost { background: transparent; }
+  &--danger { background: #a3232b; }
+  &--loading .mat-button-wrapper { opacity: 0.6; }
+}
