@@ -1,0 +1,7 @@
+<section class="bk-card" [class.bk-card--elevated]="elevated">
+  <header class="bk-card__header" *ngIf="heading">
+    <h3 class="bk-card__heading">{{ heading }}</h3>
+    <p class="bk-card__subheading" *ngIf="subheading">{{ subheading }}</p>
+  </header>
+  <div class="bk-card__body"><ng-content></ng-content></div>
+</section>
