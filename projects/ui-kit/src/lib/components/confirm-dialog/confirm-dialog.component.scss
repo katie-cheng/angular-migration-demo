@@ -1,0 +1,11 @@
+.bk-confirm-dialog__title { font-size: 18px; }
+
+::ng-deep .bk-confirm-dialog-panel {
+  .mat-dialog-container {
+    padding: 20px 24px;
+    border-radius: 2px;
+    box-shadow: 0 8px 24px rgba(31, 41, 51, 0.24);
+  }
+  .mat-dialog-title { margin-bottom: 8px; }
+  .mat-dialog-actions { padding-bottom: 0; }
+}
