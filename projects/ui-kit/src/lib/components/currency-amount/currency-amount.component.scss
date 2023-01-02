@@ -1,0 +1,4 @@
+.bk-currency-amount {
+  font-variant-numeric: tabular-nums;
+  &--negative { color: #a3232b; }
+}
