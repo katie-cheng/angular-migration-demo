@@ -1,0 +1,9 @@
+<mat-form-field appearance="legacy" class="bk-date-range">
+  <mat-label>{{ label }}</mat-label>
+  <mat-date-range-input [rangePicker]="rangePicker">
+    <input matStartDate placeholder="Start" />
+    <input matEndDate placeholder="End" />
+  </mat-date-range-input>
+  <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
+  <mat-date-range-picker #rangePicker></mat-date-range-picker>
+</mat-form-field>
