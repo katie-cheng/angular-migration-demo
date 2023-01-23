@@ -1,0 +1,5 @@
+<div class="bk-empty-state">
+  <h4 class="bk-empty-state__heading">{{ heading }}</h4>
+  <p class="bk-empty-state__message">{{ message }}</p>
+  <button *ngIf="actionLabel" type="button" class="bk-empty-state__action" (click)="actioned.emit()">{{ actionLabel }}</button>
+</div>
