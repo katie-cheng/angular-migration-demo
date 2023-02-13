@@ -1,0 +1,12 @@
+.bk-form-field {
+  width: 100%;
+
+  .mat-form-field-underline { background-color: #9aa5b1; }
+  .mat-form-field-ripple { background-color: var(--bk-color-primary); }
+  .mat-form-field-flex { padding-top: 4px; }
+  .mat-form-field-infix { border-top: 0.6em solid transparent; }
+  .mat-form-field-label { color: #52606d; }
+
+  &--invalid .mat-form-field-underline { background-color: #a3232b; }
+  &__req { color: #a3232b; margin-left: 2px; }
+}
