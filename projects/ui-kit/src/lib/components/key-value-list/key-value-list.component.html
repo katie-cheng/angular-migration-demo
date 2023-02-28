@@ -1,0 +1,6 @@
+<dl class="bk-key-value-list" [style.gridTemplateColumns]="'repeat(' + columns + ', minmax(0, 1fr))'">
+  <div class="bk-key-value-list__entry" *ngFor="let entry of entries">
+    <dt>{{ entry.key }}</dt>
+    <dd>{{ entry.value }}</dd>
+  </div>
+</dl>
