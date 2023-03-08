@@ -1,0 +1,4 @@
+<button mat-button class="bk-menu__trigger" [matMenuTriggerFor]="menu">{{ triggerLabel }}</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item *ngFor="let item of items" (click)="itemSelected.emit(item.id)">{{ item.label }}</button>
+</mat-menu>
