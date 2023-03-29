@@ -1,0 +1,6 @@
+.bk-nav-rail {
+  display: flex;
+  flex-direction: column;
+  &__item { display: flex; align-items: center; gap: 10px; border: 0; background: none; padding: 10px 14px; cursor: pointer; }
+  &__item--active { background: #f0f4f8; color: var(--bk-color-primary); font-weight: 600; }
+}

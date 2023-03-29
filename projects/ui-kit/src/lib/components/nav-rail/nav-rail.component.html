@@ -1,0 +1,7 @@
+<nav class="bk-nav-rail">
+  <button *ngFor="let item of items" type="button" class="bk-nav-rail__item"
+          [class.bk-nav-rail__item--active]="item.id === activeId" (click)="navigated.emit(item.id)">
+    <mat-icon>{{ item.icon }}</mat-icon>
+    <span class="bk-nav-rail__label">{{ item.label }}</span>
+  </button>
+</nav>
