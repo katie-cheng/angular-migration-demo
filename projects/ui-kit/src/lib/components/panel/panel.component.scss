@@ -1,0 +1,6 @@
+.bk-panel {
+  padding: 12px 16px;
+  border-left: 3px solid #cbd2d9;
+  &--info { border-left-color: var(--bk-color-primary); background: #f0f4f8; }
+  &--warn { border-left-color: #c99a2e; background: #fffaeb; }
+}
