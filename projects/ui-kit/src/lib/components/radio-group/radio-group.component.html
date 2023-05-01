@@ -1,0 +1,6 @@
+<fieldset class="bk-radio-group">
+  <legend>{{ legend }}</legend>
+  <mat-radio-group [formControl]="control">
+    <mat-radio-button *ngFor="let option of options" [value]="option.value">{{ option.label }}</mat-radio-button>
+  </mat-radio-group>
+</fieldset>
