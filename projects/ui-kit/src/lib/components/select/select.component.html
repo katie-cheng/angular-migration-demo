@@ -1,0 +1,7 @@
+<mat-form-field appearance="legacy" class="bk-select">
+  <mat-label>{{ label }}</mat-label>
+  <mat-select [formControl]="control" [disabled]="disabled"
+              (selectionChange)="selectionChanged.emit($event.value)">
+    <mat-option *ngFor="let option of options" [value]="option.value">{{ option.label }}</mat-option>
+  </mat-select>
+</mat-form-field>
