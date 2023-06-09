@@ -1,0 +1,5 @@
+<div class="bk-slider">
+  <span class="bk-slider__label">{{ label }}</span>
+  <mat-slider [min]="min" [max]="max" [value]="value"
+              (change)="valueChanged.emit($event.value ?? 0)"></mat-slider>
+</div>
