@@ -1,0 +1,4 @@
+<button class="bk-sort-header" type="button" [class.bk-sort-header--active]="active"
+        (click)="sorted.emit(direction === 'asc' ? 'desc' : 'asc')">
+  {{ label }}<span class="bk-sort-header__arrow">{{ direction === 'asc' ? '\u2191' : '\u2193' }}</span>
+</button>
