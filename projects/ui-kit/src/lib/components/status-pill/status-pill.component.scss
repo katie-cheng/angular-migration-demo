@@ -1,0 +1,9 @@
+.bk-status-pill {
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  text-transform: uppercase;
+  background: #e4e7eb;
+  &--posted, &--settled, &--approved { background: #e3f9e5; }
+  &--failed, &--declined { background: #ffe3e3; }
+}
