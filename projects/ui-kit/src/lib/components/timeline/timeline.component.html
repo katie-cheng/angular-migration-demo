@@ -1,0 +1,6 @@
+<ol class="bk-timeline">
+  <li class="bk-timeline__item" *ngFor="let event of events" [class.bk-timeline__item--done]="event.done">
+    <span class="bk-timeline__label">{{ event.label }}</span>
+    <span class="bk-timeline__at">{{ event.at }}</span>
+  </li>
+</ol>
