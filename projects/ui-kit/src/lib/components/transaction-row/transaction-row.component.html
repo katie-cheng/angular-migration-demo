@@ -1,0 +1,5 @@
+<div class="bk-transaction-row" [class.bk-transaction-row--pending]="pending">
+  <span class="bk-transaction-row__description">{{ description }}</span>
+  <span class="bk-transaction-row__date">{{ postedAt }}</span>
+  <span class="bk-transaction-row__amount">{{ amount | currency }}</span>
+</div>
