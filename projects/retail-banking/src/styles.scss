@@ -1,0 +1,27 @@
+@import '../../ui-kit/src/styles/theme';
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: var(--bk-font-body);
+  background: var(--bk-color-surface-alt, #f5f7fa);
+  color: var(--bk-color-ink);
+}
+
+a {
+  color: var(--bk-color-primary);
+}
+
+.bk-page {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.bk-confirm-dialog-panel .mat-dialog-container {
+  border-radius: var(--bk-radius);
+}
+
+.bk-snack--error .mat-simple-snackbar {
+  color: #fff;
+}
