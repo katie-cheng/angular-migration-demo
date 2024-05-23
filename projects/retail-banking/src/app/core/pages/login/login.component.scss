@@ -1,0 +1,37 @@
+.login {
+  min-height: 100vh;
+
+  &__marketing {
+    background: var(--bk-color-primary);
+    color: #fff;
+    padding: 64px;
+  }
+
+  &__marketing-title {
+    font-size: 40px;
+    margin: 0;
+  }
+
+  &__form-panel {
+    padding: 32px;
+  }
+
+  &__card {
+    width: 380px;
+    max-width: 100%;
+    padding: 24px;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 22px;
+  }
+
+  &__forgot {
+    font-size: 13px;
+  }
+
+  .mat-form-field-flex {
+    background: #fafbfc;
+  }
+}

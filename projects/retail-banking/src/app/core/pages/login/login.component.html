@@ -1,0 +1,39 @@
+<div class="login" fxLayout="row" fxLayout.lt-md="column" fxFill>
+  <section class="login__marketing" fxFlex="45" fxHide.lt-md fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="16px">
+    <h1 class="login__marketing-title">Northwind Retail</h1>
+    <p class="login__marketing-copy">Everyday banking, built around your money.</p>
+  </section>
+
+  <section class="login__form-panel" fxFlex fxLayout="column" fxLayoutAlign="center center">
+    <mat-card class="login__card" fxLayout="column" fxLayoutGap="16px">
+      <h2 class="login__title">Sign in</h2>
+
+      <bk-alert-banner *ngIf="error" tone="error" [message]="error"></bk-alert-banner>
+
+      <form [formGroup]="form" (ngSubmit)="submit()" fxLayout="column" fxLayoutGap="8px">
+        <mat-form-field appearance="legacy">
+          <mat-label>Username</mat-label>
+          <input matInput formControlName="username" autocomplete="username" />
+          <mat-error *ngIf="form.controls['username'].hasError('required')">Username is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" formControlName="password" autocomplete="current-password" />
+          <mat-error *ngIf="form.controls['password'].hasError('minlength')">
+            Passwords are at least 8 characters
+          </mat-error>
+        </mat-form-field>
+
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <mat-checkbox formControlName="rememberDevice">Remember this device</mat-checkbox>
+          <a href="#" class="login__forgot" fxHide.xs>Forgotten details?</a>
+        </div>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="submitting">
+          {{ submitting ? 'Signing in...' : 'Sign in' }}
+        </button>
+      </form>
+    </mat-card>
+  </section>
+</div>
