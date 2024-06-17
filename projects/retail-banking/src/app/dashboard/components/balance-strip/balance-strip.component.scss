@@ -1,0 +1,21 @@
+.balance-strip {
+  padding: calc(var(--bk-spacing-unit) * 2.5);
+
+  &__label {
+    color: #667085;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+  }
+
+  &__value {
+    font-size: 30px;
+    font-weight: 600;
+    color: var(--bk-color-primary);
+  }
+
+  &__stat-value {
+    font-size: 20px;
+    font-weight: 600;
+  }
+}

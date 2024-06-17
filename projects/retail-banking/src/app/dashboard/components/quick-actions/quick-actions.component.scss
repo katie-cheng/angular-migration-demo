@@ -1,0 +1,26 @@
+.quick-actions {
+  padding: calc(var(--bk-spacing-unit) * 2);
+
+  &__title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  &__action {
+    padding: 12px 4px;
+    border: 1px solid #e4e7ec;
+    border-radius: var(--bk-radius);
+    text-decoration: none;
+    color: var(--bk-color-ink);
+
+    &:hover {
+      border-color: var(--bk-color-primary);
+    }
+  }
+
+  &__label {
+    font-size: 12px;
+    text-align: center;
+  }
+}
