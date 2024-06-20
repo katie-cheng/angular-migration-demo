@@ -1,0 +1,18 @@
+.spend-breakdown {
+  padding: calc(var(--bk-spacing-unit) * 2);
+
+  &__title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  &__amount {
+    font-weight: 600;
+  }
+
+  .mat-progress-bar {
+    height: 6px;
+    border-radius: 3px;
+  }
+}

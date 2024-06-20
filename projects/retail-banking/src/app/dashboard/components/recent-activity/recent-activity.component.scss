@@ -1,0 +1,36 @@
+.recent-activity {
+  padding: calc(var(--bk-spacing-unit) * 2);
+
+  &__title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  &__row {
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f2f5;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  &__description {
+    font-weight: 500;
+  }
+
+  &__meta {
+    color: #667085;
+    font-size: 12px;
+  }
+
+  &__amount {
+    text-align: right;
+    font-weight: 600;
+
+    &--credit {
+      color: #2f855a;
+    }
+  }
+}

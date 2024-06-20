@@ -1,0 +1,40 @@
+<mat-card class="recent-activity" fxLayout="column" fxLayoutGap="8px">
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <h2 class="recent-activity__title" fxFlex>Recent activity</h2>
+    <a mat-button routerLink="/accounts" fxHide.xs>See all</a>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+
+  <div class="recent-activity__list" fxLayout="column">
+    <div *ngFor="let transaction of transactions; trackBy: trackById"
+         class="recent-activity__row"
+         fxLayout="row"
+         fxLayout.xs="column"
+         fxLayoutAlign="space-between center"
+         fxLayoutAlign.xs="start stretch"
+         fxLayoutGap="12px">
+      <div fxLayout="column" fxFlex fxLayoutGap="2px">
+        <span class="recent-activity__description">{{ transaction.description }}</span>
+        <span class="recent-activity__meta" fxHide.xs>
+          {{ transaction.postedAt | date:'mediumDate' }} &middot; {{ transaction.merchantCategory }}
+        </span>
+      </div>
+
+      <bk-status-pill [status]="transaction.status" fxHide.lt-md></bk-status-pill>
+
+      <span class="recent-activity__amount"
+            [class.recent-activity__amount--credit]="transaction.amount > 0"
+            fxFlex="120px"
+            fxFlex.xs="auto">
+        {{ transaction.amount | currency:transaction.currency }}
+      </span>
+    </div>
+  </div>
+
+  <bk-empty-state *ngIf="!loading && !transactions.length"
+                  heading="No activity yet"
+                  message="Transactions appear here as soon as they are authorised."></bk-empty-state>
+</mat-card>

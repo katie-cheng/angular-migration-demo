@@ -1,0 +1,18 @@
+<mat-card class="spend-breakdown" fxLayout="column" fxLayoutGap="10px">
+  <h2 class="spend-breakdown__title">Where your money went</h2>
+  <mat-divider></mat-divider>
+
+  <nw-sparkline [values]="trend" stroke="#003366"></nw-sparkline>
+
+  <div *ngFor="let slice of slices" class="spend-breakdown__slice" fxLayout="column" fxLayoutGap="4px">
+    <div fxLayout="row" fxLayoutAlign="space-between baseline">
+      <span fxFlex>{{ slice.category }}</span>
+      <span class="spend-breakdown__amount">{{ slice.amount | currency:'GBP' }}</span>
+    </div>
+    <mat-progress-bar mode="determinate" [value]="slice.share"></mat-progress-bar>
+  </div>
+
+  <bk-empty-state *ngIf="!slices.length"
+                  heading="Nothing to break down"
+                  message="Spending categories appear once you have card activity."></bk-empty-state>
+</mat-card>
