@@ -1,0 +1,79 @@
+<section class="accounts-list" fxLayout="column" fxLayoutGap="16px">
+  <header class="accounts-list__header"
+          fxLayout="row"
+          fxLayout.lt-md="column"
+          fxLayoutAlign="space-between center"
+          fxLayoutAlign.lt-md="start stretch"
+          fxLayoutGap="12px">
+    <div fxLayout="column" fxLayoutGap="4px">
+      <h1 class="accounts-list__title">Accounts</h1>
+      <p class="accounts-list__subtitle" fxHide.lt-sm>Balances and account detail for every product the customer holds.</p>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="8px" fxFlex.lt-md="100">
+      <mat-form-field appearance="legacy" class="accounts-list__search" fxFlex="240px" fxFlex.lt-md="auto">
+        <mat-label>Search</mat-label>
+        <input matInput [formControl]="search" autocomplete="off" />
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+      <button mat-stroked-button (click)="reload()">
+        <mat-icon>refresh</mat-icon>
+        Refresh
+      </button>
+    </div>
+  </header>
+
+  <bk-alert-banner *ngIf="error" tone="error" [message]="error"></bk-alert-banner>
+
+  <div class="accounts-list__body" fxLayout="row" fxLayout.lt-lg="column" fxLayoutGap="16px">
+    <mat-card class="accounts-list__table-card" fxFlex="grow">
+      <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+
+      <table mat-table [dataSource]="rows" matSort class="accounts-list__table">
+    <ng-container matColumnDef="nickname">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nickname</th>
+      <td mat-cell *matCellDef="let account">{{ account.nickname }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="maskedNumber">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Account</th>
+      <td mat-cell *matCellDef="let account">{{ account.maskedNumber }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="availableBalance">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Available</th>
+      <td mat-cell *matCellDef="let account">{{ account.availableBalance | currency:'GBP' }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="currentBalance">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Current</th>
+      <td mat-cell *matCellDef="let account">{{ account.currentBalance | currency:'GBP' }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+      <td mat-cell *matCellDef="let account"><bk-status-pill [status]="account.status"></bk-status-pill></td>
+    </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row
+            *matRowDef="let row; columns: displayedColumns"
+            (click)="open(row)"
+            class="accounts-list__row"></tr>
+      </table>
+
+      <bk-empty-state *ngIf="!loading && !rows.length"
+                      heading="Nothing here yet"
+                      message="Balances and account detail for every product the customer holds."></bk-empty-state>
+
+      <mat-paginator [length]="total"
+                     [pageSize]="pageSize"
+                     [pageSizeOptions]="[10, 25, 50]"
+                     (page)="onPage($event)"></mat-paginator>
+    </mat-card>
+
+    <aside class="accounts-list__aside" fxFlex="300px" fxFlex.lt-lg="100" fxHide.lt-md>
+      <bk-accounts-summary [count]="total" [loading]="loading"></bk-accounts-summary>
+    </aside>
+  </div>
+</section>

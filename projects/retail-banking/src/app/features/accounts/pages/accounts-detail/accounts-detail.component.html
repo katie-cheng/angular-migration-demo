@@ -1,0 +1,45 @@
+<section class="accounts-detail" fxLayout="column" fxLayoutGap="16px">
+  <bk-breadcrumbs [crumbs]="crumbs"></bk-breadcrumbs>
+
+  <div *ngIf="loading" fxLayout="row" fxLayoutAlign="center center" class="accounts-detail__loading">
+    <mat-spinner diameter="36"></mat-spinner>
+  </div>
+
+  <ng-container *ngIf="account as account">
+    <mat-card class="accounts-detail__card" fxLayout="column" fxLayoutGap="12px">
+      <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between start" fxLayoutGap="12px">
+        <h2 class="accounts-detail__title" fxFlex>Account detail</h2>
+        <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="end center">
+          <button mat-stroked-button (click)="back()">Back</button>
+        </div>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <div class="accounts-detail__rows" fxLayout="column" fxLayoutGap="8px">
+      <div class="detail-row" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="8px">
+        <span class="detail-row__label" fxFlex="180px" fxFlex.lt-sm="auto">Nickname</span>
+        <span class="detail-row__value" fxFlex>{{ account.nickname }}</span>
+      </div>
+      <div class="detail-row" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="8px">
+        <span class="detail-row__label" fxFlex="180px" fxFlex.lt-sm="auto">Account</span>
+        <span class="detail-row__value" fxFlex>{{ account.maskedNumber }}</span>
+      </div>
+      <div class="detail-row" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="8px">
+        <span class="detail-row__label" fxFlex="180px" fxFlex.lt-sm="auto">Available</span>
+        <span class="detail-row__value" fxFlex>{{ account.availableBalance | currency:'GBP' }}</span>
+      </div>
+      <div class="detail-row" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="8px">
+        <span class="detail-row__label" fxFlex="180px" fxFlex.lt-sm="auto">Current</span>
+        <span class="detail-row__value" fxFlex>{{ account.currentBalance | currency:'GBP' }}</span>
+      </div>
+      <div class="detail-row" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="8px">
+        <span class="detail-row__label" fxFlex="180px" fxFlex.lt-sm="auto">Status</span>
+        <span class="detail-row__value" fxFlex><bk-status-pill [status]="account.status"></bk-status-pill></span>
+      </div>
+      </div>
+    </mat-card>
+  </ng-container>
+
+  <bk-alert-banner *ngIf="error" tone="error" [message]="error"></bk-alert-banner>
+</section>
