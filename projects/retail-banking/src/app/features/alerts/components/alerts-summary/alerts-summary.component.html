@@ -1,0 +1,15 @@
+<mat-card class="alerts-summary" fxLayout="column" fxLayoutGap="8px">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+    <mat-icon class="alerts-summary__icon">notifications_active</mat-icon>
+    <h3 class="alerts-summary__title" fxFlex>Alerts</h3>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div fxLayout="row" fxLayoutAlign="space-between baseline">
+    <span class="alerts-summary__headline">{{ headline }}</span>
+    <mat-spinner *ngIf="loading" diameter="16"></mat-spinner>
+  </div>
+
+  <p class="alerts-summary__blurb" fxHide.lt-md>Balance, spend and security alert subscriptions.</p>
+</mat-card>

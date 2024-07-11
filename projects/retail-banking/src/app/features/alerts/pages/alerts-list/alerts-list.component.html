@@ -1,0 +1,77 @@
+<section class="alerts-list" fxLayout="column" fxLayoutGap="16px">
+  <header class="alerts-list__header"
+          fxLayout="row"
+          fxLayout.lt-md="column"
+          fxLayoutAlign="space-between center"
+          fxLayoutAlign.lt-md="start stretch"
+          fxLayoutGap="12px">
+    <div fxLayout="column" fxLayoutGap="4px">
+      <h1 class="alerts-list__title">Alerts</h1>
+      <p class="alerts-list__subtitle" fxHide.lt-sm>Balance, spend and security alert subscriptions.</p>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="8px" fxFlex.lt-md="100">
+      <mat-form-field appearance="legacy" class="alerts-list__search" fxFlex="240px" fxFlex.lt-md="auto">
+        <mat-label>Search</mat-label>
+        <input matInput [formControl]="search" autocomplete="off" />
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="create()" fxHide.lt-sm>
+        <mat-icon>add</mat-icon>
+        New
+      </button>
+      <button mat-mini-fab color="primary" (click)="create()" fxShow.lt-sm fxHide>
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </header>
+
+  <bk-alert-banner *ngIf="error" tone="error" [message]="error"></bk-alert-banner>
+
+  <div class="alerts-list__body" fxLayout="row" fxLayout.lt-lg="column" fxLayoutGap="16px">
+    <mat-card class="alerts-list__table-card" fxFlex="grow">
+      <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+
+      <table mat-table [dataSource]="rows" matSort class="alerts-list__table">
+    <ng-container matColumnDef="trigger">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Trigger</th>
+      <td mat-cell *matCellDef="let alert">{{ alert.trigger }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="channel">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Channel</th>
+      <td mat-cell *matCellDef="let alert">{{ alert.channel }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="threshold">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Threshold</th>
+      <td mat-cell *matCellDef="let alert">{{ alert.threshold | currency:'GBP' }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+      <td mat-cell *matCellDef="let alert"><bk-status-pill [status]="alert.status"></bk-status-pill></td>
+    </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row
+            *matRowDef="let row; columns: displayedColumns"
+            (click)="open(row)"
+            class="alerts-list__row"></tr>
+      </table>
+
+      <bk-empty-state *ngIf="!loading && !rows.length"
+                      heading="Nothing here yet"
+                      message="Balance, spend and security alert subscriptions."></bk-empty-state>
+
+      <mat-paginator [length]="total"
+                     [pageSize]="pageSize"
+                     [pageSizeOptions]="[10, 25, 50]"
+                     (page)="onPage($event)"></mat-paginator>
+    </mat-card>
+
+    <aside class="alerts-list__aside" fxFlex="300px" fxFlex.lt-lg="100" fxHide.lt-md>
+      <bk-alerts-summary [count]="total" [loading]="loading"></bk-alerts-summary>
+    </aside>
+  </div>
+</section>

@@ -1,0 +1,36 @@
+<section class="alerts-form" fxLayout="column" fxLayoutGap="16px">
+  <h1 class="alerts-form__title">{{ editing ? 'Edit' : 'New' }} alert</h1>
+
+  <mat-card>
+    <form [formGroup]="form" (ngSubmit)="submit()" fxLayout="column" fxLayoutGap="12px">
+      <div fxLayout="row wrap" fxLayoutGap="16px grid" fxLayout.lt-md="column">
+      <mat-form-field appearance="legacy" fxFlex="50" fxFlex.lt-md="100">
+        <mat-label>Trigger</mat-label>
+        <input matInput formControlName="trigger" />
+        <mat-error *ngIf="form.controls['trigger'].hasError('required')">Trigger is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="legacy" fxFlex="50" fxFlex.lt-md="100">
+        <mat-label>Channel</mat-label>
+        <input matInput formControlName="channel" />
+        <mat-error *ngIf="form.controls['channel'].hasError('required')">Channel is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="legacy" fxFlex="50" fxFlex.lt-md="100">
+        <mat-label>Threshold</mat-label>
+        <input matInput type="number" formControlName="threshold" />
+        <span matPrefix *ngIf="true">&pound;&nbsp;</span>
+      </mat-form-field>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="8px" fxLayoutAlign.lt-sm="stretch stretch">
+        <button mat-stroked-button type="button" (click)="cancel()">Cancel</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid || saving">
+          {{ saving ? 'Saving...' : 'Save' }}
+        </button>
+      </div>
+    </form>
+  </mat-card>
+</section>
