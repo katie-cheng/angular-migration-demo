@@ -1,0 +1,15 @@
+<mat-card class="bill-pay-summary" fxLayout="column" fxLayoutGap="8px">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+    <mat-icon class="bill-pay-summary__icon">receipt_long</mat-icon>
+    <h3 class="bill-pay-summary__title" fxFlex>Bill Pay</h3>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div fxLayout="row" fxLayoutAlign="space-between baseline">
+    <span class="bill-pay-summary__headline">{{ headline }}</span>
+    <mat-spinner *ngIf="loading" diameter="16"></mat-spinner>
+  </div>
+
+  <p class="bill-pay-summary__blurb" fxHide.lt-md>Biller directory, one-off payments and standing instructions.</p>
+</mat-card>
