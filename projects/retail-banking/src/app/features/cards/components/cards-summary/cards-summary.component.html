@@ -1,0 +1,15 @@
+<mat-card class="cards-summary" fxLayout="column" fxLayoutGap="8px">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+    <mat-icon class="cards-summary__icon">credit_card</mat-icon>
+    <h3 class="cards-summary__title" fxFlex>Cards</h3>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div fxLayout="row" fxLayoutAlign="space-between baseline">
+    <span class="cards-summary__headline">{{ headline }}</span>
+    <mat-spinner *ngIf="loading" diameter="16"></mat-spinner>
+  </div>
+
+  <p class="cards-summary__blurb" fxHide.lt-md>Card controls: freeze, replace, travel notices and PIN reset.</p>
+</mat-card>

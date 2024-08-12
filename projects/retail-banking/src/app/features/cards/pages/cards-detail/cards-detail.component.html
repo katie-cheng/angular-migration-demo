@@ -1,0 +1,41 @@
+<section class="cards-detail" fxLayout="column" fxLayoutGap="16px">
+  <bk-breadcrumbs [crumbs]="crumbs"></bk-breadcrumbs>
+
+  <div *ngIf="loading" fxLayout="row" fxLayoutAlign="center center" class="cards-detail__loading">
+    <mat-spinner diameter="36"></mat-spinner>
+  </div>
+
+  <ng-container *ngIf="card as card">
+    <mat-card class="cards-detail__card" fxLayout="column" fxLayoutGap="12px">
+      <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between start" fxLayoutGap="12px">
+        <h2 class="cards-detail__title" fxFlex>Card detail</h2>
+        <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="end center">
+          <button mat-stroked-button (click)="back()">Back</button>
+        </div>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <div class="cards-detail__rows" fxLayout="column" fxLayoutGap="8px">
+      <div class="detail-row" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="8px">
+        <span class="detail-row__label" fxFlex="180px" fxFlex.lt-sm="auto">Network</span>
+        <span class="detail-row__value" fxFlex>{{ card.network }}</span>
+      </div>
+      <div class="detail-row" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="8px">
+        <span class="detail-row__label" fxFlex="180px" fxFlex.lt-sm="auto">Card</span>
+        <span class="detail-row__value" fxFlex>{{ card.maskedNumber }}</span>
+      </div>
+      <div class="detail-row" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="8px">
+        <span class="detail-row__label" fxFlex="180px" fxFlex.lt-sm="auto">Expires</span>
+        <span class="detail-row__value" fxFlex>{{ card.expiry | date:'mediumDate' }}</span>
+      </div>
+      <div class="detail-row" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="8px">
+        <span class="detail-row__label" fxFlex="180px" fxFlex.lt-sm="auto">Status</span>
+        <span class="detail-row__value" fxFlex><bk-status-pill [status]="card.status"></bk-status-pill></span>
+      </div>
+      </div>
+    </mat-card>
+  </ng-container>
+
+  <bk-alert-banner *ngIf="error" tone="error" [message]="error"></bk-alert-banner>
+</section>
