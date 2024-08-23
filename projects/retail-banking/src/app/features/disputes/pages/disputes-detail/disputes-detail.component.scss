@@ -1,0 +1,28 @@
+.disputes-detail {
+  padding: calc(var(--bk-spacing-unit) * 3);
+
+  &__title {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  &__loading {
+    padding: 48px 0;
+  }
+
+  .detail-row {
+    &__label {
+      color: #667085;
+    }
+
+    &__value {
+      color: var(--bk-color-ink);
+      font-weight: 500;
+    }
+  }
+
+  .mat-card {
+    padding: calc(var(--bk-spacing-unit) * 2);
+  }
+}

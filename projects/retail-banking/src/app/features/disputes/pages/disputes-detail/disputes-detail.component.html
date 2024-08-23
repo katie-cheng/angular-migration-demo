@@ -1,0 +1,46 @@
+<section class="disputes-detail" fxLayout="column" fxLayoutGap="16px">
+  <bk-breadcrumbs [crumbs]="crumbs"></bk-breadcrumbs>
+
+  <div *ngIf="loading" fxLayout="row" fxLayoutAlign="center center" class="disputes-detail__loading">
+    <mat-spinner diameter="36"></mat-spinner>
+  </div>
+
+  <ng-container *ngIf="dispute as dispute">
+    <mat-card class="disputes-detail__card" fxLayout="column" fxLayoutGap="12px">
+      <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between start" fxLayoutGap="12px">
+        <h2 class="disputes-detail__title" fxFlex>Dispute detail</h2>
+        <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="end center">
+          <button mat-stroked-button (click)="edit()">Edit</button>
+          <button mat-raised-button color="warn" (click)="confirmRemove()">Remove</button>
+        </div>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <div class="disputes-detail__rows" fxLayout="column" fxLayoutGap="8px">
+      <div class="detail-row" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="8px">
+        <span class="detail-row__label" fxFlex="180px" fxFlex.lt-sm="auto">Transaction</span>
+        <span class="detail-row__value" fxFlex>{{ dispute.transactionRef }}</span>
+      </div>
+      <div class="detail-row" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="8px">
+        <span class="detail-row__label" fxFlex="180px" fxFlex.lt-sm="auto">Reason</span>
+        <span class="detail-row__value" fxFlex>{{ dispute.reason }}</span>
+      </div>
+      <div class="detail-row" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="8px">
+        <span class="detail-row__label" fxFlex="180px" fxFlex.lt-sm="auto">Amount</span>
+        <span class="detail-row__value" fxFlex>{{ dispute.amount | currency:'GBP' }}</span>
+      </div>
+      <div class="detail-row" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="8px">
+        <span class="detail-row__label" fxFlex="180px" fxFlex.lt-sm="auto">Raised</span>
+        <span class="detail-row__value" fxFlex>{{ dispute.raisedOn | date:'mediumDate' }}</span>
+      </div>
+      <div class="detail-row" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="8px">
+        <span class="detail-row__label" fxFlex="180px" fxFlex.lt-sm="auto">Status</span>
+        <span class="detail-row__value" fxFlex><bk-status-pill [status]="dispute.status"></bk-status-pill></span>
+      </div>
+      </div>
+    </mat-card>
+  </ng-container>
+
+  <bk-alert-banner *ngIf="error" tone="error" [message]="error"></bk-alert-banner>
+</section>

@@ -1,0 +1,15 @@
+<mat-card class="disputes-summary" fxLayout="column" fxLayoutGap="8px">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+    <mat-icon class="disputes-summary__icon">gavel</mat-icon>
+    <h3 class="disputes-summary__title" fxFlex>Disputes</h3>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div fxLayout="row" fxLayoutAlign="space-between baseline">
+    <span class="disputes-summary__headline">{{ headline }}</span>
+    <mat-spinner *ngIf="loading" diameter="16"></mat-spinner>
+  </div>
+
+  <p class="disputes-summary__blurb" fxHide.lt-md>Raise and track transaction disputes and chargebacks.</p>
+</mat-card>
