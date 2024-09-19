@@ -1,0 +1,74 @@
+<section class="loans-list" fxLayout="column" fxLayoutGap="16px">
+  <header class="loans-list__header"
+          fxLayout="row"
+          fxLayout.lt-md="column"
+          fxLayoutAlign="space-between center"
+          fxLayoutAlign.lt-md="start stretch"
+          fxLayoutGap="12px">
+    <div fxLayout="column" fxLayoutGap="4px">
+      <h1 class="loans-list__title">Loans</h1>
+      <p class="loans-list__subtitle" fxHide.lt-sm>Personal loan balances, schedules and overpayment quotes.</p>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="8px" fxFlex.lt-md="100">
+      <mat-form-field appearance="legacy" class="loans-list__search" fxFlex="240px" fxFlex.lt-md="auto">
+        <mat-label>Search</mat-label>
+        <input matInput [formControl]="search" autocomplete="off" />
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+      <button mat-stroked-button (click)="reload()">
+        <mat-icon>refresh</mat-icon>
+        Refresh
+      </button>
+    </div>
+  </header>
+
+  <bk-alert-banner *ngIf="error" tone="error" [message]="error"></bk-alert-banner>
+
+  <div class="loans-list__body" fxLayout="row" fxLayout.lt-lg="column" fxLayoutGap="16px">
+    <mat-card class="loans-list__table-card" fxFlex="grow">
+      <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+
+      <table mat-table [dataSource]="rows" matSort class="loans-list__table">
+    <ng-container matColumnDef="product">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Product</th>
+      <td mat-cell *matCellDef="let loan">{{ loan.product }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="outstanding">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Outstanding</th>
+      <td mat-cell *matCellDef="let loan">{{ loan.outstanding | currency:'GBP' }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="rate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Rate</th>
+      <td mat-cell *matCellDef="let loan">{{ loan.rate }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="nextPaymentOn">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Next payment</th>
+      <td mat-cell *matCellDef="let loan">{{ loan.nextPaymentOn | date:'mediumDate' }}</td>
+    </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row
+            *matRowDef="let row; columns: displayedColumns"
+            (click)="open(row)"
+            class="loans-list__row"></tr>
+      </table>
+
+      <bk-empty-state *ngIf="!loading && !rows.length"
+                      heading="Nothing here yet"
+                      message="Personal loan balances, schedules and overpayment quotes."></bk-empty-state>
+
+      <mat-paginator [length]="total"
+                     [pageSize]="pageSize"
+                     [pageSizeOptions]="[10, 25, 50]"
+                     (page)="onPage($event)"></mat-paginator>
+    </mat-card>
+
+    <aside class="loans-list__aside" fxFlex="300px" fxFlex.lt-lg="100" fxHide.lt-md>
+      <bk-loans-summary [count]="total" [loading]="loading"></bk-loans-summary>
+    </aside>
+  </div>
+</section>

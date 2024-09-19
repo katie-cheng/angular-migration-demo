@@ -1,0 +1,41 @@
+<section class="loans-detail" fxLayout="column" fxLayoutGap="16px">
+  <bk-breadcrumbs [crumbs]="crumbs"></bk-breadcrumbs>
+
+  <div *ngIf="loading" fxLayout="row" fxLayoutAlign="center center" class="loans-detail__loading">
+    <mat-spinner diameter="36"></mat-spinner>
+  </div>
+
+  <ng-container *ngIf="loan as loan">
+    <mat-card class="loans-detail__card" fxLayout="column" fxLayoutGap="12px">
+      <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between start" fxLayoutGap="12px">
+        <h2 class="loans-detail__title" fxFlex>Loan detail</h2>
+        <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="end center">
+          <button mat-stroked-button (click)="back()">Back</button>
+        </div>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <div class="loans-detail__rows" fxLayout="column" fxLayoutGap="8px">
+      <div class="detail-row" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="8px">
+        <span class="detail-row__label" fxFlex="180px" fxFlex.lt-sm="auto">Product</span>
+        <span class="detail-row__value" fxFlex>{{ loan.product }}</span>
+      </div>
+      <div class="detail-row" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="8px">
+        <span class="detail-row__label" fxFlex="180px" fxFlex.lt-sm="auto">Outstanding</span>
+        <span class="detail-row__value" fxFlex>{{ loan.outstanding | currency:'GBP' }}</span>
+      </div>
+      <div class="detail-row" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="8px">
+        <span class="detail-row__label" fxFlex="180px" fxFlex.lt-sm="auto">Rate</span>
+        <span class="detail-row__value" fxFlex>{{ loan.rate }}</span>
+      </div>
+      <div class="detail-row" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="8px">
+        <span class="detail-row__label" fxFlex="180px" fxFlex.lt-sm="auto">Next payment</span>
+        <span class="detail-row__value" fxFlex>{{ loan.nextPaymentOn | date:'mediumDate' }}</span>
+      </div>
+      </div>
+    </mat-card>
+  </ng-container>
+
+  <bk-alert-banner *ngIf="error" tone="error" [message]="error"></bk-alert-banner>
+</section>

@@ -1,0 +1,15 @@
+<mat-card class="loans-summary" fxLayout="column" fxLayoutGap="8px">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+    <mat-icon class="loans-summary__icon">request_quote</mat-icon>
+    <h3 class="loans-summary__title" fxFlex>Loans</h3>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div fxLayout="row" fxLayoutAlign="space-between baseline">
+    <span class="loans-summary__headline">{{ headline }}</span>
+    <mat-spinner *ngIf="loading" diameter="16"></mat-spinner>
+  </div>
+
+  <p class="loans-summary__blurb" fxHide.lt-md>Personal loan balances, schedules and overpayment quotes.</p>
+</mat-card>
