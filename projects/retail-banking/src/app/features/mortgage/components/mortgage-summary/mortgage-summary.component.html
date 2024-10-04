@@ -1,0 +1,15 @@
+<mat-card class="mortgage-summary" fxLayout="column" fxLayoutGap="8px">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+    <mat-icon class="mortgage-summary__icon">home_work</mat-icon>
+    <h3 class="mortgage-summary__title" fxFlex>Mortgage</h3>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div fxLayout="row" fxLayoutAlign="space-between baseline">
+    <span class="mortgage-summary__headline">{{ headline }}</span>
+    <mat-spinner *ngIf="loading" diameter="16"></mat-spinner>
+  </div>
+
+  <p class="mortgage-summary__blurb" fxHide.lt-md>Mortgage account view, rate switch eligibility and overpayments.</p>
+</mat-card>
