@@ -1,0 +1,15 @@
+<mat-card class="p2p-payments-summary" fxLayout="column" fxLayoutGap="8px">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+    <mat-icon class="p2p-payments-summary__icon">send</mat-icon>
+    <h3 class="p2p-payments-summary__title" fxFlex>P2p Payments</h3>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div fxLayout="row" fxLayoutAlign="space-between baseline">
+    <span class="p2p-payments-summary__headline">{{ headline }}</span>
+    <mat-spinner *ngIf="loading" diameter="16"></mat-spinner>
+  </div>
+
+  <p class="p2p-payments-summary__blurb" fxHide.lt-md>Person-to-person payments by phone number or handle.</p>
+</mat-card>
