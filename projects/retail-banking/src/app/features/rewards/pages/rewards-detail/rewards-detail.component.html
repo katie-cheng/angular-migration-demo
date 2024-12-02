@@ -1,0 +1,41 @@
+<section class="rewards-detail" fxLayout="column" fxLayoutGap="16px">
+  <bk-breadcrumbs [crumbs]="crumbs"></bk-breadcrumbs>
+
+  <div *ngIf="loading" fxLayout="row" fxLayoutAlign="center center" class="rewards-detail__loading">
+    <mat-spinner diameter="36"></mat-spinner>
+  </div>
+
+  <ng-container *ngIf="reward as reward">
+    <mat-card class="rewards-detail__card" fxLayout="column" fxLayoutGap="12px">
+      <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between start" fxLayoutGap="12px">
+        <h2 class="rewards-detail__title" fxFlex>Reward detail</h2>
+        <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="end center">
+          <button mat-stroked-button (click)="back()">Back</button>
+        </div>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <div class="rewards-detail__rows" fxLayout="column" fxLayoutGap="8px">
+      <div class="detail-row" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="8px">
+        <span class="detail-row__label" fxFlex="180px" fxFlex.lt-sm="auto">Offer</span>
+        <span class="detail-row__value" fxFlex>{{ reward.offer }}</span>
+      </div>
+      <div class="detail-row" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="8px">
+        <span class="detail-row__label" fxFlex="180px" fxFlex.lt-sm="auto">Merchant</span>
+        <span class="detail-row__value" fxFlex>{{ reward.merchant }}</span>
+      </div>
+      <div class="detail-row" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="8px">
+        <span class="detail-row__label" fxFlex="180px" fxFlex.lt-sm="auto">Value</span>
+        <span class="detail-row__value" fxFlex>{{ reward.value | currency:'GBP' }}</span>
+      </div>
+      <div class="detail-row" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="8px">
+        <span class="detail-row__label" fxFlex="180px" fxFlex.lt-sm="auto">Expires</span>
+        <span class="detail-row__value" fxFlex>{{ reward.expiresOn | date:'mediumDate' }}</span>
+      </div>
+      </div>
+    </mat-card>
+  </ng-container>
+
+  <bk-alert-banner *ngIf="error" tone="error" [message]="error"></bk-alert-banner>
+</section>
