@@ -1,0 +1,15 @@
+<mat-card class="statements-summary" fxLayout="column" fxLayoutGap="8px">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+    <mat-icon class="statements-summary__icon">description</mat-icon>
+    <h3 class="statements-summary__title" fxFlex>Statements</h3>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div fxLayout="row" fxLayoutAlign="space-between baseline">
+    <span class="statements-summary__headline">{{ headline }}</span>
+    <mat-spinner *ngIf="loading" diameter="16"></mat-spinner>
+  </div>
+
+  <p class="statements-summary__blurb" fxHide.lt-md>Downloadable statements and tax documents.</p>
+</mat-card>
