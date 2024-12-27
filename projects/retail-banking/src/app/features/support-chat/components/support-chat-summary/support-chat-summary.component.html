@@ -1,0 +1,15 @@
+<mat-card class="support-chat-summary" fxLayout="column" fxLayoutGap="8px">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+    <mat-icon class="support-chat-summary__icon">support_agent</mat-icon>
+    <h3 class="support-chat-summary__title" fxFlex>Support Chat</h3>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div fxLayout="row" fxLayoutAlign="space-between baseline">
+    <span class="support-chat-summary__headline">{{ headline }}</span>
+    <mat-spinner *ngIf="loading" diameter="16"></mat-spinner>
+  </div>
+
+  <p class="support-chat-summary__blurb" fxHide.lt-md>Secure messaging with the service team.</p>
+</mat-card>
