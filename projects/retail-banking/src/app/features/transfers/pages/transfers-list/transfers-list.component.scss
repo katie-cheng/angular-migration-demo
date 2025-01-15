@@ -1,0 +1,46 @@
+.transfers-list {
+  padding: calc(var(--bk-spacing-unit) * 3);
+
+  &__title {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0;
+    color: var(--bk-color-ink);
+  }
+
+  &__subtitle {
+    margin: 0;
+    color: #667085;
+  }
+
+  &__table-card {
+    padding: 0;
+    overflow: hidden;
+  }
+
+  &__table {
+    width: 100%;
+  }
+
+  &__row {
+    cursor: pointer;
+
+    &:hover {
+      background: var(--bk-color-surface-alt, #f5f7fa);
+    }
+  }
+
+  // Pre-MDC Material internals; these selectors disappear in v15.
+  .mat-header-cell {
+    color: var(--bk-color-ink);
+    font-weight: 600;
+  }
+
+  .mat-form-field-underline {
+    background-color: rgba(0, 51, 102, 0.42);
+  }
+
+  .mat-paginator-container {
+    min-height: 52px;
+  }
+}

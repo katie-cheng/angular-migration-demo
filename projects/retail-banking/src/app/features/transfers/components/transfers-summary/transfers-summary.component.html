@@ -1,0 +1,15 @@
+<mat-card class="transfers-summary" fxLayout="column" fxLayoutGap="8px">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+    <mat-icon class="transfers-summary__icon">swap_horiz</mat-icon>
+    <h3 class="transfers-summary__title" fxFlex>Transfers</h3>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div fxLayout="row" fxLayoutAlign="space-between baseline">
+    <span class="transfers-summary__headline">{{ headline }}</span>
+    <mat-spinner *ngIf="loading" diameter="16"></mat-spinner>
+  </div>
+
+  <p class="transfers-summary__blurb" fxHide.lt-md>Move money between own accounts and saved payees.</p>
+</mat-card>
