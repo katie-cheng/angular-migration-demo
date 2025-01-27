@@ -1,0 +1,10 @@
+@import '../../ui-kit/src/styles/theme';
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: var(--bk-font-body);
+  color: var(--bk-color-ink);
+  background: var(--bk-color-surface-alt, #f5f7fa);
+}
