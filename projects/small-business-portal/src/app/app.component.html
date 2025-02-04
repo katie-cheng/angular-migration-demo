@@ -1,0 +1,15 @@
+<mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center">
+  <span>Northwind Business</span>
+  <span class="sbp-business" fxHide.xs>{{ businessName }}</span>
+</mat-toolbar>
+
+<main class="sbp-shell" fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutGap="16px grid">
+  <section fxFlex="60" fxFlex.lt-md="100">
+    <sbp-approvals></sbp-approvals>
+  </section>
+  <aside fxFlex="40" fxFlex.lt-md="100">
+    <sbp-payroll-summary></sbp-payroll-summary>
+  </aside>
+</main>
+
+<router-outlet></router-outlet>
