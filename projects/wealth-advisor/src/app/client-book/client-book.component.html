@@ -1,0 +1,13 @@
+<mat-card class="wa-client-book" fxLayout="column" fxLayoutGap="8px">
+  <h2>Client book</h2>
+  <mat-divider></mat-divider>
+
+  <mat-list>
+    <mat-list-item *ngFor="let holding of holdings$ | async">
+      <div fxLayout="row" fxLayoutAlign="space-between center" fxFlex>
+        <span>{{ holding.label }}</span>
+        <strong>{{ holding.value | currency:holding.currency }}</strong>
+      </div>
+    </mat-list-item>
+  </mat-list>
+</mat-card>
