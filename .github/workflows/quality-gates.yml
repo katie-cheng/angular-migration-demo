@@ -1,0 +1,58 @@
+name: Quality gates
+
+on:
+  pull_request:
+  schedule:
+    - cron: '0 3 * * 1'
+
+env:
+  NODE_VERSION: '16.20.2'
+
+jobs:
+  dependency-audit:
+    name: Dependency audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci --legacy-peer-deps
+      - name: Audit production dependencies
+        run: npm audit --omit=dev --audit-level=high
+      - name: Report archived and deprecated packages
+        run: node tools/ci/check-deprecations.js
+
+  accessibility:
+    name: Accessibility
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci --legacy-peer-deps
+      - run: npm run build:libs
+      - run: npx playwright install --with-deps chromium
+      - run: node tools/ci/axe-scan.js
+
+  consumer-matrix:
+    name: Consumer matrix (${{ matrix.consumer }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        consumer: [small-business-portal, wealth-advisor]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci --legacy-peer-deps
+      - name: Build and pack the shared libraries
+        run: node tools/ci/pack-libs.js
+      - name: Build the consumer against the packed tarballs
+        run: npx ng build ${{ matrix.consumer }}
