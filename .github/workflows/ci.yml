@@ -74,7 +74,8 @@ jobs:
 
   behaviour:
     name: Behaviour baseline
-    runs-on: ubuntu-latest
+    # Playwright's dependency install still expects the 22.04 package names.
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

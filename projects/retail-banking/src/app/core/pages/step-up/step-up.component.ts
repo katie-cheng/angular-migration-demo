@@ -32,6 +32,11 @@ export class StepUpComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.channels = this.auth.mfaChannels;
+    const preferred = this.channels[0];
+    if (preferred) {
+      this.form.patchValue({ channelId: preferred.id });
+    }
     this.analytics.track('mfa_prompted', { surface: 'step-up' });
   }
 

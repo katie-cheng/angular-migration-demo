@@ -26,7 +26,7 @@ test.describe('authentication', () => {
     await page.getByLabel('Password').fill(CREDENTIALS.password);
     await page.getByRole('button', { name: /sign in/i }).click();
     await page.getByRole('button', { name: /send code/i }).click();
-    await page.getByLabel(/code/i).fill(MFA_CODE);
+    await page.getByLabel('6-digit code').fill(MFA_CODE);
     await page.getByRole('button', { name: /verify/i }).click();
 
     await expect(page).toHaveURL(/statements/);

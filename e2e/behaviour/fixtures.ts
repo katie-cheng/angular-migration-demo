@@ -12,7 +12,7 @@ export async function signIn(page: Page, options: { mfa?: boolean } = {}): Promi
   if (options.mfa !== false) {
     await expect(page).toHaveURL(/step-up/);
     await page.getByRole('button', { name: /send code/i }).click();
-    await page.getByLabel(/code/i).fill(MFA_CODE);
+    await page.getByLabel('6-digit code').fill(MFA_CODE);
     await page.getByRole('button', { name: /verify/i }).click();
   }
 

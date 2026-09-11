@@ -8,6 +8,7 @@ import { ensureCorrelationId } from './correlation';
 import {
   LoginRequest,
   LoginResponse,
+  MfaChannel,
   MfaVerifyRequest,
   Session,
   UserProfile,
@@ -21,6 +22,9 @@ export class AuthService {
     private readonly store: SessionStore,
     @Inject(AUTH_CONFIG) private readonly config: AuthConfig
   ) {}
+
+  /** Channels the identity service offered on the most recent sign-in. */
+  mfaChannels: MfaChannel[] = [];
 
   get session(): Session | null {
     return this.store.snapshot;
@@ -60,6 +64,7 @@ export class AuthService {
             correlationId,
             mfaSatisfied: !response.mfaRequired,
           };
+          this.mfaChannels = response.mfaChannels || [];
           this.store.set(session);
           return session;
         })
