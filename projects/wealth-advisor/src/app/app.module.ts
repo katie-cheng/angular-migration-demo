@@ -19,18 +19,24 @@ import { AppRoutingModule } from './app-routing.module';
 import { ClientBookComponent } from './client-book/client-book.component';
 import { environment } from '../environments/environment';
 
-@NgModule({ declarations: [AppComponent, ClientBookComponent],
-    bootstrap: [AppComponent], imports: [BrowserModule,
-        BrowserAnimationsModule,
-        MatButtonModule,
-        MatCardModule,
-        MatDividerModule,
-        MatIconModule,
-        MatListModule,
-        MatToolbarModule,
-        UiKitModule,
-        AuthModule.forRoot({ issuer: environment.issuer, apiBase: environment.apiBase }),
-        AnalyticsSdkModule.forRoot({ collectorUrl: environment.collectorUrl }),
-        DataProvidersModule.forRoot({ region: environment.region }),
-        AppRoutingModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
+@NgModule({
+  declarations: [AppComponent, ClientBookComponent],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatCardModule,
+    MatDividerModule,
+    MatIconModule,
+    MatListModule,
+    MatToolbarModule,
+    UiKitModule,
+    AuthModule.forRoot({ issuer: environment.issuer, apiBase: environment.apiBase }),
+    AnalyticsSdkModule.forRoot({ collectorUrl: environment.collectorUrl }),
+    DataProvidersModule.forRoot({ region: environment.region }),
+    AppRoutingModule,
+  ],
+  providers: [provideHttpClient(withInterceptorsFromDi())],
+  bootstrap: [AppComponent],
+})
 export class AppModule {}

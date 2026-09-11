@@ -6,7 +6,7 @@ on:
     - cron: '0 3 * * 1'
 
 env:
-  NODE_VERSION: '18.20.8'
+  NODE_VERSION: '20.20.2'
 
 jobs:
   dependency-audit:
@@ -18,7 +18,7 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: npm
-      - run: npm ci --legacy-peer-deps
+      - run: npm ci
       - name: Audit production dependencies
         run: npm audit --omit=dev --audit-level=high
       - name: Report archived and deprecated packages
@@ -35,7 +35,7 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: npm
-      - run: npm ci --legacy-peer-deps
+      - run: npm ci
       - run: npm run build:libs
       - run: npx playwright install --with-deps chromium
       - run: node tools/ci/axe-scan.js
@@ -53,7 +53,7 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: npm
-      - run: npm ci --legacy-peer-deps
+      - run: npm ci
       - name: Build and pack the shared libraries
         run: node tools/ci/pack-libs.js
       - name: Build the consumer against the packed tarballs

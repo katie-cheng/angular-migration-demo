@@ -22,20 +22,26 @@ import { ApprovalsComponent } from './approvals/approvals.component';
 import { PayrollSummaryComponent } from './payroll/payroll-summary.component';
 import { environment } from '../environments/environment';
 
-@NgModule({ declarations: [AppComponent, ApprovalsComponent, PayrollSummaryComponent],
-    bootstrap: [AppComponent], imports: [BrowserModule,
-        BrowserAnimationsModule,
-        ReactiveFormsModule,
-        MatButtonModule,
-        MatCardModule,
-        MatDividerModule,
-        MatIconModule,
-        MatInputModule,
-        MatTableModule,
-        MatToolbarModule,
-        UiKitModule,
-        AuthModule.forRoot({ issuer: environment.issuer, apiBase: environment.apiBase }),
-        AnalyticsSdkModule.forRoot({ collectorUrl: environment.collectorUrl }),
-        DataProvidersModule.forRoot({ region: environment.region }),
-        AppRoutingModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
+@NgModule({
+  declarations: [AppComponent, ApprovalsComponent, PayrollSummaryComponent],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatCardModule,
+    MatDividerModule,
+    MatIconModule,
+    MatInputModule,
+    MatTableModule,
+    MatToolbarModule,
+    UiKitModule,
+    AuthModule.forRoot({ issuer: environment.issuer, apiBase: environment.apiBase }),
+    AnalyticsSdkModule.forRoot({ collectorUrl: environment.collectorUrl }),
+    DataProvidersModule.forRoot({ region: environment.region }),
+    AppRoutingModule,
+  ],
+  providers: [provideHttpClient(withInterceptorsFromDi())],
+  bootstrap: [AppComponent],
+})
 export class AppModule {}

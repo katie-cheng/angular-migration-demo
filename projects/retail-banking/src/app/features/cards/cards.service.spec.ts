@@ -10,9 +10,8 @@ describe('CardsService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [],
-    providers: [CardsService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+      providers: [CardsService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+    });
     service = TestBed.inject(CardsService);
     http = TestBed.inject(HttpTestingController);
   });

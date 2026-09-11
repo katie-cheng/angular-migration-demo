@@ -10,9 +10,8 @@ describe('TransfersService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [],
-    providers: [TransfersService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+      providers: [TransfersService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+    });
     service = TestBed.inject(TransfersService);
     http = TestBed.inject(HttpTestingController);
   });

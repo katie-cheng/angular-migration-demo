@@ -10,9 +10,8 @@ describe('P2pPaymentsService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [],
-    providers: [P2pPaymentsService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+      providers: [P2pPaymentsService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+    });
     service = TestBed.inject(P2pPaymentsService);
     http = TestBed.inject(HttpTestingController);
   });

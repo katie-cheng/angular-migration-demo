@@ -19,11 +19,11 @@ describe('TransfersListComponent', () => {
     service.list.and.returnValue(of({ items: [], total: 0, page: 1, pageSize: 25 }));
 
     await TestBed.configureTestingModule({
-    declarations: [TransfersListComponent],
-    schemas: [NO_ERRORS_SCHEMA],
-    imports: [ReactiveFormsModule, RouterTestingModule],
-    providers: [{ provide: TransfersService, useValue: service }, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
+      declarations: [TransfersListComponent],
+      schemas: [NO_ERRORS_SCHEMA],
+      imports: [ReactiveFormsModule, RouterTestingModule],
+      providers: [{ provide: TransfersService, useValue: service }, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(TransfersListComponent);
     component = fixture.componentInstance;

@@ -10,9 +10,8 @@ describe('ProfileSettingsService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [],
-    providers: [ProfileSettingsService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+      providers: [ProfileSettingsService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+    });
     service = TestBed.inject(ProfileSettingsService);
     http = TestBed.inject(HttpTestingController);
   });

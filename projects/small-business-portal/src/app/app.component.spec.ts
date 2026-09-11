@@ -11,11 +11,11 @@ describe('small-business-portal AppComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [AppComponent],
-    schemas: [NO_ERRORS_SCHEMA],
-    imports: [RouterTestingModule],
-    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
+      declarations: [AppComponent],
+      schemas: [NO_ERRORS_SCHEMA],
+      imports: [RouterTestingModule],
+      providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(AppComponent);
   });

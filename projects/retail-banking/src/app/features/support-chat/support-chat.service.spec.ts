@@ -10,9 +10,8 @@ describe('SupportChatService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [],
-    providers: [SupportChatService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+      providers: [SupportChatService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+    });
     service = TestBed.inject(SupportChatService);
     http = TestBed.inject(HttpTestingController);
   });

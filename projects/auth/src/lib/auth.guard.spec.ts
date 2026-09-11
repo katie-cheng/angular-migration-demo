@@ -32,9 +32,9 @@ describe('auth guards', () => {
   beforeEach(() => {
     window.localStorage.clear();
     TestBed.configureTestingModule({
-    imports: [RouterTestingModule],
-    providers: [{ provide: AUTH_CONFIG, useValue: DEFAULT_AUTH_CONFIG }, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+      imports: [RouterTestingModule],
+      providers: [{ provide: AUTH_CONFIG, useValue: DEFAULT_AUTH_CONFIG }, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+    });
     auth = TestBed.inject(AuthService);
     router = TestBed.inject(Router);
   });

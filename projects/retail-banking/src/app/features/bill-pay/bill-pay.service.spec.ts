@@ -10,9 +10,8 @@ describe('BillPayService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [],
-    providers: [BillPayService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+      providers: [BillPayService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+    });
     service = TestBed.inject(BillPayService);
     http = TestBed.inject(HttpTestingController);
   });

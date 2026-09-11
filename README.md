@@ -28,11 +28,11 @@ e2e/behaviour/       the behaviour contract the upgrade must preserve
 
 ## Getting started
 
-Node 18.20.x and npm 10.x. Angular 16 does not support Node 16.
+Node 20.20.x and npm 10.x. Angular 18 requires Node 18.19+ or 20.11+.
 
 ```bash
-nvm use                     # 18.20.8
-npm ci --legacy-peer-deps
+nvm use                     # 20.20.2
+npm ci
 npm run build:libs          # the apps import the libraries from dist/
 npm run mock-backend        # in one terminal
 npm start                   # in another: http://localhost:4200
@@ -57,6 +57,6 @@ purpose). The step-up code is always `123456`; start the backend with
 
 ## Current state
 
-The workspace is on Angular 14.2 and is not yet upgradable in place: see
-[docs/KNOWN-DEBT.md](docs/KNOWN-DEBT.md) for the blockers, and
+The workspace is on Angular 18.2: see
+[docs/KNOWN-DEBT.md](docs/KNOWN-DEBT.md) for what is left, and
 [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for how the pieces fit together.

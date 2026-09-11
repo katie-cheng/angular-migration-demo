@@ -19,11 +19,11 @@ describe('P2pPaymentsListComponent', () => {
     service.list.and.returnValue(of({ items: [], total: 0, page: 1, pageSize: 25 }));
 
     await TestBed.configureTestingModule({
-    declarations: [P2pPaymentsListComponent],
-    schemas: [NO_ERRORS_SCHEMA],
-    imports: [ReactiveFormsModule, RouterTestingModule],
-    providers: [{ provide: P2pPaymentsService, useValue: service }, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
+      declarations: [P2pPaymentsListComponent],
+      schemas: [NO_ERRORS_SCHEMA],
+      imports: [ReactiveFormsModule, RouterTestingModule],
+      providers: [{ provide: P2pPaymentsService, useValue: service }, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(P2pPaymentsListComponent);
     component = fixture.componentInstance;

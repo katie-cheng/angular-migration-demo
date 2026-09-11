@@ -46,18 +46,17 @@ describe('DashboardComponent', () => {
     facade.transactions.and.returnValue(of({ items: [], page: 1, pageSize: 8, total: 0 } as never));
 
     await TestBed.configureTestingModule({
-    declarations: [DashboardComponent],
-    schemas: [NO_ERRORS_SCHEMA],
-    imports: [],
-    providers: [
+      declarations: [DashboardComponent],
+      schemas: [NO_ERRORS_SCHEMA],
+      providers: [
         { provide: BankingFacade, useValue: facade },
         { provide: AuthService, useValue: { session: { profile: { displayName: 'Dana Whitfield' } } } },
         { provide: AnalyticsService, useValue: jasmine.createSpyObj('AnalyticsService', ['pageView']) },
         { provide: BreakpointObserver, useValue: breakpoints },
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),
-    ]
-}).compileComponents();
+      ],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(DashboardComponent);
   });

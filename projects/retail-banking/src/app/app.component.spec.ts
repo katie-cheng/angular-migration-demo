@@ -19,21 +19,21 @@ describe('AppComponent', () => {
     routeAnalytics = jasmine.createSpyObj<RouteAnalytics>('RouteAnalytics', ['start']);
 
     await TestBed.configureTestingModule({
-    declarations: [AppComponent],
-    schemas: [NO_ERRORS_SCHEMA],
-    imports: [RouterTestingModule],
-    providers: [
+      declarations: [AppComponent],
+      schemas: [NO_ERRORS_SCHEMA],
+      imports: [RouterTestingModule],
+      providers: [
         { provide: AnalyticsService, useValue: analytics },
         { provide: RouteAnalytics, useValue: routeAnalytics },
         { provide: AuthService, useValue: { session: null } },
         {
-            provide: SessionStore,
-            useValue: { changes: () => of(null), events: () => of() },
+          provide: SessionStore,
+          useValue: { changes: () => of(null), events: () => of() },
         },
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),
-    ]
-}).compileComponents();
+      ],
+    }).compileComponents();
   });
 
   it('creates the application', () => {

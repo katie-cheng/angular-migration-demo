@@ -28,14 +28,13 @@ describe('AuthInterceptor', () => {
   beforeEach(() => {
     window.localStorage.clear();
     TestBed.configureTestingModule({
-    imports: [],
-    providers: [
+      providers: [
         { provide: AUTH_CONFIG, useValue: DEFAULT_AUTH_CONFIG },
         { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),
-    ]
-});
+      ],
+    });
     http = TestBed.inject(HttpClient);
     controller = TestBed.inject(HttpTestingController);
     store = TestBed.inject(SessionStore);

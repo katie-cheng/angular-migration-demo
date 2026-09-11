@@ -19,11 +19,11 @@ describe('CardsListComponent', () => {
     service.list.and.returnValue(of({ items: [], total: 0, page: 1, pageSize: 25 }));
 
     await TestBed.configureTestingModule({
-    declarations: [CardsListComponent],
-    schemas: [NO_ERRORS_SCHEMA],
-    imports: [ReactiveFormsModule, RouterTestingModule],
-    providers: [{ provide: CardsService, useValue: service }, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
+      declarations: [CardsListComponent],
+      schemas: [NO_ERRORS_SCHEMA],
+      imports: [ReactiveFormsModule, RouterTestingModule],
+      providers: [{ provide: CardsService, useValue: service }, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(CardsListComponent);
     component = fixture.componentInstance;

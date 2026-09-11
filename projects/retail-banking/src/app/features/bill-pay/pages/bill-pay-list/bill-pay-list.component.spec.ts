@@ -19,11 +19,11 @@ describe('BillPayListComponent', () => {
     service.list.and.returnValue(of({ items: [], total: 0, page: 1, pageSize: 25 }));
 
     await TestBed.configureTestingModule({
-    declarations: [BillPayListComponent],
-    schemas: [NO_ERRORS_SCHEMA],
-    imports: [ReactiveFormsModule, RouterTestingModule],
-    providers: [{ provide: BillPayService, useValue: service }, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
+      declarations: [BillPayListComponent],
+      schemas: [NO_ERRORS_SCHEMA],
+      imports: [ReactiveFormsModule, RouterTestingModule],
+      providers: [{ provide: BillPayService, useValue: service }, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(BillPayListComponent);
     component = fixture.componentInstance;

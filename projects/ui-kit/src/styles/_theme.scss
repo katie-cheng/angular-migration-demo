@@ -6,17 +6,17 @@
 // The component paint below is expressed with public Material APIs only:
 // component inputs, the element/attribute selectors Material publishes as a
 // component's API, overlay panel classes we own, and design tokens.
+//
+// Theming system: Material 2 (`mat.m2-*`). Angular Material 18 ships the
+// Material 3 theme API alongside M2 and keeps M2 fully supported; this theme
+// deliberately stays on M2 so the version upgrade does not change how the
+// three applications look. Moving to `mat.define-theme` / M3 is a design
+// decision with its own review and is tracked in docs/KNOWN-DEBT.md.
 
 @use '@angular/material' as mat;
 
-// TODO(v15): As of v15 mat.legacy-core no longer includes default typography styles.
-//  The following line adds:
-//    1. Default typography styles for all components
-//    2. Styles for typography hierarchy classes (e.g. .mat-headline-1)
-//  If you specify typography styles for the components you use elsewhere, you should delete this line.
-//  If you don't need the default component typographies but still want the hierarchy styles,
-//  you can delete this line and instead use:
-//    `@include mat.legacy-typography-hierarchy(mat.define-typography-config());`
+// Default typography styles for all components plus the typography hierarchy
+// classes (e.g. .mat-headline-1) the applications use directly.
 @include mat.all-component-typographies();
 @include mat.core();
 

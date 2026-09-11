@@ -15,13 +15,12 @@ describe('AnalyticsService', () => {
   beforeEach(() => {
     window.localStorage.clear();
     TestBed.configureTestingModule({
-    imports: [],
-    providers: [
+      providers: [
         { provide: ANALYTICS_CONFIG, useValue: { ...DEFAULT_ANALYTICS_CONFIG, batchSize: 3 } },
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),
-    ]
-});
+      ],
+    });
     service = TestBed.inject(AnalyticsService);
     http = TestBed.inject(HttpTestingController);
     consent = TestBed.inject(ConsentService);

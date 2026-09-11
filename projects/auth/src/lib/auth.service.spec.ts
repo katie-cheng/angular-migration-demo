@@ -34,9 +34,8 @@ describe('AuthService', () => {
   beforeEach(() => {
     window.localStorage.clear();
     TestBed.configureTestingModule({
-    imports: [],
-    providers: [{ provide: AUTH_CONFIG, useValue: DEFAULT_AUTH_CONFIG }, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+      providers: [{ provide: AUTH_CONFIG, useValue: DEFAULT_AUTH_CONFIG }, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+    });
     service = TestBed.inject(AuthService);
     http = TestBed.inject(HttpTestingController);
     store = TestBed.inject(SessionStore);

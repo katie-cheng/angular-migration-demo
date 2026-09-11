@@ -12,9 +12,8 @@ describe('LegacyCoreProvider', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [],
-    providers: [{ provide: PROVIDER_ROUTING, useValue: DEFAULT_PROVIDER_ROUTING }, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+      providers: [{ provide: PROVIDER_ROUTING, useValue: DEFAULT_PROVIDER_ROUTING }, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+    });
     provider = TestBed.inject(LegacyCoreProvider);
     http = TestBed.inject(HttpTestingController);
   });
