@@ -1,6 +1,6 @@
 <div class="shell">
   <mat-toolbar color="primary" class="shell__toolbar bk-row bk-justify-start bk-items-center bk-gap-8px">
-    <button mat-icon-button (click)="toggle()" aria-label="Toggle navigation menu">
+    <button mat-icon-button (click)="toggle()" aria-label="Open navigation menu">
       <mat-icon>menu</mat-icon>
     </button>
 
@@ -16,7 +16,7 @@
     <button mat-button
             [matMenuTriggerFor]="profileMenu"
             class="shell__profile"
-            aria-label="Account menu">
+            aria-label="Profile">
       <mat-icon>account_circle</mat-icon>
       <span class="bk-hide-lt-md">{{ session?.profile?.displayName }}</span>
     </button>

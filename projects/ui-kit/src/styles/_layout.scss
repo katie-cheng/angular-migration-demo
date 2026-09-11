@@ -47,6 +47,7 @@ $bk-flex-widths: 120px, 180px, 240px, 300px;
 .bk-col {
   display: flex;
   box-sizing: border-box;
+  --bk-gap: 0px;
 }
 
 .bk-row {
@@ -90,9 +91,13 @@ $bk-flex-widths: 120px, 180px, 240px, 300px;
 
 // --------------------------------------------------------------------- gaps
 
+// `--bk-gap` is read back by the percentage width utilities so a percentage
+// item plus the gap still fits on one line, the way flex-layout's margin-based
+// `fxLayoutGap="16px grid"` did.
 @each $gap in $bk-gaps {
   .bk-gap-#{$gap} {
     gap: $gap;
+    --bk-gap: #{$gap};
   }
 }
 
@@ -101,6 +106,7 @@ $bk-flex-widths: 120px, 180px, 240px, 300px;
     .bk-gap-#{$gap}-#{$alias} {
       @include bk-respond-to($alias) {
         gap: $gap;
+        --bk-gap: #{$gap};
       }
     }
   }
@@ -186,7 +192,11 @@ $bk-items: (
 
 @each $percent in $bk-flex-percents {
   .bk-flex-#{$percent} {
-    @include bk-flex-basis(100%, percentage($percent * 0.01));
+    @if $percent == 100 {
+      @include bk-flex-basis(100%, 100%);
+    } @else {
+      @include bk-flex-basis(100%, calc(#{percentage($percent * 0.01)} - var(--bk-gap, 0px)));
+    }
   }
 }
 
@@ -214,8 +224,13 @@ $bk-items: (
       @include bk-respond-to($alias) {
         flex: 1 1 100%;
         box-sizing: border-box;
-        max-width: percentage($percent * 0.01);
         min-width: 0;
+
+        @if $percent == 100 {
+          max-width: 100%;
+        } @else {
+          max-width: calc(#{percentage($percent * 0.01)} - var(--bk-gap, 0px));
+        }
       }
     }
   }
