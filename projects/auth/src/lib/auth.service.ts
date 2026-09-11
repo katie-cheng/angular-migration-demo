@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { Observable, of, throwError } from 'rxjs';
+import { Observable, firstValueFrom, of, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { AUTH_CONFIG, AuthConfig } from './auth.config';
@@ -46,7 +46,7 @@ export class AuthService {
   establishSession(request: LoginRequest): Promise<Session> {
     const correlationId = ensureCorrelationId(this.config.correlationCookieName);
 
-    return this.http
+    const response$ = this.http
       .post<LoginResponse>(this.config.issuer + '/login', {
         ...request,
         clientId: this.config.clientId,
@@ -63,8 +63,9 @@ export class AuthService {
           this.store.set(session);
           return session;
         })
-      )
-      .toPromise() as Promise<Session>;
+      );
+
+    return firstValueFrom(response$);
   }
 
   /** Restores a session on cold boot; resolves to null when there is none. */
@@ -76,9 +77,9 @@ export class AuthService {
     if (!existing) {
       return Promise.resolve(null);
     }
-    return this.refresh()
-      .pipe(catchError(() => of(null)))
-      .toPromise() as Promise<Session | null>;
+    return firstValueFrom(this.refresh().pipe(catchError(() => of(null))), {
+      defaultValue: null,
+    });
   }
 
   refresh(): Observable<Session | null> {
@@ -102,7 +103,7 @@ export class AuthService {
   }
 
   completeMfa(request: MfaVerifyRequest): Promise<Session> {
-    return this.http
+    const mfa$ = this.http
       .post<{ tokens: LoginResponse['tokens'] }>(this.config.issuer + '/mfa/verify', request)
       .pipe(
         map((response) => {
@@ -114,21 +115,25 @@ export class AuthService {
           this.store.update(next);
           return next;
         })
-      )
-      .toPromise() as Promise<Session>;
+      );
+
+    return firstValueFrom(mfa$);
   }
 
   loadProfile(): Promise<UserProfile | undefined> {
-    return this.http.get<UserProfile>(this.config.issuer + '/profile').toPromise();
+    return firstValueFrom(this.http.get<UserProfile>(this.config.issuer + '/profile'), {
+      defaultValue: undefined,
+    });
   }
 
   logout(): Promise<void> {
-    return this.http
+    const logout$ = this.http
       .post<void>(this.config.issuer + '/logout', {})
       .pipe(
         catchError(() => of(void 0)),
         tap(() => this.store.clear())
-      )
-      .toPromise() as Promise<void>;
+      );
+
+    return firstValueFrom(logout$, { defaultValue: undefined });
   }
 }
