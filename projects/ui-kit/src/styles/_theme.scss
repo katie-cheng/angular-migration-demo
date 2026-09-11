@@ -113,7 +113,7 @@ $bk-shell-theme: mat.define-light-theme(
 );
 
 @include mat.all-component-themes($bk-theme);
-@include mat.toolbar-theme($bk-shell-theme);
+@include mat.toolbar-density($bk-shell-theme);
 
 :root {
   --bk-color-primary: #003366;
