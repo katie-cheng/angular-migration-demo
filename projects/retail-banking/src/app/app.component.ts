@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { AnalyticsService, RouteAnalytics } from 'analytics-sdk';
 import { AuthService, SessionStore } from 'auth';
@@ -13,7 +14,8 @@ export class AppComponent implements OnInit {
     private readonly auth: AuthService,
     private readonly store: SessionStore,
     private readonly analytics: AnalyticsService,
-    private readonly routeAnalytics: RouteAnalytics
+    private readonly routeAnalytics: RouteAnalytics,
+    private readonly router: Router
   ) {}
 
   ngOnInit(): void {
@@ -33,6 +35,9 @@ export class AppComponent implements OnInit {
       if (event.kind === 'session-ended') {
         this.analytics.track('session_ended', { correlationId: event.correlationId });
         this.analytics.flush();
+        if (!this.router.url.startsWith('/login')) {
+          this.router.navigate(['/login']);
+        }
       }
     });
   }

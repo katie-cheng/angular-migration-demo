@@ -32,7 +32,12 @@ export class AuthService {
 
   isAuthenticated(): boolean {
     const session = this.store.snapshot;
-    return !!session && session.tokens.expiresAt > Date.now();
+    if (!session) {
+      return false;
+    }
+    // An expired access token is still a live session while a refresh token
+    // remains; the interceptor renews it on the first 401.
+    return session.tokens.expiresAt > Date.now() || !!session.tokens.refreshToken;
   }
 
   hasEntitlement(entitlement: string): boolean {

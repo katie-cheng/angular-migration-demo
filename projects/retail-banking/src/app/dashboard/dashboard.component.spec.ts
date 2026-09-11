@@ -31,10 +31,12 @@ describe('DashboardComponent', () => {
   beforeEach(async () => {
     facade = jasmine.createSpyObj<BankingFacade>('BankingFacade', [
       'accounts',
+      'openAccounts',
       'totalAvailable',
       'transactions',
     ]);
     facade.accounts.and.returnValue(of(ACCOUNTS as never));
+    facade.openAccounts.and.returnValue(of(ACCOUNTS as never));
     facade.totalAvailable.and.returnValue(of(2483.19));
     facade.transactions.and.returnValue(of({ items: [], page: 1, pageSize: 8, total: 0 } as never));
 

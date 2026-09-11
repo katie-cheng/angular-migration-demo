@@ -47,7 +47,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       )
       .subscribe((isNarrow) => (this.columns = isNarrow ? 1 : 2));
 
-    combineLatest([this.facade.accounts(), this.facade.totalAvailable('GBP')])
+    combineLatest([this.facade.openAccounts(), this.facade.totalAvailable('GBP')])
       .pipe(takeUntil(this.destroyed$))
       .subscribe({
         next: ([accounts, total]) => {

@@ -31,7 +31,9 @@ export default defineConfig({
       timeout: 60_000,
     },
     {
-      command: 'npx ng serve retail-banking --port 4200',
+      // --live-reload=false keeps the dev-server client iframe out of the page;
+      // it overlays the viewport and swallows clicks.
+      command: 'npx ng serve retail-banking --port 4200 --live-reload=false',
       url: 'http://localhost:4200',
       reuseExistingServer: !process.env.CI,
       timeout: 240_000,
