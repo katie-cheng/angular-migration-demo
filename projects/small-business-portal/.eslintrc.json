@@ -14,8 +14,7 @@
         "project": [
           "projects/small-business-portal/tsconfig.app.json",
           "projects/small-business-portal/tsconfig.spec.json"
-        ],
-        "createDefaultProgram": true
+        ]
       },
       "rules": {
         "@angular-eslint/directive-selector": [

@@ -178,12 +178,15 @@
       "prefix": "bk",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/retail-banking",
+            "outputPath": {
+              "base": "dist/retail-banking"
+            },
             "index": "projects/retail-banking/src/index.html",
-            "main": "projects/retail-banking/src/main.ts",
-            "polyfills": "projects/retail-banking/src/polyfills.ts",
+            "polyfills": [
+              "projects/retail-banking/src/polyfills.ts"
+            ],
             "tsConfig": "projects/retail-banking/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -193,7 +196,8 @@
             "styles": [
               "projects/retail-banking/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "browser": "projects/retail-banking/src/main.ts"
           },
           "configurations": {
             "production": {
@@ -218,9 +222,7 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
@@ -232,10 +234,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "retail-banking:build:production"
+              "buildTarget": "retail-banking:build:production"
             },
             "development": {
-              "browserTarget": "retail-banking:build:development"
+              "buildTarget": "retail-banking:build:development"
             }
           },
           "defaultConfiguration": "development",
@@ -246,7 +248,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "retail-banking:build"
+            "buildTarget": "retail-banking:build"
           }
         },
         "test": {
@@ -290,12 +292,15 @@
       "prefix": "sb",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/small-business-portal",
+            "outputPath": {
+              "base": "dist/small-business-portal"
+            },
             "index": "projects/small-business-portal/src/index.html",
-            "main": "projects/small-business-portal/src/main.ts",
-            "polyfills": "projects/small-business-portal/src/polyfills.ts",
+            "polyfills": [
+              "projects/small-business-portal/src/polyfills.ts"
+            ],
             "tsConfig": "projects/small-business-portal/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -305,7 +310,8 @@
             "styles": [
               "projects/small-business-portal/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "browser": "projects/small-business-portal/src/main.ts"
           },
           "configurations": {
             "production": {
@@ -330,9 +336,7 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
@@ -344,10 +348,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "small-business-portal:build:production"
+              "buildTarget": "small-business-portal:build:production"
             },
             "development": {
-              "browserTarget": "small-business-portal:build:development"
+              "buildTarget": "small-business-portal:build:development"
             }
           },
           "defaultConfiguration": "development",
@@ -358,7 +362,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "small-business-portal:build"
+            "buildTarget": "small-business-portal:build"
           }
         },
         "test": {
@@ -402,12 +406,15 @@
       "prefix": "wa",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/wealth-advisor",
+            "outputPath": {
+              "base": "dist/wealth-advisor"
+            },
             "index": "projects/wealth-advisor/src/index.html",
-            "main": "projects/wealth-advisor/src/main.ts",
-            "polyfills": "projects/wealth-advisor/src/polyfills.ts",
+            "polyfills": [
+              "projects/wealth-advisor/src/polyfills.ts"
+            ],
             "tsConfig": "projects/wealth-advisor/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -417,7 +424,8 @@
             "styles": [
               "projects/wealth-advisor/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "browser": "projects/wealth-advisor/src/main.ts"
           },
           "configurations": {
             "production": {
@@ -442,9 +450,7 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
@@ -456,10 +462,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "wealth-advisor:build:production"
+              "buildTarget": "wealth-advisor:build:production"
             },
             "development": {
-              "browserTarget": "wealth-advisor:build:development"
+              "buildTarget": "wealth-advisor:build:development"
             }
           },
           "defaultConfiguration": "development",
@@ -470,7 +476,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "wealth-advisor:build"
+            "buildTarget": "wealth-advisor:build"
           }
         },
         "test": {
