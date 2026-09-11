@@ -21,7 +21,7 @@
   <bk-alert-banner *ngIf="error" tone="error" [message]="error"></bk-alert-banner>
 
   <div class="loans-list__body bk-row bk-col-lt-lg bk-gap-16px">
-    <mat-card class="loans-list__table-card bk-flex-grow">
+    <mat-card appearance="outlined" class="loans-list__table-card bk-flex-grow">
       <mat-progress-bar *ngIf="loading" mode="indeterminate" color="accent"></mat-progress-bar>
 
       <table mat-table [dataSource]="rows" matSort class="loans-list__table">

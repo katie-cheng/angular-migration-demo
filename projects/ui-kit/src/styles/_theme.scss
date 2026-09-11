@@ -9,6 +9,15 @@
 
 @use '@angular/material' as mat;
 
+// TODO(v15): As of v15 mat.legacy-core no longer includes default typography styles.
+//  The following line adds:
+//    1. Default typography styles for all components
+//    2. Styles for typography hierarchy classes (e.g. .mat-headline-1)
+//  If you specify typography styles for the components you use elsewhere, you should delete this line.
+//  If you don't need the default component typographies but still want the hierarchy styles,
+//  you can delete this line and instead use:
+//    `@include mat.legacy-typography-hierarchy(mat.define-typography-config());`
+@include mat.all-component-typographies();
 @include mat.core();
 
 $bk-primary-palette: (
@@ -67,10 +76,10 @@ $bk-warn: mat.define-palette(mat.$red-palette, 700);
 
 $bk-typography: mat.define-typography-config(
   $font-family: '"Inter", "Helvetica Neue", Arial, sans-serif',
-  $headline: mat.define-typography-level(28px, 36px, 600),
-  $title: mat.define-typography-level(20px, 28px, 600),
-  $subheading-2: mat.define-typography-level(16px, 24px, 500),
-  $body-1: mat.define-typography-level(14px, 22px, 400),
+  $headline-5: mat.define-typography-level(28px, 36px, 600),
+  $headline-6: mat.define-typography-level(20px, 28px, 600),
+  $subtitle-1: mat.define-typography-level(16px, 24px, 500),
+  $body-2: mat.define-typography-level(14px, 22px, 400),
   $caption: mat.define-typography-level(12px, 18px, 400),
   $button: mat.define-typography-level(14px, 36px, 600, $letter-spacing: 0.2px),
 );
@@ -104,7 +113,7 @@ $bk-shell-theme: mat.define-light-theme(
 );
 
 @include mat.all-component-themes($bk-theme);
-@include mat.toolbar-theme($bk-shell-theme);
+@include mat.toolbar-density($bk-shell-theme);
 
 :root {
   --bk-color-primary: #003366;
@@ -152,6 +161,7 @@ textarea[matInput] {
   caret-color: var(--bk-color-primary);
 }
 
+/* TODO(mdc-migration): The following rule targets internal classes of select that may no longer apply for the MDC version.*/
 mat-select {
   color: var(--bk-color-ink);
 }
@@ -163,10 +173,12 @@ mat-select {
 }
 
 // The active ink bar colour comes from `color="accent"` on the tab group.
+/* TODO(mdc-migration): The following rule targets internal classes of tabs that may no longer apply for the MDC version.*/
 mat-tab-header {
   border-bottom: 1px solid var(--bk-color-border);
 }
 
+/* TODO(mdc-migration): The following rule targets internal classes of checkbox that may no longer apply for the MDC version.*/
 mat-checkbox {
   font-size: 14px;
 }
@@ -237,6 +249,7 @@ mat-expansion-panel-header {
   height: 48px;
 }
 
+/* TODO(mdc-migration): The following rule targets internal classes of chips that may no longer apply for the MDC version.*/
 mat-chip {
   border-radius: 2px;
   background: var(--bk-color-border);

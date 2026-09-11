@@ -1,7 +1,7 @@
 <section class="p2p-payments-form bk-col bk-gap-16px">
   <h1 class="p2p-payments-form__title">{{ editing ? 'Edit' : 'New' }} payment</h1>
 
-  <mat-card>
+  <mat-card appearance="outlined">
     <form class="bk-col bk-gap-12px" [formGroup]="form" (ngSubmit)="submit()">
       <div class="bk-row bk-wrap bk-gap-16px bk-col-lt-md">
       <mat-form-field class="bk-flex-50 bk-flex-100-lt-md" appearance="fill">
