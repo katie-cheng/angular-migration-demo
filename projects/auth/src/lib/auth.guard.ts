@@ -1,19 +1,10 @@
 import { Injectable } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  CanActivate,
-  CanLoad,
-  Route,
-  Router,
-  RouterStateSnapshot,
-  UrlSegment,
-  UrlTree,
-} from '@angular/router';
+import { ActivatedRouteSnapshot, Route, Router, RouterStateSnapshot, UrlSegment, UrlTree } from '@angular/router';
 
 import { AuthService } from './auth.service';
 
 @Injectable({ providedIn: 'root' })
-export class AuthGuard implements CanActivate, CanLoad {
+export class AuthGuard  {
   constructor(private readonly auth: AuthService, private readonly router: Router) {}
 
   canActivate(_route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree {
@@ -33,7 +24,7 @@ export class AuthGuard implements CanActivate, CanLoad {
 }
 
 @Injectable({ providedIn: 'root' })
-export class EntitlementGuard implements CanActivate {
+export class EntitlementGuard  {
   constructor(private readonly auth: AuthService, private readonly router: Router) {}
 
   canActivate(route: ActivatedRouteSnapshot): boolean | UrlTree {
@@ -46,7 +37,7 @@ export class EntitlementGuard implements CanActivate {
 }
 
 @Injectable({ providedIn: 'root' })
-export class MfaGuard implements CanActivate {
+export class MfaGuard  {
   constructor(private readonly auth: AuthService, private readonly router: Router) {}
 
   canActivate(_route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree {

@@ -9,7 +9,6 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTabsModule } from '@angular/material/tabs';
 import { RouterModule, Routes } from '@angular/router';
-import { LegacyChartsModule } from '@northwind/legacy-charts';
 
 import { UiKitModule } from 'ui-kit';
 
@@ -39,7 +38,6 @@ const routes: Routes = [{ path: '', component: DashboardComponent }];
     MatProgressBarModule,
     MatProgressSpinnerModule,
     MatTabsModule,
-    LegacyChartsModule,
     UiKitModule,
     RouterModule.forChild(routes),
   ],

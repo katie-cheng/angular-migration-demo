@@ -2,7 +2,7 @@
   <h2 class="spend-breakdown__title">Where your money went</h2>
   <mat-divider></mat-divider>
 
-  <nw-sparkline [values]="trend" stroke="#003366"></nw-sparkline>
+  <bk-sparkline [values]="trend" stroke="#003366" label="Spending trend"></bk-sparkline>
 
   <div *ngFor="let slice of slices" class="spend-breakdown__slice bk-col bk-gap-4px">
     <div class="bk-row bk-justify-space-between bk-items-baseline">

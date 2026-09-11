@@ -28,10 +28,10 @@ e2e/behaviour/       the behaviour contract the upgrade must preserve
 
 ## Getting started
 
-Node 16.20.x and npm 8.x. Anything newer will not build this Angular version.
+Node 18.20.x and npm 10.x. Angular 16 does not support Node 16.
 
 ```bash
-nvm use                     # 16.20.2
+nvm use                     # 18.20.8
 npm ci --legacy-peer-deps
 npm run build:libs          # the apps import the libraries from dist/
 npm run mock-backend        # in one terminal

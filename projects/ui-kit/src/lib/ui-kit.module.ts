@@ -24,6 +24,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSortModule } from '@angular/material/sort';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTableModule } from '@angular/material/table';
@@ -76,6 +77,7 @@ import { FileUploadComponent } from './components/file-upload/file-upload.compon
 import { SearchFieldComponent } from './components/search-field/search-field.component';
 import { TimelineComponent } from './components/timeline/timeline.component';
 import { MetricTileComponent } from './components/metric-tile/metric-tile.component';
+import { SparklineComponent } from './components/sparkline/sparkline.component';
 import { AutofocusDirective } from './directives/autofocus.directive';
 import { ElevationDirective } from './directives/elevation.directive';
 import { TrimInputDirective } from './directives/trim-input.directive';
@@ -142,6 +144,7 @@ const MATERIAL = [
   MatSelectModule,
   MatSlideToggleModule,
   MatSliderModule,
+  MatSnackBarModule,
   MatSortModule,
   MatStepperModule,
   MatTableModule,
@@ -196,6 +199,7 @@ const DECLARATIONS = [
   SearchFieldComponent,
   TimelineComponent,
   MetricTileComponent,
+  SparklineComponent,
   AutofocusDirective,
   ElevationDirective,
   TrimInputDirective,

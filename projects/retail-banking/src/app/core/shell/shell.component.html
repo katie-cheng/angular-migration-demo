@@ -1,5 +1,5 @@
 <div class="shell">
-  <mat-toolbar color="primary" class="shell__toolbar bk-row bk-justify-start bk-items-center bk-gap-8px">
+  <mat-toolbar #toolbar color="primary" class="shell__toolbar bk-row bk-justify-start bk-items-center bk-gap-8px">
     <button mat-icon-button (click)="toggle()" aria-label="Open navigation menu">
       <mat-icon>menu</mat-icon>
     </button>
@@ -38,7 +38,8 @@
                  class="shell__sidenav"
                  [mode]="sidenavMode"
                  [opened]="!handset"
-                 [fixedInViewport]="handset">
+                 [fixedInViewport]="handset"
+                 [fixedTopGap]="toolbarHeight">
       <mat-nav-list class="shell__nav bk-col">
         <a class="bk-row bk-justify-start bk-items-center bk-gap-12px" mat-list-item
            *ngFor="let item of visibleNavItems()"
