@@ -70,23 +70,23 @@ $bk-accent-palette: (
   ),
 );
 
-$bk-primary: mat.define-palette($bk-primary-palette, 500);
-$bk-accent: mat.define-palette($bk-accent-palette, 500);
-$bk-warn: mat.define-palette(mat.$red-palette, 700);
+$bk-primary: mat.m2-define-palette($bk-primary-palette, 500);
+$bk-accent: mat.m2-define-palette($bk-accent-palette, 500);
+$bk-warn: mat.m2-define-palette(mat.$m2-red-palette, 700);
 
-$bk-typography: mat.define-typography-config(
+$bk-typography: mat.m2-define-typography-config(
   $font-family: '"Inter", "Helvetica Neue", Arial, sans-serif',
-  $headline-5: mat.define-typography-level(28px, 36px, 600),
-  $headline-6: mat.define-typography-level(20px, 28px, 600),
-  $subtitle-1: mat.define-typography-level(16px, 24px, 500),
-  $body-2: mat.define-typography-level(14px, 22px, 400),
-  $caption: mat.define-typography-level(12px, 18px, 400),
-  $button: mat.define-typography-level(14px, 36px, 600, $letter-spacing: 0.2px),
+  $headline-5: mat.m2-define-typography-level(28px, 36px, 600),
+  $headline-6: mat.m2-define-typography-level(20px, 28px, 600),
+  $subtitle-1: mat.m2-define-typography-level(16px, 24px, 500),
+  $body-2: mat.m2-define-typography-level(14px, 22px, 400),
+  $caption: mat.m2-define-typography-level(12px, 18px, 400),
+  $button: mat.m2-define-typography-level(14px, 36px, 600, $letter-spacing: 0.2px),
 );
 
 // Density -1 is the step that keeps form fields and the paginator at the
 // compact heights this design system asks for.
-$bk-theme: mat.define-light-theme(
+$bk-theme: mat.m2-define-light-theme(
   (
     color: (
       primary: $bk-primary,
@@ -100,7 +100,7 @@ $bk-theme: mat.define-light-theme(
 
 // The shell chrome stays at the default density; only the in-page components
 // are compacted.
-$bk-shell-theme: mat.define-light-theme(
+$bk-shell-theme: mat.m2-define-light-theme(
   (
     color: (
       primary: $bk-primary,
