@@ -76,6 +76,7 @@ import { FileUploadComponent } from './components/file-upload/file-upload.compon
 import { SearchFieldComponent } from './components/search-field/search-field.component';
 import { TimelineComponent } from './components/timeline/timeline.component';
 import { MetricTileComponent } from './components/metric-tile/metric-tile.component';
+import { SparklineComponent } from './components/sparkline/sparkline.component';
 import { AutofocusDirective } from './directives/autofocus.directive';
 import { ElevationDirective } from './directives/elevation.directive';
 import { TrimInputDirective } from './directives/trim-input.directive';
@@ -196,6 +197,7 @@ const DECLARATIONS = [
   SearchFieldComponent,
   TimelineComponent,
   MetricTileComponent,
+  SparklineComponent,
   AutofocusDirective,
   ElevationDirective,
   TrimInputDirective,

@@ -51,6 +51,7 @@ export * from './lib/components/file-upload/file-upload.component';
 export * from './lib/components/search-field/search-field.component';
 export * from './lib/components/timeline/timeline.component';
 export * from './lib/components/metric-tile/metric-tile.component';
+export * from './lib/components/sparkline/sparkline.component';
 export * from './lib/directives/autofocus.directive';
 export * from './lib/directives/elevation.directive';
 export * from './lib/directives/trim-input.directive';
