@@ -14,8 +14,7 @@
         "project": [
           "projects/data-providers/tsconfig.lib.json",
           "projects/data-providers/tsconfig.spec.json"
-        ],
-        "createDefaultProgram": true
+        ]
       },
       "rules": {
         "@angular-eslint/directive-selector": [

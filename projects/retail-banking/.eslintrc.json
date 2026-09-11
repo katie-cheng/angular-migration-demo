@@ -14,8 +14,7 @@
         "project": [
           "projects/retail-banking/tsconfig.app.json",
           "projects/retail-banking/tsconfig.spec.json"
-        ],
-        "createDefaultProgram": true
+        ]
       },
       "rules": {
         "@angular-eslint/directive-selector": [

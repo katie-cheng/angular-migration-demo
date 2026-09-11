@@ -14,8 +14,7 @@
         "project": [
           "projects/auth/tsconfig.lib.json",
           "projects/auth/tsconfig.spec.json"
-        ],
-        "createDefaultProgram": true
+        ]
       },
       "rules": {
         "@angular-eslint/directive-selector": [
