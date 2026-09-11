@@ -6,7 +6,7 @@
 
   <mat-divider></mat-divider>
 
-  <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+  <mat-progress-bar *ngIf="loading" mode="indeterminate" color="accent"></mat-progress-bar>
 
   <div class="recent-activity__list bk-col">
     <div *ngFor="let transaction of transactions; trackBy: trackById"

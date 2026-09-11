@@ -229,6 +229,52 @@ function componentSpec(entry) {
     if (type === 'string' && def !== "''") continue;
   }
 
+  // Wrappers that project arbitrary content are exercised through a host
+  // component so the projection is part of the assertion.
+  if (entry.specHost) {
+    return `import { Component } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
+${[...new Set(mats)].map((m) => `import { ${m} } from '${MAT_IMPORT[m]}';`).join('\n')}
+import { ${cls} } from './${entry.name}.component';
+
+@Component({
+  template: \`${entry.specHost}\`,
+})
+class Host${cls} {}
+
+describe('${cls}', () => {
+  let fixture: ComponentFixture<Host${cls}>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [${cls}, Host${cls}],
+      imports: [NoopAnimationsModule, ReactiveFormsModule, ${[...new Set(mats)].join(', ')}],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(Host${cls});
+    fixture.detectChanges();
+  });
+
+  it('creates the component', () => {
+    expect(fixture.componentInstance).toBeTruthy();
+  });
+
+  it('renders its own label, hint and projected control', () => {
+    const element: HTMLElement = fixture.nativeElement;
+    expect(element.querySelector('.bk-form-field__label')?.textContent).toContain('Amount');
+    expect(element.querySelector('.bk-form-field__hint')?.textContent).toContain('USD');
+    expect(element.querySelector('.bk-form-field__control input')).toBeTruthy();
+  });
+
+  it('renders without throwing when change detection runs twice', () => {
+    expect(() => fixture.detectChanges()).not.toThrow();
+  });
+});
+`;
+  }
+
   return `${imports.join('\n')}
 
 describe('${cls}', () => {
@@ -360,9 +406,34 @@ function main() {
   write(`${LIB}/ui-kit.module.ts`, `import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
+import { MAT_MENU_DEFAULT_OPTIONS } from '@angular/material/menu';
+import { MAT_SELECT_CONFIG } from '@angular/material/select';
+import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 ${matList.map((m) => `import { ${m} } from '${MAT_IMPORT[m]}';`).join('\n')}
 
 ${declarations.map((d) => `import { ${d.cls} } from './${d.file}';`).join('\n')}
+
+/**
+ * Overlay-rendered components (dialog, menu, select, snack bar) sit outside
+ * the component tree, so the design system tags their panels with its own
+ * classes through the supported default-options tokens and styles those.
+ */
+const OVERLAY_PANEL_PROVIDERS = [
+  { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { panelClass: 'bk-dialog-panel' } },
+  {
+    provide: MAT_MENU_DEFAULT_OPTIONS,
+    useValue: {
+      xPosition: 'after',
+      yPosition: 'below',
+      overlapTrigger: false,
+      backdropClass: 'cdk-overlay-transparent-backdrop',
+      overlayPanelClass: 'bk-menu-panel',
+    },
+  },
+  { provide: MAT_SELECT_CONFIG, useValue: { overlayPanelClass: 'bk-select-panel' } },
+  { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { panelClass: ['bk-snack'], duration: 4000 } },
+];
 
 const MATERIAL = [
 ${matList.map((m) => `  ${m},`).join('\n')}
@@ -376,6 +447,7 @@ ${declarations.map((d) => `  ${d.cls},`).join('\n')}
   declarations: DECLARATIONS,
   imports: [CommonModule, FormsModule, ReactiveFormsModule, ...MATERIAL],
   exports: [...DECLARATIONS, ...MATERIAL],
+  providers: [...OVERLAY_PANEL_PROVIDERS],
 })
 export class UiKitModule {}
 `);

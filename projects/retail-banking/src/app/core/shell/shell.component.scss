@@ -31,21 +31,12 @@
   &__nav-item--active {
     background: rgba(0, 51, 102, 0.08);
 
-    .mat-icon {
+    mat-icon {
       color: var(--bk-color-primary);
     }
   }
 
-  // Pre-MDC internals relied on by the toolbar chrome.
-  .mat-toolbar.mat-primary {
-    background: var(--bk-color-primary);
-  }
-
-  .mat-drawer-container {
+  mat-sidenav-container {
     background: var(--bk-color-surface-alt, #f5f7fa);
-  }
-
-  .mat-list-item-content {
-    padding: 0 16px;
   }
 }

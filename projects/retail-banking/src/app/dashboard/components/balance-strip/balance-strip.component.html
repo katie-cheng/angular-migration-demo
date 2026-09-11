@@ -2,7 +2,7 @@
   <div class="balance-strip__primary bk-col bk-gap-4px bk-flex-40 bk-flex-100-lt-md">
     <span class="balance-strip__label">Total available</span>
     <span class="balance-strip__value">{{ total | currency:'GBP' }}</span>
-    <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+    <mat-progress-bar *ngIf="loading" mode="indeterminate" color="accent"></mat-progress-bar>
   </div>
 
   <mat-divider class="bk-hide-lt-md" [vertical]="true"></mat-divider>

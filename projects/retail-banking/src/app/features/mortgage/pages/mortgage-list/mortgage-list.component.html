@@ -6,7 +6,7 @@
     </div>
 
     <div class="bk-row bk-justify-end bk-items-center bk-gap-8px bk-flex-100-lt-md">
-      <mat-form-field appearance="legacy" class="mortgage-list__search bk-flex-240px bk-flex-auto-lt-md">
+      <mat-form-field appearance="fill" class="mortgage-list__search bk-flex-240px bk-flex-auto-lt-md">
         <mat-label>Search</mat-label>
         <input matInput [formControl]="search" autocomplete="off" />
         <mat-icon matSuffix>search</mat-icon>
@@ -22,7 +22,7 @@
 
   <div class="mortgage-list__body bk-row bk-col-lt-lg bk-gap-16px">
     <mat-card class="mortgage-list__table-card bk-flex-grow">
-      <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+      <mat-progress-bar *ngIf="loading" mode="indeterminate" color="accent"></mat-progress-bar>
 
       <table mat-table [dataSource]="rows" matSort class="mortgage-list__table">
     <ng-container matColumnDef="property">

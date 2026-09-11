@@ -1,11 +1,11 @@
 .bk-table {
   width: 100%;
+  background: transparent;
 
-  .mat-table { background: transparent; }
-  .mat-header-row { height: 44px; }
-  .mat-row { height: 52px; border-bottom: 1px solid #f5f7fa; }
-  .mat-cell { font-size: 14px; color: #1f2933; }
-  .mat-header-cell { color: #52606d; text-transform: uppercase; font-size: 11px; }
+  &__header-row { height: var(--bk-table-header-row-height); }
+  &__row { height: var(--bk-table-row-height); border-bottom: 1px solid #f5f7fa; }
+  &__cell { font-size: 14px; color: #1f2933; }
+  &__header-cell { color: var(--bk-color-ink-muted); text-transform: uppercase; font-size: 11px; }
 
-  &--dense .mat-row { height: 40px; }
+  &--dense .bk-table__row { height: var(--bk-table-row-height-dense); }
 }

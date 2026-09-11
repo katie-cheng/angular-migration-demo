@@ -30,17 +30,8 @@
     }
   }
 
-  // Pre-MDC Material internals; these selectors disappear in v15.
-  .mat-header-cell {
+  th {
     color: var(--bk-color-ink);
     font-weight: 600;
-  }
-
-  .mat-form-field-underline {
-    background-color: rgba(0, 51, 102, 0.42);
-  }
-
-  .mat-paginator-container {
-    min-height: 52px;
   }
 }

@@ -4,19 +4,19 @@
   <mat-card>
     <form class="bk-col bk-gap-12px" [formGroup]="form" (ngSubmit)="submit()">
       <div class="bk-row bk-wrap bk-gap-16px bk-col-lt-md">
-      <mat-form-field class="bk-flex-50 bk-flex-100-lt-md" appearance="legacy">
+      <mat-form-field class="bk-flex-50 bk-flex-100-lt-md" appearance="fill">
         <mat-label>Trigger</mat-label>
         <input matInput formControlName="trigger" />
         <mat-error *ngIf="form.controls['trigger'].hasError('required')">Trigger is required</mat-error>
       </mat-form-field>
 
-      <mat-form-field class="bk-flex-50 bk-flex-100-lt-md" appearance="legacy">
+      <mat-form-field class="bk-flex-50 bk-flex-100-lt-md" appearance="fill">
         <mat-label>Channel</mat-label>
         <input matInput formControlName="channel" />
         <mat-error *ngIf="form.controls['channel'].hasError('required')">Channel is required</mat-error>
       </mat-form-field>
 
-      <mat-form-field class="bk-flex-50 bk-flex-100-lt-md" appearance="legacy">
+      <mat-form-field class="bk-flex-50 bk-flex-100-lt-md" appearance="fill">
         <mat-label>Threshold</mat-label>
         <input matInput type="number" formControlName="threshold" />
         <span matPrefix *ngIf="true">&pound;&nbsp;</span>

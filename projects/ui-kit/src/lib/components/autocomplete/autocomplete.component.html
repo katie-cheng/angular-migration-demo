@@ -1,7 +1,7 @@
-<mat-form-field appearance="legacy" class="bk-autocomplete">
+<mat-form-field appearance="fill" class="bk-autocomplete">
   <mat-label>{{ label }}</mat-label>
   <input matInput [formControl]="control" [matAutocomplete]="auto" />
-  <mat-autocomplete #auto="matAutocomplete">
+  <mat-autocomplete #auto="matAutocomplete" class="bk-autocomplete-panel">
     <mat-option *ngFor="let option of options" [value]="option">{{ option }}</mat-option>
   </mat-autocomplete>
 </mat-form-field>

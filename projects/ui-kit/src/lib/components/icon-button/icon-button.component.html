@@ -1,4 +1,4 @@
 <button mat-icon-button class="bk-icon-button" [attr.aria-label]="label"
-        [matTooltip]="label" [disabled]="disabled" (click)="pressed.emit($event)">
-  <mat-icon>{{ icon }}</mat-icon>
+        [matTooltip]="label" matTooltipClass="bk-tooltip" [disabled]="disabled" (click)="pressed.emit($event)">
+  <span class="bk-icon-button__content"><mat-icon>{{ icon }}</mat-icon></span>
 </button>

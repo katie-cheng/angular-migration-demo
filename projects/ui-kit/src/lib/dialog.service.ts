@@ -23,7 +23,7 @@ export class DialogService {
   confirm(options: ConfirmOptions): Observable<boolean | undefined> {
     const ref: MatDialogRef<ConfirmDialogComponent, boolean> = this.dialog.open(ConfirmDialogComponent, {
       width: options.width || '440px',
-      panelClass: 'bk-confirm-dialog-panel',
+      panelClass: ['bk-dialog-panel', 'bk-confirm-dialog-panel'],
       autoFocus: false,
       data: {
         title: options.title,

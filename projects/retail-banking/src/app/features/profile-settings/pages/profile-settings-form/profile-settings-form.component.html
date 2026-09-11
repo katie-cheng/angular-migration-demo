@@ -4,19 +4,19 @@
   <mat-card>
     <form class="bk-col bk-gap-12px" [formGroup]="form" (ngSubmit)="submit()">
       <div class="bk-row bk-wrap bk-gap-16px bk-col-lt-md">
-      <mat-form-field class="bk-flex-50 bk-flex-100-lt-md" appearance="legacy">
+      <mat-form-field class="bk-flex-50 bk-flex-100-lt-md" appearance="fill">
         <mat-label>Setting</mat-label>
         <input matInput formControlName="label" />
         <mat-error *ngIf="form.controls['label'].hasError('required')">Setting is required</mat-error>
       </mat-form-field>
 
-      <mat-form-field class="bk-flex-50 bk-flex-100-lt-md" appearance="legacy">
+      <mat-form-field class="bk-flex-50 bk-flex-100-lt-md" appearance="fill">
         <mat-label>Value</mat-label>
         <input matInput formControlName="value" />
         <mat-error *ngIf="form.controls['value'].hasError('required')">Value is required</mat-error>
       </mat-form-field>
 
-      <mat-form-field class="bk-flex-50 bk-flex-100-lt-md" appearance="legacy">
+      <mat-form-field class="bk-flex-50 bk-flex-100-lt-md" appearance="fill">
         <mat-label>Updated</mat-label>
         <input matInput [matDatepicker]="updatedOnPicker" formControlName="updatedOn" />
         <mat-datepicker-toggle matSuffix [for]="updatedOnPicker"></mat-datepicker-toggle>

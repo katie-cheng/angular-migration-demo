@@ -3,13 +3,13 @@
 // Owned by the Design Systems guild. Consumed by retail-banking,
 // small-business-portal and wealth-advisor.
 //
-// NOTE (2021-03, DS guild): the brand team signed off on the component
-// paint below. Several rules reach into Angular Material's own class names
-// because the components do not expose the hooks we need.
+// The component paint below is expressed with public Material APIs only:
+// component inputs, the element/attribute selectors Material publishes as a
+// component's API, overlay panel classes we own, and design tokens.
 
-@import '~@angular/material/theming';
+@use '@angular/material' as mat;
 
-@include mat-core();
+@include mat.core();
 
 $bk-primary-palette: (
   50: #e6ecf2,
@@ -61,31 +61,35 @@ $bk-accent-palette: (
   ),
 );
 
-$bk-primary: mat-palette($bk-primary-palette, 500);
-$bk-accent: mat-palette($bk-accent-palette, 500);
-$bk-warn: mat-palette($mat-red, 700);
+$bk-primary: mat.define-palette($bk-primary-palette, 500);
+$bk-accent: mat.define-palette($bk-accent-palette, 500);
+$bk-warn: mat.define-palette(mat.$red-palette, 700);
 
-$bk-typography: mat-typography-config(
+$bk-typography: mat.define-typography-config(
   $font-family: '"Inter", "Helvetica Neue", Arial, sans-serif',
-  $headline: mat-typography-level(28px, 36px, 600),
-  $title: mat-typography-level(20px, 28px, 600),
-  $subheading-2: mat-typography-level(16px, 24px, 500),
-  $body-1: mat-typography-level(14px, 22px, 400),
-  $caption: mat-typography-level(12px, 18px, 400),
+  $headline: mat.define-typography-level(28px, 36px, 600),
+  $title: mat.define-typography-level(20px, 28px, 600),
+  $subheading-2: mat.define-typography-level(16px, 24px, 500),
+  $body-1: mat.define-typography-level(14px, 22px, 400),
+  $caption: mat.define-typography-level(12px, 18px, 400),
+  $button: mat.define-typography-level(14px, 36px, 600, $letter-spacing: 0.2px),
 );
 
-$bk-theme: mat-light-theme(
+// Density -1 is the step that keeps form fields and the paginator at the
+// compact heights this design system asks for.
+$bk-theme: mat.define-light-theme(
   (
     color: (
       primary: $bk-primary,
       accent: $bk-accent,
       warn: $bk-warn,
     ),
+    typography: $bk-typography,
+    density: -1,
   )
 );
 
-@include angular-material-theme($bk-theme);
-@include angular-material-typography($bk-typography);
+@include mat.all-component-themes($bk-theme);
 
 :root {
   --bk-color-primary: #003366;
@@ -93,245 +97,162 @@ $bk-theme: mat-light-theme(
   --bk-color-danger: #a3232b;
   --bk-color-surface: #ffffff;
   --bk-color-ink: #1f2933;
+  --bk-color-ink-muted: #52606d;
+  --bk-color-border: #e4e7eb;
+  --bk-color-surface-alt: #f5f7fa;
   --bk-font-body: 'Inter', 'Helvetica Neue', Arial, sans-serif;
   --bk-radius: 3px;
   --bk-spacing-unit: 8px;
+
+  // Size and elevation tokens.
+  --bk-table-header-row-height: 56px;
+  --bk-table-row-height: 48px;
+  --bk-table-row-height-dense: 40px;
+  --bk-menu-item-height: 40px;
+  --bk-overlay-shadow: 0 4px 16px rgba(31, 41, 51, 0.18);
+  --bk-dialog-shadow: 0 10px 30px rgba(31, 41, 51, 0.26);
+  --bk-dialog-padding: 20px 24px;
+  --bk-snackbar-min-width: 320px;
 }
 
 // ---------------------------------------------------------------------------
-// Brand paint. These selectors are Angular Material internals.
+// Brand paint. Button weight and tracking come from the typography config's
+// `button` level.
 // ---------------------------------------------------------------------------
 
-.mat-button-wrapper {
-  letter-spacing: 0.2px;
-}
-
-.mat-raised-button {
-  border-radius: var(--bk-radius);
-
-  .mat-button-wrapper {
-    font-weight: 600;
-  }
-}
-
-.mat-stroked-button .mat-button-wrapper {
-  padding: 0 2px;
-}
-
-.mat-flat-button .mat-button-focus-overlay {
-  background-color: rgba(0, 51, 102, 0.1);
-}
-
-.mat-icon-button .mat-button-ripple-round {
+[mat-button],
+[mat-raised-button],
+[mat-stroked-button],
+[mat-flat-button] {
   border-radius: var(--bk-radius);
 }
 
-.mat-form-field-underline {
-  background-color: #9aa5b1;
+[mat-icon-button] {
+  border-radius: var(--bk-radius);
 }
 
-.mat-form-field-ripple {
-  background-color: var(--bk-color-primary);
+// Form fields take their underline, label and subscript colours from the theme.
+input[matInput],
+textarea[matInput] {
+  caret-color: var(--bk-color-primary);
 }
 
-.mat-form-field-flex {
-  background-color: #f5f7fa;
-  padding: 6px 12px 0;
-  border-radius: var(--bk-radius) var(--bk-radius) 0 0;
-}
-
-.mat-form-field-infix {
-  border-top-width: 0.7em;
-}
-
-.mat-form-field-label {
-  color: #52606d;
-}
-
-.mat-form-field-subscript-wrapper {
-  margin-top: 0.5em;
-  font-size: 12px;
-}
-
-.mat-form-field-appearance-legacy .mat-form-field-wrapper {
-  padding-bottom: 1.2em;
-}
-
-.mat-select-arrow {
-  color: var(--bk-color-primary);
-  border-width: 5px 5px 0;
-}
-
-.mat-select-value {
+mat-select {
   color: var(--bk-color-ink);
 }
 
-.mat-select-panel {
+// Select overlay. Applied through `MAT_SELECT_CONFIG.overlayPanelClass`.
+.bk-select-panel {
   border-radius: var(--bk-radius);
-  box-shadow: 0 4px 16px rgba(31, 41, 51, 0.18);
+  box-shadow: var(--bk-overlay-shadow);
 }
 
-.mat-option.mat-active {
-  background: #f0f4f8;
+// The active ink bar colour comes from `color="accent"` on the tab group.
+mat-tab-header {
+  border-bottom: 1px solid var(--bk-color-border);
 }
 
-.mat-tab-label {
-  min-width: 120px;
-  opacity: 1;
-  padding: 0 20px;
-}
-
-.mat-tab-label-active {
-  color: var(--bk-color-primary);
-  font-weight: 600;
-}
-
-.mat-ink-bar {
-  height: 3px;
-  background-color: var(--bk-color-accent);
-}
-
-.mat-tab-header {
-  border-bottom: 1px solid #e4e7eb;
-}
-
-.mat-checkbox-frame {
-  border-color: #7b8794;
-  border-width: 1px;
-  border-radius: 2px;
-}
-
-.mat-checkbox-background {
-  border-radius: 2px;
-}
-
-.mat-checkbox-label {
+mat-checkbox {
   font-size: 14px;
 }
 
-.mat-slide-toggle-bar {
-  background-color: #cbd2d9;
-  height: 16px;
-  width: 34px;
-  border-radius: 8px;
-}
-
-.mat-slide-toggle-thumb {
-  height: 18px;
-  width: 18px;
-}
-
-.mat-slide-toggle-thumb-container {
-  top: -1px;
-}
-
-.mat-dialog-container {
+// Dialogs. `MAT_DIALOG_DEFAULT_OPTIONS` puts `bk-dialog-panel` on the overlay
+// pane. Its direct child is the dialog container in every Material version,
+// which carries the padding without naming a Material class.
+.bk-dialog-panel {
   border-radius: var(--bk-radius);
-  padding: 20px 24px;
-  box-shadow: 0 10px 30px rgba(31, 41, 51, 0.26);
+  box-shadow: var(--bk-dialog-shadow);
+  overflow: hidden;
+
+  > * {
+    padding: var(--bk-dialog-padding);
+  }
 }
 
-.mat-dialog-title {
+[mat-dialog-title] {
   color: var(--bk-color-primary);
 }
 
-.mat-dialog-actions {
+mat-dialog-actions,
+[mat-dialog-actions] {
   padding: 8px 0 0;
   min-height: 44px;
 }
 
-.mat-snack-bar-container {
-  border-radius: var(--bk-radius);
-  background: var(--bk-color-ink);
-  min-width: 320px;
+// Snackbars. `MAT_SNACK_BAR_DEFAULT_OPTIONS` puts `bk-snack` on the overlay
+// pane; the action is a plain button element inside it.
+.bk-snack {
+  min-width: var(--bk-snackbar-min-width);
+
+  > * {
+    border-radius: var(--bk-radius);
+    background: var(--bk-color-ink);
+  }
+
+  button {
+    color: var(--bk-color-accent);
+  }
 }
 
-.mat-simple-snackbar-action {
-  color: var(--bk-color-accent);
-}
-
-.mat-table {
+// Tables render real table markup in every Material version.
+table[mat-table] {
   font-family: var(--bk-font-body);
+
+  thead tr {
+    height: var(--bk-table-header-row-height);
+  }
+
+  tbody tr {
+    height: var(--bk-table-row-height);
+  }
+
+  th {
+    font-size: 11px;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    color: var(--bk-color-ink-muted);
+  }
+
+  td {
+    font-size: 14px;
+  }
 }
 
-.mat-header-row {
-  height: 44px;
-}
-
-.mat-row {
-  height: 52px;
-}
-
-.mat-header-cell {
-  font-size: 11px;
-  letter-spacing: 0.6px;
-  text-transform: uppercase;
-  color: #52606d;
-}
-
-.mat-cell {
-  font-size: 14px;
-}
-
-.mat-paginator-container {
-  min-height: 48px;
-}
-
-.mat-progress-bar-fill::after {
-  background-color: var(--bk-color-accent);
-}
-
-.mat-expansion-panel-header {
+mat-expansion-panel-header {
   height: 48px;
 }
 
-.mat-step-header .mat-step-icon-selected {
-  background-color: var(--bk-color-primary);
-}
-
-.mat-chip.mat-standard-chip {
+mat-chip {
   border-radius: 2px;
-  background: #e4e7eb;
+  background: var(--bk-color-border);
 }
 
-.mat-tooltip {
+// Tooltips are styled through `matTooltipClass`, menus through
+// `MAT_MENU_DEFAULT_OPTIONS.overlayPanelClass`.
+.bk-tooltip {
   font-size: 12px;
   background: rgba(31, 41, 51, 0.94);
 }
 
-.mat-menu-panel {
+.bk-menu-panel {
   border-radius: var(--bk-radius);
 }
 
-.mat-menu-item {
-  height: 40px;
-  line-height: 40px;
+// Autocomplete panel class, set with the `class` input on `mat-autocomplete`.
+.bk-autocomplete-panel {
+  max-height: 280px;
 }
 
-.mat-datepicker-content .mat-calendar {
+[mat-menu-item] {
+  height: var(--bk-menu-item-height);
+  line-height: var(--bk-menu-item-height);
+}
+
+mat-calendar {
   font-family: var(--bk-font-body);
 }
 
-.mat-calendar-body-selected {
-  background-color: var(--bk-color-primary);
-}
-
-.mat-radio-outer-circle {
-  border-color: #7b8794;
-}
-
-.mat-radio-label-content {
-  padding-left: 6px;
-}
-
-.mat-slider-track-fill {
-  background-color: var(--bk-color-primary);
-}
-
-.mat-toolbar.mat-primary {
-  background: var(--bk-color-primary);
-}
-
-.mat-drawer-container {
-  background: #f5f7fa;
+// The toolbar takes its brand colour from `color="primary"`.
+mat-sidenav-container {
+  background: var(--bk-color-surface-alt);
 }
