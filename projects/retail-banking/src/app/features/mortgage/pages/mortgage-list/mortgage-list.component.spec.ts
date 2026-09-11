@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -7,6 +7,7 @@ import { of, throwError } from 'rxjs';
 
 import { MortgageListComponent } from './mortgage-list.component';
 import { MortgageService } from '../../mortgage.service';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('MortgageListComponent', () => {
   let fixture: ComponentFixture<MortgageListComponent>;
@@ -18,11 +19,11 @@ describe('MortgageListComponent', () => {
     service.list.and.returnValue(of({ items: [], total: 0, page: 1, pageSize: 25 }));
 
     await TestBed.configureTestingModule({
-      declarations: [MortgageListComponent],
-      imports: [HttpClientTestingModule, ReactiveFormsModule, RouterTestingModule],
-      providers: [{ provide: MortgageService, useValue: service }],
-      schemas: [NO_ERRORS_SCHEMA],
-    }).compileComponents();
+    declarations: [MortgageListComponent],
+    schemas: [NO_ERRORS_SCHEMA],
+    imports: [ReactiveFormsModule, RouterTestingModule],
+    providers: [{ provide: MortgageService, useValue: service }, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+}).compileComponents();
 
     fixture = TestBed.createComponent(MortgageListComponent);
     component = fixture.componentInstance;

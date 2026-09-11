@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -7,6 +7,7 @@ import { of, throwError } from 'rxjs';
 
 import { InvestmentsListComponent } from './investments-list.component';
 import { InvestmentsService } from '../../investments.service';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('InvestmentsListComponent', () => {
   let fixture: ComponentFixture<InvestmentsListComponent>;
@@ -18,11 +19,11 @@ describe('InvestmentsListComponent', () => {
     service.list.and.returnValue(of({ items: [], total: 0, page: 1, pageSize: 25 }));
 
     await TestBed.configureTestingModule({
-      declarations: [InvestmentsListComponent],
-      imports: [HttpClientTestingModule, ReactiveFormsModule, RouterTestingModule],
-      providers: [{ provide: InvestmentsService, useValue: service }],
-      schemas: [NO_ERRORS_SCHEMA],
-    }).compileComponents();
+    declarations: [InvestmentsListComponent],
+    schemas: [NO_ERRORS_SCHEMA],
+    imports: [ReactiveFormsModule, RouterTestingModule],
+    providers: [{ provide: InvestmentsService, useValue: service }, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+}).compileComponents();
 
     fixture = TestBed.createComponent(InvestmentsListComponent);
     component = fixture.componentInstance;

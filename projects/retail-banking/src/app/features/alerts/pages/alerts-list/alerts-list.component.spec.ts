@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -7,6 +7,7 @@ import { of, throwError } from 'rxjs';
 
 import { AlertsListComponent } from './alerts-list.component';
 import { AlertsService } from '../../alerts.service';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('AlertsListComponent', () => {
   let fixture: ComponentFixture<AlertsListComponent>;
@@ -18,11 +19,11 @@ describe('AlertsListComponent', () => {
     service.list.and.returnValue(of({ items: [], total: 0, page: 1, pageSize: 25 }));
 
     await TestBed.configureTestingModule({
-      declarations: [AlertsListComponent],
-      imports: [HttpClientTestingModule, ReactiveFormsModule, RouterTestingModule],
-      providers: [{ provide: AlertsService, useValue: service }],
-      schemas: [NO_ERRORS_SCHEMA],
-    }).compileComponents();
+    declarations: [AlertsListComponent],
+    schemas: [NO_ERRORS_SCHEMA],
+    imports: [ReactiveFormsModule, RouterTestingModule],
+    providers: [{ provide: AlertsService, useValue: service }, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+}).compileComponents();
 
     fixture = TestBed.createComponent(AlertsListComponent);
     component = fixture.componentInstance;

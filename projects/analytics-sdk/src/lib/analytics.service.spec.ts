@@ -1,10 +1,11 @@
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 
 import { ANALYTICS_CONFIG, DEFAULT_ANALYTICS_CONFIG } from './analytics.config';
 import { AnalyticsBatch } from './analytics.models';
 import { AnalyticsService } from './analytics.service';
 import { ConsentService } from './consent.service';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('AnalyticsService', () => {
   let service: AnalyticsService;
@@ -14,11 +15,13 @@ describe('AnalyticsService', () => {
   beforeEach(() => {
     window.localStorage.clear();
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [
+    imports: [],
+    providers: [
         { provide: ANALYTICS_CONFIG, useValue: { ...DEFAULT_ANALYTICS_CONFIG, batchSize: 3 } },
-      ],
-    });
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
+    ]
+});
     service = TestBed.inject(AnalyticsService);
     http = TestBed.inject(HttpTestingController);
     consent = TestBed.inject(ConsentService);

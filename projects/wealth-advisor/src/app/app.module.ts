@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -19,24 +19,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { ClientBookComponent } from './client-book/client-book.component';
 import { environment } from '../environments/environment';
 
-@NgModule({
-  declarations: [AppComponent, ClientBookComponent],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    MatButtonModule,
-    MatCardModule,
-    MatDividerModule,
-    MatIconModule,
-    MatListModule,
-    MatToolbarModule,
-    UiKitModule,
-    AuthModule.forRoot({ issuer: environment.issuer, apiBase: environment.apiBase }),
-    AnalyticsSdkModule.forRoot({ collectorUrl: environment.collectorUrl }),
-    DataProvidersModule.forRoot({ region: environment.region }),
-    AppRoutingModule,
-  ],
-  bootstrap: [AppComponent],
-})
+@NgModule({ declarations: [AppComponent, ClientBookComponent],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        BrowserAnimationsModule,
+        MatButtonModule,
+        MatCardModule,
+        MatDividerModule,
+        MatIconModule,
+        MatListModule,
+        MatToolbarModule,
+        UiKitModule,
+        AuthModule.forRoot({ issuer: environment.issuer, apiBase: environment.apiBase }),
+        AnalyticsSdkModule.forRoot({ collectorUrl: environment.collectorUrl }),
+        DataProvidersModule.forRoot({ region: environment.region }),
+        AppRoutingModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule {}

@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -7,6 +7,7 @@ import { of, throwError } from 'rxjs';
 
 import { P2pPaymentsListComponent } from './p2p-payments-list.component';
 import { P2pPaymentsService } from '../../p2p-payments.service';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('P2pPaymentsListComponent', () => {
   let fixture: ComponentFixture<P2pPaymentsListComponent>;
@@ -18,11 +19,11 @@ describe('P2pPaymentsListComponent', () => {
     service.list.and.returnValue(of({ items: [], total: 0, page: 1, pageSize: 25 }));
 
     await TestBed.configureTestingModule({
-      declarations: [P2pPaymentsListComponent],
-      imports: [HttpClientTestingModule, ReactiveFormsModule, RouterTestingModule],
-      providers: [{ provide: P2pPaymentsService, useValue: service }],
-      schemas: [NO_ERRORS_SCHEMA],
-    }).compileComponents();
+    declarations: [P2pPaymentsListComponent],
+    schemas: [NO_ERRORS_SCHEMA],
+    imports: [ReactiveFormsModule, RouterTestingModule],
+    providers: [{ provide: P2pPaymentsService, useValue: service }, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+}).compileComponents();
 
     fixture = TestBed.createComponent(P2pPaymentsListComponent);
     component = fixture.componentInstance;

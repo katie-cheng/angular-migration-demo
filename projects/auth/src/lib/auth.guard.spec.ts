@@ -1,12 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 import { AUTH_CONFIG, DEFAULT_AUTH_CONFIG } from './auth.config';
 import { AuthGuard, EntitlementGuard, MfaGuard } from './auth.guard';
 import { AuthService } from './auth.service';
 import { Session } from './auth.models';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 function session(overrides: Partial<Session> = {}): Session {
   return {
@@ -31,9 +32,9 @@ describe('auth guards', () => {
   beforeEach(() => {
     window.localStorage.clear();
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule],
-      providers: [{ provide: AUTH_CONFIG, useValue: DEFAULT_AUTH_CONFIG }],
-    });
+    imports: [RouterTestingModule],
+    providers: [{ provide: AUTH_CONFIG, useValue: DEFAULT_AUTH_CONFIG }, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     auth = TestBed.inject(AuthService);
     router = TestBed.inject(Router);
   });

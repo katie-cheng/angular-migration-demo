@@ -1,5 +1,5 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { of } from 'rxjs';
@@ -11,6 +11,7 @@ import { BankingFacade } from 'data-providers';
 import { NARROW } from '../core/breakpoints';
 
 import { DashboardComponent } from './dashboard.component';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 const ACCOUNTS = [
   {
@@ -45,16 +46,18 @@ describe('DashboardComponent', () => {
     facade.transactions.and.returnValue(of({ items: [], page: 1, pageSize: 8, total: 0 } as never));
 
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      declarations: [DashboardComponent],
-      providers: [
+    declarations: [DashboardComponent],
+    schemas: [NO_ERRORS_SCHEMA],
+    imports: [],
+    providers: [
         { provide: BankingFacade, useValue: facade },
         { provide: AuthService, useValue: { session: { profile: { displayName: 'Dana Whitfield' } } } },
         { provide: AnalyticsService, useValue: jasmine.createSpyObj('AnalyticsService', ['pageView']) },
         { provide: BreakpointObserver, useValue: breakpoints },
-      ],
-      schemas: [NO_ERRORS_SCHEMA],
-    }).compileComponents();
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
+    ]
+}).compileComponents();
 
     fixture = TestBed.createComponent(DashboardComponent);
   });

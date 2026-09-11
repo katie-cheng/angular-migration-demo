@@ -1,7 +1,8 @@
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 
 import { SupportChatService } from './support-chat.service';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('SupportChatService', () => {
   let service: SupportChatService;
@@ -9,9 +10,9 @@ describe('SupportChatService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [SupportChatService],
-    });
+    imports: [],
+    providers: [SupportChatService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     service = TestBed.inject(SupportChatService);
     http = TestBed.inject(HttpTestingController);
   });

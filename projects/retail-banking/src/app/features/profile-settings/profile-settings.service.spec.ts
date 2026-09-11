@@ -1,7 +1,8 @@
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 
 import { ProfileSettingsService } from './profile-settings.service';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('ProfileSettingsService', () => {
   let service: ProfileSettingsService;
@@ -9,9 +10,9 @@ describe('ProfileSettingsService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [ProfileSettingsService],
-    });
+    imports: [],
+    providers: [ProfileSettingsService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     service = TestBed.inject(ProfileSettingsService);
     http = TestBed.inject(HttpTestingController);
   });
