@@ -126,4 +126,27 @@ describe('AuthService', () => {
   it('resolves to null when resuming without a stored session', async () => {
     await expectAsync(service.resumeSession()).toBeResolvedTo(null);
   });
+
+  it('resolves the profile without throwing when the response has no body', async () => {
+    const pending = service.loadProfile();
+    http.expectOne(DEFAULT_AUTH_CONFIG.issuer + '/profile').flush(null, { status: 204, statusText: 'No Content' });
+
+    await expectAsync(pending).toBeResolvedTo(null as never);
+  });
+
+  it('resolves logout even when the identity service is unreachable', async () => {
+    const existing: Session = {
+      tokens: { accessToken: 'old', refreshToken: 'refresh-1', expiresAt: Date.now() + 1000 },
+      profile: loginResponse().profile,
+      correlationId: 'c-test',
+      mfaSatisfied: true,
+    };
+    store.set(existing, false);
+
+    const pending = service.logout();
+    http.expectOne(DEFAULT_AUTH_CONFIG.issuer + '/logout').error(new ProgressEvent('offline'));
+
+    await pending;
+    expect(service.isAuthenticated()).toBeFalse();
+  });
 });
