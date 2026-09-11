@@ -1,5 +1,14 @@
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  NgZone,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { NavigationEnd, Router } from '@angular/router';
 import { Subject } from 'rxjs';
@@ -17,21 +26,26 @@ import { NAV_ITEMS, NavItem } from './nav-items';
   templateUrl: './shell.component.html',
   styleUrls: ['./shell.component.scss'],
 })
-export class ShellComponent implements OnInit, OnDestroy {
+export class ShellComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('sidenav') sidenav?: MatSidenav;
+  @ViewChild('toolbar', { read: ElementRef }) toolbar?: ElementRef<HTMLElement>;
 
   readonly navItems: NavItem[] = NAV_ITEMS;
   session: Session | null = null;
   handset = false;
   sidenavMode: 'side' | 'over' = 'side';
+  toolbarHeight = 0;
 
   private readonly destroyed$ = new Subject<void>();
+  private resizeObserver?: ResizeObserver;
 
   constructor(
     private readonly breakpoints: BreakpointObserver,
     private readonly auth: AuthService,
     private readonly analytics: AnalyticsService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly zone: NgZone,
+    private readonly changeDetector: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -57,9 +71,36 @@ export class ShellComponent implements OnInit, OnDestroy {
       });
   }
 
+  ngAfterViewInit(): void {
+    const element = this.toolbar?.nativeElement;
+    if (!element) {
+      return;
+    }
+
+    this.measureToolbar();
+
+    if (typeof ResizeObserver !== 'undefined') {
+      this.resizeObserver = new ResizeObserver(() =>
+        this.zone.run(() => this.measureToolbar())
+      );
+      this.resizeObserver.observe(element);
+    }
+  }
+
   ngOnDestroy(): void {
+    this.resizeObserver?.disconnect();
     this.destroyed$.next();
     this.destroyed$.complete();
+  }
+
+  private measureToolbar(): void {
+    const height = this.toolbar?.nativeElement.offsetHeight ?? 0;
+    if (height === this.toolbarHeight) {
+      return;
+    }
+
+    this.toolbarHeight = height;
+    this.changeDetector.detectChanges();
   }
 
   visibleNavItems(): NavItem[] {

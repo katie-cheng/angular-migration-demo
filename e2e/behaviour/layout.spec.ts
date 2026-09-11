@@ -43,6 +43,25 @@ test.describe('responsive layout', () => {
     await expect(page.getByRole('link', { name: /accounts/i }).first()).toBeVisible();
   });
 
+  test('opens the drawer below the toolbar so the first nav item is reachable', async ({
+    page,
+  }, testInfo) => {
+    test.skip(testInfo.project.name === 'desktop', 'narrow viewports only');
+
+    await signIn(page);
+    await page.getByRole('button', { name: /menu/i }).click();
+
+    const toolbar = (await page.locator('mat-toolbar').first().boundingBox())!;
+    const drawer = (await page.locator('mat-sidenav').boundingBox())!;
+    expect(drawer.y).toBeGreaterThanOrEqual(toolbar.y + toolbar.height - 1);
+
+    const firstItem = page.getByRole('link', { name: /dashboard/i }).first();
+    const item = (await firstItem.boundingBox())!;
+    expect(item.y).toBeGreaterThanOrEqual(toolbar.y + toolbar.height - 1);
+    await firstItem.click();
+    await expect(page).toHaveURL(/\/dashboard/);
+  });
+
   test('keeps the primary call to action reachable at every width', async ({ page }) => {
     await signIn(page);
     await expect(page.getByRole('button', { name: /move money/i })).toBeVisible();
