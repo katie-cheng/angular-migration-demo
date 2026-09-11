@@ -1,4 +1,6 @@
 <div class="bk-slider">
   <span class="bk-slider__label">{{ label }}</span>
-  <mat-slider [min]="min" [max]="max" #ngSlider><input matSliderThumb [value]="value" (change)="valueChanged.emit({source: ngSliderThumb, parent: ngSlider, value: ngSliderThumb.value}.value ?? 0)" #ngSliderThumb="matSliderThumb" /></mat-slider>
+  <mat-slider [min]="min" [max]="max">
+    <input matSliderThumb [value]="value" (valueChange)="valueChanged.emit($event ?? 0)" />
+  </mat-slider>
 </div>
