@@ -11,15 +11,15 @@ import { Component } from '@angular/core';
   `,
   styles: [
     `
-      .not-found {
-        min-height: 60vh;
-      }
-      .not-found__code {
-        font-size: 56px;
-        margin: 0;
-        color: var(--bk-color-primary);
-      }
-    `,
+          .not-found {
+            min-height: 60vh;
+          }
+          .not-found__code {
+            font-size: 56px;
+            margin: 0;
+            color: var(--bk-color-primary);
+          }
+        `,
   ],
 })
 export class NotFoundComponent {}

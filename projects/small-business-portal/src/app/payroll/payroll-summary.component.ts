@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'sbp-payroll-summary',
   template: `
-    <mat-card class="sbp-payroll bk-col bk-gap-8px">
+    <mat-card appearance="outlined" class="sbp-payroll bk-col bk-gap-8px">
       <h2>Payroll</h2>
       <mat-divider></mat-divider>
       <div class="bk-row bk-justify-space-between bk-items-center">
@@ -19,10 +19,10 @@ import { Component } from '@angular/core';
   `,
   styles: [
     `
-      .sbp-payroll {
-        padding: 16px;
-      }
-    `,
+          .sbp-payroll {
+            padding: 16px;
+          }
+        `,
   ],
 })
 export class PayrollSummaryComponent {}
