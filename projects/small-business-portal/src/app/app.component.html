@@ -1,13 +1,13 @@
-<mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center">
+<mat-toolbar class="bk-row bk-justify-space-between bk-items-center" color="primary">
   <span>Northwind Business</span>
-  <span class="sbp-business" fxHide.xs>{{ businessName }}</span>
+  <span class="sbp-business bk-hide-xs">{{ businessName }}</span>
 </mat-toolbar>
 
-<main class="sbp-shell" fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutGap="16px grid">
-  <section fxFlex="60" fxFlex.lt-md="100">
+<main class="sbp-shell bk-row bk-wrap bk-col-lt-md bk-gap-16px">
+  <section class="bk-flex-60 bk-flex-100-lt-md">
     <sbp-approvals></sbp-approvals>
   </section>
-  <aside fxFlex="40" fxFlex.lt-md="100">
+  <aside class="bk-flex-40 bk-flex-100-lt-md">
     <sbp-payroll-summary></sbp-payroll-summary>
   </aside>
 </main>

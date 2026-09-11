@@ -1,15 +1,15 @@
-<mat-card class="profile-settings-summary" fxLayout="column" fxLayoutGap="8px">
-  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+<mat-card class="profile-settings-summary bk-col bk-gap-8px">
+  <div class="bk-row bk-justify-start bk-items-center bk-gap-8px">
     <mat-icon class="profile-settings-summary__icon">manage_accounts</mat-icon>
-    <h3 class="profile-settings-summary__title" fxFlex>Profile Settings</h3>
+    <h3 class="profile-settings-summary__title bk-flex">Profile Settings</h3>
   </div>
 
   <mat-divider></mat-divider>
 
-  <div fxLayout="row" fxLayoutAlign="space-between baseline">
+  <div class="bk-row bk-justify-space-between bk-items-baseline">
     <span class="profile-settings-summary__headline">{{ headline }}</span>
     <mat-spinner *ngIf="loading" diameter="16"></mat-spinner>
   </div>
 
-  <p class="profile-settings-summary__blurb" fxHide.lt-md>Contact details, marketing preferences and security settings.</p>
+  <p class="profile-settings-summary__blurb bk-hide-lt-md">Contact details, marketing preferences and security settings.</p>
 </mat-card>

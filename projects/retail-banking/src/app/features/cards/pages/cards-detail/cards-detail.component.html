@@ -1,37 +1,37 @@
-<section class="cards-detail" fxLayout="column" fxLayoutGap="16px">
+<section class="cards-detail bk-col bk-gap-16px">
   <bk-breadcrumbs [crumbs]="crumbs"></bk-breadcrumbs>
 
-  <div *ngIf="loading" fxLayout="row" fxLayoutAlign="center center" class="cards-detail__loading">
+  <div *ngIf="loading" class="cards-detail__loading bk-row bk-justify-center bk-items-center">
     <mat-spinner diameter="36"></mat-spinner>
   </div>
 
   <ng-container *ngIf="card as card">
-    <mat-card class="cards-detail__card" fxLayout="column" fxLayoutGap="12px">
-      <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between start" fxLayoutGap="12px">
-        <h2 class="cards-detail__title" fxFlex>Card detail</h2>
-        <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="end center">
+    <mat-card class="cards-detail__card bk-col bk-gap-12px">
+      <div class="bk-row bk-col-lt-md bk-justify-space-between bk-items-start bk-gap-12px">
+        <h2 class="cards-detail__title bk-flex">Card detail</h2>
+        <div class="bk-row bk-gap-8px bk-justify-end bk-items-center">
           <button mat-stroked-button (click)="back()">Back</button>
         </div>
       </div>
 
       <mat-divider></mat-divider>
 
-      <div class="cards-detail__rows" fxLayout="column" fxLayoutGap="8px">
-      <div class="detail-row" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="8px">
-        <span class="detail-row__label" fxFlex="180px" fxFlex.lt-sm="auto">Network</span>
-        <span class="detail-row__value" fxFlex>{{ card.network }}</span>
+      <div class="cards-detail__rows bk-col bk-gap-8px">
+      <div class="detail-row bk-row bk-col-lt-sm bk-gap-8px">
+        <span class="detail-row__label bk-flex-180px bk-flex-auto-lt-sm">Network</span>
+        <span class="detail-row__value bk-flex">{{ card.network }}</span>
       </div>
-      <div class="detail-row" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="8px">
-        <span class="detail-row__label" fxFlex="180px" fxFlex.lt-sm="auto">Card</span>
-        <span class="detail-row__value" fxFlex>{{ card.maskedNumber }}</span>
+      <div class="detail-row bk-row bk-col-lt-sm bk-gap-8px">
+        <span class="detail-row__label bk-flex-180px bk-flex-auto-lt-sm">Card</span>
+        <span class="detail-row__value bk-flex">{{ card.maskedNumber }}</span>
       </div>
-      <div class="detail-row" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="8px">
-        <span class="detail-row__label" fxFlex="180px" fxFlex.lt-sm="auto">Expires</span>
-        <span class="detail-row__value" fxFlex>{{ card.expiry | date:'mediumDate' }}</span>
+      <div class="detail-row bk-row bk-col-lt-sm bk-gap-8px">
+        <span class="detail-row__label bk-flex-180px bk-flex-auto-lt-sm">Expires</span>
+        <span class="detail-row__value bk-flex">{{ card.expiry | date:'mediumDate' }}</span>
       </div>
-      <div class="detail-row" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="8px">
-        <span class="detail-row__label" fxFlex="180px" fxFlex.lt-sm="auto">Status</span>
-        <span class="detail-row__value" fxFlex><bk-status-pill [status]="card.status"></bk-status-pill></span>
+      <div class="detail-row bk-row bk-col-lt-sm bk-gap-8px">
+        <span class="detail-row__label bk-flex-180px bk-flex-auto-lt-sm">Status</span>
+        <span class="detail-row__value bk-flex"><bk-status-pill [status]="card.status"></bk-status-pill></span>
       </div>
       </div>
     </mat-card>

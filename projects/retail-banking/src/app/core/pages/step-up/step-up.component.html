@@ -1,11 +1,11 @@
-<div class="step-up" fxLayout="column" fxLayoutAlign="center center" fxFill>
-  <mat-card class="step-up__card" fxLayout="column" fxLayoutGap="16px">
+<div class="step-up bk-col bk-justify-center bk-items-center bk-fill">
+  <mat-card class="step-up__card bk-col bk-gap-16px">
     <h2 class="step-up__title">Confirm it's you</h2>
     <p class="step-up__copy">We need a one-time code before you can move money.</p>
 
     <bk-alert-banner *ngIf="error" tone="error" [message]="error"></bk-alert-banner>
 
-    <form [formGroup]="form" fxLayout="column" fxLayoutGap="8px">
+    <form class="bk-col bk-gap-8px" [formGroup]="form">
       <mat-form-field appearance="legacy">
         <mat-label>Send code to</mat-label>
         <mat-select formControlName="channelId">
@@ -15,8 +15,8 @@
         </mat-select>
       </mat-form-field>
 
-      <div fxLayout="row" fxLayoutGap="8px" fxLayout.xs="column">
-        <mat-form-field appearance="legacy" fxFlex>
+      <div class="bk-row bk-gap-8px bk-col-xs">
+        <mat-form-field class="bk-flex" appearance="legacy">
           <mat-label>6-digit code</mat-label>
           <input matInput formControlName="code" inputmode="numeric" maxlength="6" />
         </mat-form-field>

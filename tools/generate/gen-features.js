@@ -121,31 +121,26 @@ function listTemplate(feature) {
     )
     .join('\n\n');
 
-  return `<section class="${feature.name}-list" fxLayout="column" fxLayoutGap="16px">
-  <header class="${feature.name}-list__header"
-          fxLayout="row"
-          fxLayout.lt-md="column"
-          fxLayoutAlign="space-between center"
-          fxLayoutAlign.lt-md="start stretch"
-          fxLayoutGap="12px">
-    <div fxLayout="column" fxLayoutGap="4px">
+  return `<section class="${feature.name}-list bk-col bk-gap-16px">
+  <header class="${feature.name}-list__header bk-row bk-col-lt-md bk-justify-space-between bk-items-center bk-justify-start-lt-md bk-items-stretch-lt-md bk-gap-12px">
+    <div class="bk-col bk-gap-4px">
       <h1 class="${feature.name}-list__title">${title(feature.name)}</h1>
-      <p class="${feature.name}-list__subtitle" fxHide.lt-sm>${feature.summary}</p>
+      <p class="${feature.name}-list__subtitle bk-hide-lt-sm">${feature.summary}</p>
     </div>
 
-    <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="8px" fxFlex.lt-md="100">
-      <mat-form-field appearance="legacy" class="${feature.name}-list__search" fxFlex="240px" fxFlex.lt-md="auto">
+    <div class="bk-row bk-justify-end bk-items-center bk-gap-8px bk-flex-100-lt-md">
+      <mat-form-field appearance="legacy" class="${feature.name}-list__search bk-flex-240px bk-flex-auto-lt-md">
         <mat-label>Search</mat-label>
         <input matInput [formControl]="search" autocomplete="off" />
         <mat-icon matSuffix>search</mat-icon>
       </mat-form-field>
 ${
   feature.form
-    ? `      <button mat-raised-button color="primary" (click)="create()" fxHide.lt-sm>
+    ? `      <button class="bk-hide-lt-sm" mat-raised-button color="primary" (click)="create()">
         <mat-icon>add</mat-icon>
         New
       </button>
-      <button mat-mini-fab color="primary" (click)="create()" fxShow.lt-sm fxHide>
+      <button class="bk-show-lt-sm bk-hide" mat-mini-fab color="primary" (click)="create()">
         <mat-icon>add</mat-icon>
       </button>`
     : `      <button mat-stroked-button (click)="reload()">
@@ -158,8 +153,8 @@ ${
 
   <bk-alert-banner *ngIf="error" tone="error" [message]="error"></bk-alert-banner>
 
-  <div class="${feature.name}-list__body" fxLayout="row" fxLayout.lt-lg="column" fxLayoutGap="16px">
-    <mat-card class="${feature.name}-list__table-card" fxFlex="grow">
+  <div class="${feature.name}-list__body bk-row bk-col-lt-lg bk-gap-16px">
+    <mat-card class="${feature.name}-list__table-card bk-flex-grow">
       <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
 
       <table mat-table [dataSource]="rows" matSort class="${feature.name}-list__table">
@@ -182,7 +177,7 @@ ${headerCells}
                      (page)="onPage($event)"></mat-paginator>
     </mat-card>
 
-    <aside class="${feature.name}-list__aside" fxFlex="300px" fxFlex.lt-lg="100" fxHide.lt-md>
+    <aside class="${feature.name}-list__aside bk-flex-300px bk-flex-100-lt-lg bk-hide-lt-md">
       <bk-${feature.name}-summary [count]="total" [loading]="loading"></bk-${feature.name}-summary>
     </aside>
   </div>
@@ -339,25 +334,25 @@ function detailTemplate(feature) {
   const entity = camel(feature.entity);
   const rows = feature.fields
     .map(
-      (field) => `      <div class="detail-row" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="8px">
-        <span class="detail-row__label" fxFlex="180px" fxFlex.lt-sm="auto">${field.label}</span>
-        <span class="detail-row__value" fxFlex>${cellFor(field, entity)}</span>
+      (field) => `      <div class="detail-row bk-row bk-col-lt-sm bk-gap-8px">
+        <span class="detail-row__label bk-flex-180px bk-flex-auto-lt-sm">${field.label}</span>
+        <span class="detail-row__value bk-flex">${cellFor(field, entity)}</span>
       </div>`
     )
     .join('\n');
 
-  return `<section class="${feature.name}-detail" fxLayout="column" fxLayoutGap="16px">
+  return `<section class="${feature.name}-detail bk-col bk-gap-16px">
   <bk-breadcrumbs [crumbs]="crumbs"></bk-breadcrumbs>
 
-  <div *ngIf="loading" fxLayout="row" fxLayoutAlign="center center" class="${feature.name}-detail__loading">
+  <div *ngIf="loading" class="${feature.name}-detail__loading bk-row bk-justify-center bk-items-center">
     <mat-spinner diameter="36"></mat-spinner>
   </div>
 
   <ng-container *ngIf="${entity} as ${entity}">
-    <mat-card class="${feature.name}-detail__card" fxLayout="column" fxLayoutGap="12px">
-      <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between start" fxLayoutGap="12px">
-        <h2 class="${feature.name}-detail__title" fxFlex>${title(feature.entity)} detail</h2>
-        <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="end center">
+    <mat-card class="${feature.name}-detail__card bk-col bk-gap-12px">
+      <div class="bk-row bk-col-lt-md bk-justify-space-between bk-items-start bk-gap-12px">
+        <h2 class="${feature.name}-detail__title bk-flex">${title(feature.entity)} detail</h2>
+        <div class="bk-row bk-gap-8px bk-justify-end bk-items-center">
 ${
   feature.form
     ? `          <button mat-stroked-button (click)="edit()">Edit</button>
@@ -369,7 +364,7 @@ ${
 
       <mat-divider></mat-divider>
 
-      <div class="${feature.name}-detail__rows" fxLayout="column" fxLayoutGap="8px">
+      <div class="${feature.name}-detail__rows bk-col bk-gap-8px">
 ${rows}
       </div>
     </mat-card>
@@ -506,7 +501,7 @@ function formTemplate(feature) {
     .filter((field) => field.type !== 'status')
     .map((field) => {
       if (field.type === 'date') {
-        return `      <mat-form-field appearance="legacy" fxFlex="50" fxFlex.lt-md="100">
+        return `      <mat-form-field class="bk-flex-50 bk-flex-100-lt-md" appearance="legacy">
         <mat-label>${field.label}</mat-label>
         <input matInput [matDatepicker]="${camel(field.name)}Picker" formControlName="${field.name}" />
         <mat-datepicker-toggle matSuffix [for]="${camel(field.name)}Picker"></mat-datepicker-toggle>
@@ -514,13 +509,13 @@ function formTemplate(feature) {
       </mat-form-field>`;
       }
       if (field.type === 'money' || field.type === 'number') {
-        return `      <mat-form-field appearance="legacy" fxFlex="50" fxFlex.lt-md="100">
+        return `      <mat-form-field class="bk-flex-50 bk-flex-100-lt-md" appearance="legacy">
         <mat-label>${field.label}</mat-label>
         <input matInput type="number" formControlName="${field.name}" />
         <span matPrefix *ngIf="${field.type === 'money'}">&pound;&nbsp;</span>
       </mat-form-field>`;
       }
-      return `      <mat-form-field appearance="legacy" fxFlex="50" fxFlex.lt-md="100">
+      return `      <mat-form-field class="bk-flex-50 bk-flex-100-lt-md" appearance="legacy">
         <mat-label>${field.label}</mat-label>
         <input matInput formControlName="${field.name}" />
         <mat-error *ngIf="form.controls['${field.name}'].hasError('required')">${field.label} is required</mat-error>
@@ -528,18 +523,18 @@ function formTemplate(feature) {
     })
     .join('\n\n');
 
-  return `<section class="${feature.name}-form" fxLayout="column" fxLayoutGap="16px">
+  return `<section class="${feature.name}-form bk-col bk-gap-16px">
   <h1 class="${feature.name}-form__title">{{ editing ? 'Edit' : 'New' }} ${feature.entity}</h1>
 
   <mat-card>
-    <form [formGroup]="form" (ngSubmit)="submit()" fxLayout="column" fxLayoutGap="12px">
-      <div fxLayout="row wrap" fxLayoutGap="16px grid" fxLayout.lt-md="column">
+    <form class="bk-col bk-gap-12px" [formGroup]="form" (ngSubmit)="submit()">
+      <div class="bk-row bk-wrap bk-gap-16px bk-col-lt-md">
 ${inputs}
       </div>
 
       <mat-divider></mat-divider>
 
-      <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="8px" fxLayoutAlign.lt-sm="stretch stretch">
+      <div class="bk-row bk-justify-end bk-items-center bk-gap-8px bk-justify-start-lt-sm bk-items-stretch-lt-sm">
         <button mat-stroked-button type="button" (click)="cancel()">Cancel</button>
         <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid || saving">
           {{ saving ? 'Saving...' : 'Save' }}
@@ -667,20 +662,20 @@ export class ${Component} {
   }
 }
 `,
-    html: `<mat-card class="${feature.name}-summary" fxLayout="column" fxLayoutGap="8px">
-  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+    html: `<mat-card class="${feature.name}-summary bk-col bk-gap-8px">
+  <div class="bk-row bk-justify-start bk-items-center bk-gap-8px">
     <mat-icon class="${feature.name}-summary__icon">${feature.icon}</mat-icon>
-    <h3 class="${feature.name}-summary__title" fxFlex>${title(feature.name)}</h3>
+    <h3 class="${feature.name}-summary__title bk-flex">${title(feature.name)}</h3>
   </div>
 
   <mat-divider></mat-divider>
 
-  <div fxLayout="row" fxLayoutAlign="space-between baseline">
+  <div class="bk-row bk-justify-space-between bk-items-baseline">
     <span class="${feature.name}-summary__headline">{{ headline }}</span>
     <mat-spinner *ngIf="loading" diameter="16"></mat-spinner>
   </div>
 
-  <p class="${feature.name}-summary__blurb" fxHide.lt-md>${feature.summary}</p>
+  <p class="${feature.name}-summary__blurb bk-hide-lt-md">${feature.summary}</p>
 </mat-card>
 `,
     scss: `.${feature.name}-summary {
@@ -785,7 +780,6 @@ function featureModule(feature) {
   return `import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -813,7 +807,6 @@ ${declarations}
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    FlexLayoutModule,
     MatButtonModule,
     MatCardModule,
     MatDatepickerModule,

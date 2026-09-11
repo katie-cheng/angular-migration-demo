@@ -1,15 +1,15 @@
-<mat-card class="onboarding-summary" fxLayout="column" fxLayoutGap="8px">
-  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+<mat-card class="onboarding-summary bk-col bk-gap-8px">
+  <div class="bk-row bk-justify-start bk-items-center bk-gap-8px">
     <mat-icon class="onboarding-summary__icon">how_to_reg</mat-icon>
-    <h3 class="onboarding-summary__title" fxFlex>Onboarding</h3>
+    <h3 class="onboarding-summary__title bk-flex">Onboarding</h3>
   </div>
 
   <mat-divider></mat-divider>
 
-  <div fxLayout="row" fxLayoutAlign="space-between baseline">
+  <div class="bk-row bk-justify-space-between bk-items-baseline">
     <span class="onboarding-summary__headline">{{ headline }}</span>
     <mat-spinner *ngIf="loading" diameter="16"></mat-spinner>
   </div>
 
-  <p class="onboarding-summary__blurb" fxHide.lt-md>New product applications with identity and affordability steps.</p>
+  <p class="onboarding-summary__blurb bk-hide-lt-md">New product applications with identity and affordability steps.</p>
 </mat-card>

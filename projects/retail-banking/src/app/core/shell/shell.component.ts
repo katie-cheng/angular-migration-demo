@@ -1,5 +1,5 @@
+import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { MediaChange, MediaObserver } from '@angular/flex-layout';
 import { MatSidenav } from '@angular/material/sidenav';
 import { NavigationEnd, Router } from '@angular/router';
 import { Subject } from 'rxjs';
@@ -7,6 +7,8 @@ import { filter, takeUntil } from 'rxjs/operators';
 
 import { AnalyticsService } from 'analytics-sdk';
 import { AuthService, Session } from 'auth';
+
+import { NARROW } from '../breakpoints';
 
 import { NAV_ITEMS, NavItem } from './nav-items';
 
@@ -26,7 +28,7 @@ export class ShellComponent implements OnInit, OnDestroy {
   private readonly destroyed$ = new Subject<void>();
 
   constructor(
-    private readonly media: MediaObserver,
+    private readonly breakpoints: BreakpointObserver,
     private readonly auth: AuthService,
     private readonly analytics: AnalyticsService,
     private readonly router: Router
@@ -35,11 +37,11 @@ export class ShellComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.session = this.auth.session;
 
-    this.media
-      .asObservable()
+    this.breakpoints
+      .observe(NARROW)
       .pipe(takeUntil(this.destroyed$))
-      .subscribe((changes: MediaChange[]) => {
-        this.handset = changes.some((change) => change.mqAlias === 'xs' || change.mqAlias === 'sm');
+      .subscribe((state: BreakpointState) => {
+        this.handset = state.matches;
         this.sidenavMode = this.handset ? 'over' : 'side';
       });
 

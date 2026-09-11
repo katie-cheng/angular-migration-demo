@@ -5,21 +5,6 @@ upgrade. Kept honest rather than tidy.
 
 ## Blocking the upgrade
 
-### `@angular/flex-layout` is archived
-
-The package was archived by the Angular team and never shipped a stable
-release for Angular 15 or later. It is a hard stop: we cannot take the
-Angular 15 bump while it is in the dependency tree.
-
-It is used in roughly eight hundred places across the retail templates, the
-shell, the dashboard and both consumer applications, including the
-responsive suffixes (`fxFlex.lt-md`, `fxHide.xs`). `MediaObserver` is also
-used imperatively in the shell and the dashboard to switch the sidenav mode
-and the dashboard column count.
-
-Replacing it means CSS grid and flexbox plus media queries, and the CDK's
-`BreakpointObserver` where the decision has to happen in TypeScript.
-
 ### Pre-MDC Angular Material
 
 `ui-kit` is themed against Material 14's pre-MDC API — `@import

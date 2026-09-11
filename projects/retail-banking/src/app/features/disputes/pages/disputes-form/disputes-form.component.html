@@ -1,28 +1,28 @@
-<section class="disputes-form" fxLayout="column" fxLayoutGap="16px">
+<section class="disputes-form bk-col bk-gap-16px">
   <h1 class="disputes-form__title">{{ editing ? 'Edit' : 'New' }} dispute</h1>
 
   <mat-card>
-    <form [formGroup]="form" (ngSubmit)="submit()" fxLayout="column" fxLayoutGap="12px">
-      <div fxLayout="row wrap" fxLayoutGap="16px grid" fxLayout.lt-md="column">
-      <mat-form-field appearance="legacy" fxFlex="50" fxFlex.lt-md="100">
+    <form class="bk-col bk-gap-12px" [formGroup]="form" (ngSubmit)="submit()">
+      <div class="bk-row bk-wrap bk-gap-16px bk-col-lt-md">
+      <mat-form-field class="bk-flex-50 bk-flex-100-lt-md" appearance="legacy">
         <mat-label>Transaction</mat-label>
         <input matInput formControlName="transactionRef" />
         <mat-error *ngIf="form.controls['transactionRef'].hasError('required')">Transaction is required</mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="legacy" fxFlex="50" fxFlex.lt-md="100">
+      <mat-form-field class="bk-flex-50 bk-flex-100-lt-md" appearance="legacy">
         <mat-label>Reason</mat-label>
         <input matInput formControlName="reason" />
         <mat-error *ngIf="form.controls['reason'].hasError('required')">Reason is required</mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="legacy" fxFlex="50" fxFlex.lt-md="100">
+      <mat-form-field class="bk-flex-50 bk-flex-100-lt-md" appearance="legacy">
         <mat-label>Amount</mat-label>
         <input matInput type="number" formControlName="amount" />
         <span matPrefix *ngIf="true">&pound;&nbsp;</span>
       </mat-form-field>
 
-      <mat-form-field appearance="legacy" fxFlex="50" fxFlex.lt-md="100">
+      <mat-form-field class="bk-flex-50 bk-flex-100-lt-md" appearance="legacy">
         <mat-label>Raised</mat-label>
         <input matInput [matDatepicker]="raisedOnPicker" formControlName="raisedOn" />
         <mat-datepicker-toggle matSuffix [for]="raisedOnPicker"></mat-datepicker-toggle>
@@ -32,7 +32,7 @@
 
       <mat-divider></mat-divider>
 
-      <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="8px" fxLayoutAlign.lt-sm="stretch stretch">
+      <div class="bk-row bk-justify-end bk-items-center bk-gap-8px bk-justify-start-lt-sm bk-items-stretch-lt-sm">
         <button mat-stroked-button type="button" (click)="cancel()">Cancel</button>
         <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid || saving">
           {{ saving ? 'Saving...' : 'Save' }}

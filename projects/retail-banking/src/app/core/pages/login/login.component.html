@@ -1,16 +1,16 @@
-<div class="login" fxLayout="row" fxLayout.lt-md="column" fxFill>
-  <section class="login__marketing" fxFlex="45" fxHide.lt-md fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="16px">
+<div class="login bk-row bk-col-lt-md bk-fill">
+  <section class="login__marketing bk-flex-45 bk-hide-lt-md bk-col bk-justify-center bk-items-start bk-gap-16px">
     <h1 class="login__marketing-title">Northwind Retail</h1>
     <p class="login__marketing-copy">Everyday banking, built around your money.</p>
   </section>
 
-  <section class="login__form-panel" fxFlex fxLayout="column" fxLayoutAlign="center center">
-    <mat-card class="login__card" fxLayout="column" fxLayoutGap="16px">
+  <section class="login__form-panel bk-flex bk-col bk-justify-center bk-items-center">
+    <mat-card class="login__card bk-col bk-gap-16px">
       <h2 class="login__title">Sign in</h2>
 
       <bk-alert-banner *ngIf="error" tone="error" [message]="error"></bk-alert-banner>
 
-      <form [formGroup]="form" (ngSubmit)="submit()" fxLayout="column" fxLayoutGap="8px">
+      <form class="bk-col bk-gap-8px" [formGroup]="form" (ngSubmit)="submit()">
         <mat-form-field appearance="legacy">
           <mat-label>Username</mat-label>
           <input matInput formControlName="username" autocomplete="username" />
@@ -25,9 +25,9 @@
           </mat-error>
         </mat-form-field>
 
-        <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div class="bk-row bk-justify-space-between bk-items-center">
           <mat-checkbox formControlName="rememberDevice">Remember this device</mat-checkbox>
-          <a href="#" class="login__forgot" fxHide.xs>Forgotten details?</a>
+          <a href="#" class="login__forgot bk-hide-xs">Forgotten details?</a>
         </div>
 
         <button mat-raised-button color="primary" type="submit" [disabled]="submitting">

@@ -1,15 +1,15 @@
-<mat-card class="investments-summary" fxLayout="column" fxLayoutGap="8px">
-  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+<mat-card class="investments-summary bk-col bk-gap-8px">
+  <div class="bk-row bk-justify-start bk-items-center bk-gap-8px">
     <mat-icon class="investments-summary__icon">trending_up</mat-icon>
-    <h3 class="investments-summary__title" fxFlex>Investments</h3>
+    <h3 class="investments-summary__title bk-flex">Investments</h3>
   </div>
 
   <mat-divider></mat-divider>
 
-  <div fxLayout="row" fxLayoutAlign="space-between baseline">
+  <div class="bk-row bk-justify-space-between bk-items-baseline">
     <span class="investments-summary__headline">{{ headline }}</span>
     <mat-spinner *ngIf="loading" diameter="16"></mat-spinner>
   </div>
 
-  <p class="investments-summary__blurb" fxHide.lt-md>Brokerage holdings, performance and dividend history.</p>
+  <p class="investments-summary__blurb bk-hide-lt-md">Brokerage holdings, performance and dividend history.</p>
 </mat-card>

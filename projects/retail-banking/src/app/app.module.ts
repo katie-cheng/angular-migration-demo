@@ -1,6 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -45,7 +44,6 @@ import { StepUpComponent } from './core/pages/step-up/step-up.component';
     BrowserAnimationsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FlexLayoutModule,
     MatButtonModule,
     MatCardModule,
     MatCheckboxModule,

@@ -1,26 +1,21 @@
-<section class="transfers-list" fxLayout="column" fxLayoutGap="16px">
-  <header class="transfers-list__header"
-          fxLayout="row"
-          fxLayout.lt-md="column"
-          fxLayoutAlign="space-between center"
-          fxLayoutAlign.lt-md="start stretch"
-          fxLayoutGap="12px">
-    <div fxLayout="column" fxLayoutGap="4px">
+<section class="transfers-list bk-col bk-gap-16px">
+  <header class="transfers-list__header bk-row bk-col-lt-md bk-justify-space-between bk-items-center bk-justify-start-lt-md bk-items-stretch-lt-md bk-gap-12px">
+    <div class="bk-col bk-gap-4px">
       <h1 class="transfers-list__title">Transfers</h1>
-      <p class="transfers-list__subtitle" fxHide.lt-sm>Move money between own accounts and saved payees.</p>
+      <p class="transfers-list__subtitle bk-hide-lt-sm">Move money between own accounts and saved payees.</p>
     </div>
 
-    <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="8px" fxFlex.lt-md="100">
-      <mat-form-field appearance="legacy" class="transfers-list__search" fxFlex="240px" fxFlex.lt-md="auto">
+    <div class="bk-row bk-justify-end bk-items-center bk-gap-8px bk-flex-100-lt-md">
+      <mat-form-field appearance="legacy" class="transfers-list__search bk-flex-240px bk-flex-auto-lt-md">
         <mat-label>Search</mat-label>
         <input matInput [formControl]="search" autocomplete="off" />
         <mat-icon matSuffix>search</mat-icon>
       </mat-form-field>
-      <button mat-raised-button color="primary" (click)="create()" fxHide.lt-sm>
+      <button class="bk-hide-lt-sm" mat-raised-button color="primary" (click)="create()">
         <mat-icon>add</mat-icon>
         New
       </button>
-      <button mat-mini-fab color="primary" (click)="create()" fxShow.lt-sm fxHide>
+      <button class="bk-show-lt-sm bk-hide" mat-mini-fab color="primary" (click)="create()">
         <mat-icon>add</mat-icon>
       </button>
     </div>
@@ -28,8 +23,8 @@
 
   <bk-alert-banner *ngIf="error" tone="error" [message]="error"></bk-alert-banner>
 
-  <div class="transfers-list__body" fxLayout="row" fxLayout.lt-lg="column" fxLayoutGap="16px">
-    <mat-card class="transfers-list__table-card" fxFlex="grow">
+  <div class="transfers-list__body bk-row bk-col-lt-lg bk-gap-16px">
+    <mat-card class="transfers-list__table-card bk-flex-grow">
       <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
 
       <table mat-table [dataSource]="rows" matSort class="transfers-list__table">
@@ -70,7 +65,7 @@
                      (page)="onPage($event)"></mat-paginator>
     </mat-card>
 
-    <aside class="transfers-list__aside" fxFlex="300px" fxFlex.lt-lg="100" fxHide.lt-md>
+    <aside class="transfers-list__aside bk-flex-300px bk-flex-100-lt-lg bk-hide-lt-md">
       <bk-transfers-summary [count]="total" [loading]="loading"></bk-transfers-summary>
     </aside>
   </div>
