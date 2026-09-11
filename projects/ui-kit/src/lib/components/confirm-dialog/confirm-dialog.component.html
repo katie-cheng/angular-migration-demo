@@ -1,6 +1,6 @@
 <h2 mat-dialog-title class="bk-confirm-dialog__title">{{ data.title }}</h2>
 <mat-dialog-content class="bk-confirm-dialog__content">{{ data.message }}</mat-dialog-content>
-<mat-dialog-actions align="end">
+<mat-dialog-actions class="bk-confirm-dialog__actions" align="end">
   <button mat-button (click)="dialogRef.close(false)">{{ data.cancelLabel }}</button>
   <button mat-raised-button color="primary" (click)="dialogRef.close(true)">{{ data.confirmLabel }}</button>
 </mat-dialog-actions>

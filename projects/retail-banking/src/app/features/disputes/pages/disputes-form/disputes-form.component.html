@@ -4,25 +4,25 @@
   <mat-card>
     <form class="bk-col bk-gap-12px" [formGroup]="form" (ngSubmit)="submit()">
       <div class="bk-row bk-wrap bk-gap-16px bk-col-lt-md">
-      <mat-form-field class="bk-flex-50 bk-flex-100-lt-md" appearance="legacy">
+      <mat-form-field class="bk-flex-50 bk-flex-100-lt-md" appearance="fill">
         <mat-label>Transaction</mat-label>
         <input matInput formControlName="transactionRef" />
         <mat-error *ngIf="form.controls['transactionRef'].hasError('required')">Transaction is required</mat-error>
       </mat-form-field>
 
-      <mat-form-field class="bk-flex-50 bk-flex-100-lt-md" appearance="legacy">
+      <mat-form-field class="bk-flex-50 bk-flex-100-lt-md" appearance="fill">
         <mat-label>Reason</mat-label>
         <input matInput formControlName="reason" />
         <mat-error *ngIf="form.controls['reason'].hasError('required')">Reason is required</mat-error>
       </mat-form-field>
 
-      <mat-form-field class="bk-flex-50 bk-flex-100-lt-md" appearance="legacy">
+      <mat-form-field class="bk-flex-50 bk-flex-100-lt-md" appearance="fill">
         <mat-label>Amount</mat-label>
         <input matInput type="number" formControlName="amount" />
         <span matPrefix *ngIf="true">&pound;&nbsp;</span>
       </mat-form-field>
 
-      <mat-form-field class="bk-flex-50 bk-flex-100-lt-md" appearance="legacy">
+      <mat-form-field class="bk-flex-50 bk-flex-100-lt-md" appearance="fill">
         <mat-label>Raised</mat-label>
         <input matInput [matDatepicker]="raisedOnPicker" formControlName="raisedOn" />
         <mat-datepicker-toggle matSuffix [for]="raisedOnPicker"></mat-datepicker-toggle>

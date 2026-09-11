@@ -3,6 +3,8 @@
         [class.bk-button--loading]="loading"
         [disabled]="disabled || loading"
         (click)="onClick($event)">
-  <mat-icon *ngIf="icon" class="bk-button__icon">{{ icon }}</mat-icon>
-  <ng-content></ng-content>
+  <span class="bk-button__content">
+    <mat-icon *ngIf="icon" class="bk-button__icon">{{ icon }}</mat-icon>
+    <ng-content></ng-content>
+  </span>
 </button>

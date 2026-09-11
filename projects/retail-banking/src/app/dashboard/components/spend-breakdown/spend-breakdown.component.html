@@ -9,7 +9,7 @@
       <span class="bk-flex">{{ slice.category }}</span>
       <span class="spend-breakdown__amount">{{ slice.amount | currency:'GBP' }}</span>
     </div>
-    <mat-progress-bar mode="determinate" [value]="slice.share"></mat-progress-bar>
+    <mat-progress-bar mode="determinate" color="accent" [value]="slice.share"></mat-progress-bar>
   </div>
 
   <bk-empty-state *ngIf="!slices.length"

@@ -4,25 +4,25 @@
   <mat-card>
     <form class="bk-col bk-gap-12px" [formGroup]="form" (ngSubmit)="submit()">
       <div class="bk-row bk-wrap bk-gap-16px bk-col-lt-md">
-      <mat-form-field class="bk-flex-50 bk-flex-100-lt-md" appearance="legacy">
+      <mat-form-field class="bk-flex-50 bk-flex-100-lt-md" appearance="fill">
         <mat-label>Biller</mat-label>
         <input matInput formControlName="biller" />
         <mat-error *ngIf="form.controls['biller'].hasError('required')">Biller is required</mat-error>
       </mat-form-field>
 
-      <mat-form-field class="bk-flex-50 bk-flex-100-lt-md" appearance="legacy">
+      <mat-form-field class="bk-flex-50 bk-flex-100-lt-md" appearance="fill">
         <mat-label>Reference</mat-label>
         <input matInput formControlName="accountRef" />
         <mat-error *ngIf="form.controls['accountRef'].hasError('required')">Reference is required</mat-error>
       </mat-form-field>
 
-      <mat-form-field class="bk-flex-50 bk-flex-100-lt-md" appearance="legacy">
+      <mat-form-field class="bk-flex-50 bk-flex-100-lt-md" appearance="fill">
         <mat-label>Amount</mat-label>
         <input matInput type="number" formControlName="amount" />
         <span matPrefix *ngIf="true">&pound;&nbsp;</span>
       </mat-form-field>
 
-      <mat-form-field class="bk-flex-50 bk-flex-100-lt-md" appearance="legacy">
+      <mat-form-field class="bk-flex-50 bk-flex-100-lt-md" appearance="fill">
         <mat-label>Due</mat-label>
         <input matInput [matDatepicker]="dueOnPicker" formControlName="dueOn" />
         <mat-datepicker-toggle matSuffix [for]="dueOnPicker"></mat-datepicker-toggle>

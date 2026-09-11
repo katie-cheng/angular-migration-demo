@@ -6,7 +6,7 @@
     <bk-alert-banner *ngIf="error" tone="error" [message]="error"></bk-alert-banner>
 
     <form class="bk-col bk-gap-8px" [formGroup]="form">
-      <mat-form-field appearance="legacy">
+      <mat-form-field appearance="fill">
         <mat-label>Send code to</mat-label>
         <mat-select formControlName="channelId">
           <mat-option *ngFor="let channel of channels" [value]="channel.id">
@@ -16,7 +16,7 @@
       </mat-form-field>
 
       <div class="bk-row bk-gap-8px bk-col-xs">
-        <mat-form-field class="bk-flex" appearance="legacy">
+        <mat-form-field class="bk-flex" appearance="fill">
           <mat-label>6-digit code</mat-label>
           <input matInput formControlName="code" inputmode="numeric" maxlength="6" />
         </mat-form-field>

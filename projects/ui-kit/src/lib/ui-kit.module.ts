@@ -1,6 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
+import { MAT_MENU_DEFAULT_OPTIONS } from '@angular/material/menu';
+import { MAT_SELECT_CONFIG } from '@angular/material/select';
+import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -87,6 +91,36 @@ import { YesNoPipe } from './pipes/yes-no.pipe';
 import { SignedAmountPipe } from './pipes/signed-amount.pipe';
 import { IbanPipe } from './pipes/iban.pipe';
 import { TransactionStatusPipe } from './pipes/transaction-status.pipe';
+
+/**
+ * Overlay-rendered components (dialog, menu, select, snack bar) sit outside
+ * the component tree, so the design system tags their panels with its own
+ * classes through the supported default-options tokens and styles those.
+ */
+const OVERLAY_PANEL_PROVIDERS = [
+  { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { panelClass: 'bk-dialog-panel', maxWidth: '80vw' } },
+  {
+    provide: MAT_MENU_DEFAULT_OPTIONS,
+    useValue: {
+      xPosition: 'after',
+      yPosition: 'below',
+      overlapTrigger: false,
+      backdropClass: 'cdk-overlay-transparent-backdrop',
+      overlayPanelClass: 'bk-menu-panel',
+    },
+  },
+  { provide: MAT_SELECT_CONFIG, useValue: { overlayPanelClass: 'bk-select-panel' } },
+  {
+    provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
+    useValue: {
+      panelClass: ['bk-snack'],
+      duration: 4000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom',
+      politeness: 'assertive',
+    },
+  },
+];
 
 const MATERIAL = [
   MatAutocompleteModule,
@@ -183,5 +217,6 @@ const DECLARATIONS = [
   declarations: DECLARATIONS,
   imports: [CommonModule, FormsModule, ReactiveFormsModule, ...MATERIAL],
   exports: [...DECLARATIONS, ...MATERIAL],
+  providers: [...OVERLAY_PANEL_PROVIDERS],
 })
 export class UiKitModule {}

@@ -1,4 +1,4 @@
-<mat-form-field appearance="legacy" class="bk-search-field">
+<mat-form-field appearance="fill" class="bk-search-field">
   <mat-icon matPrefix>search</mat-icon>
   <input matInput [formControl]="control" [placeholder]="placeholder"
          (keyup.enter)="searched.emit(control.value ?? '')" />

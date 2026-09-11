@@ -20,25 +20,26 @@ const C = [
         [class.bk-button--loading]="loading"
         [disabled]="disabled || loading"
         (click)="onClick($event)">
-  <mat-icon *ngIf="icon" class="bk-button__icon">{{ icon }}</mat-icon>
-  <ng-content></ng-content>
+  <span class="bk-button__content">
+    <mat-icon *ngIf="icon" class="bk-button__icon">{{ icon }}</mat-icon>
+    <ng-content></ng-content>
+  </span>
 </button>`,
     scss: `.bk-button {
   font-family: var(--bk-font-body);
   letter-spacing: 0.2px;
 
-  // Design-system paint applied straight onto the Material internals.
-  .mat-button-wrapper {
+  &__content {
     display: inline-flex;
     align-items: center;
     gap: 8px;
     line-height: 20px;
   }
 
-  &--primary .mat-button-wrapper { color: #ffffff; }
+  &--primary .bk-button__content { color: #ffffff; }
   &--ghost { background: transparent; }
   &--danger { background: #a3232b; }
-  &--loading .mat-button-wrapper { opacity: 0.6; }
+  &--loading .bk-button__content { opacity: 0.6; }
 }`,
     body: `onClick(event: MouseEvent): void {
     if (this.disabled || this.loading) {
@@ -54,34 +55,44 @@ const C = [
     inputs: [['icon', 'string', "'more_vert'"], ['label', 'string', "''"], ['disabled', 'boolean', 'false']],
     outputs: ['pressed'],
     tpl: `<button mat-icon-button class="bk-icon-button" [attr.aria-label]="label"
-        [matTooltip]="label" [disabled]="disabled" (click)="pressed.emit($event)">
-  <mat-icon>{{ icon }}</mat-icon>
+        [matTooltip]="label" matTooltipClass="bk-tooltip" [disabled]="disabled" (click)="pressed.emit($event)">
+  <span class="bk-icon-button__content"><mat-icon>{{ icon }}</mat-icon></span>
 </button>`,
-    scss: `.bk-icon-button {
-  .mat-button-wrapper { line-height: 0; }
-  .mat-button-focus-overlay { background-color: rgba(0, 51, 102, 0.08); }
+    scss: `.bk-icon-button__content {
+  display: inline-flex;
+  line-height: 0;
 }`,
   },
   {
     name: 'form-field',
     mat: ['MatFormFieldModule', 'MatInputModule'],
+    specHost: `<bk-form-field label="Amount" hint="USD"><input /></bk-form-field>`,
     inputs: [['label', 'string', "''"], ['hint', 'string', "''"], ['error', 'string | null', 'null'], ['required', 'boolean', 'false']],
-    tpl: `<mat-form-field appearance="legacy" class="bk-form-field" [class.bk-form-field--invalid]="!!error">
-  <mat-label>{{ label }}<span *ngIf="required" class="bk-form-field__req">*</span></mat-label>
-  <ng-content></ng-content>
-  <mat-hint *ngIf="hint">{{ hint }}</mat-hint>
-  <mat-error *ngIf="error">{{ error }}</mat-error>
-</mat-form-field>`,
+    tpl: `<div class="bk-form-field" [class.bk-form-field--invalid]="!!error">
+  <label class="bk-form-field__label">{{ label }}<span *ngIf="required" class="bk-form-field__req">*</span></label>
+  <div class="bk-form-field__control"><ng-content></ng-content></div>
+  <p class="bk-form-field__hint" *ngIf="hint && !error">{{ hint }}</p>
+  <p class="bk-form-field__error" *ngIf="error">{{ error }}</p>
+</div>`,
     scss: `.bk-form-field {
   width: 100%;
+  display: block;
 
-  .mat-form-field-underline { background-color: #9aa5b1; }
-  .mat-form-field-ripple { background-color: var(--bk-color-primary); }
-  .mat-form-field-flex { padding-top: 4px; }
-  .mat-form-field-infix { border-top: 0.6em solid transparent; }
-  .mat-form-field-label { color: #52606d; }
+  &__label {
+    display: block;
+    font-size: 12px;
+    color: var(--bk-color-ink-muted, #52606d);
+  }
 
-  &--invalid .mat-form-field-underline { background-color: #a3232b; }
+  &__control { display: block; }
+
+  &__hint,
+  &__error {
+    margin: 4px 0 0;
+    font-size: 12px;
+  }
+
+  &__error { color: #a3232b; }
   &__req { color: #a3232b; margin-left: 2px; }
 }`,
   },
@@ -90,25 +101,22 @@ const C = [
     mat: ['MatFormFieldModule', 'MatInputModule'],
     forms: true,
     inputs: [['label', 'string', "''"], ['placeholder', 'string', "''"], ['maxLength', 'number', '120'], ['disabled', 'boolean', 'false']],
-    tpl: `<mat-form-field appearance="legacy" class="bk-text-input">
+    tpl: `<mat-form-field appearance="fill" class="bk-text-input">
   <mat-label>{{ label }}</mat-label>
   <input matInput [formControl]="control" [placeholder]="placeholder" [maxlength]="maxLength" />
 </mat-form-field>`,
-    scss: `.bk-text-input {
-  .mat-form-field-underline { height: 1px; }
-  .mat-input-element { caret-color: var(--bk-color-primary); }
-}`,
+    scss: ``,
   },
   {
     name: 'number-input',
     mat: ['MatFormFieldModule', 'MatInputModule'],
     forms: true,
     inputs: [['label', 'string', "''"], ['min', 'number', '0'], ['max', 'number', '1000000'], ['step', 'number', '1']],
-    tpl: `<mat-form-field appearance="legacy" class="bk-number-input">
+    tpl: `<mat-form-field appearance="fill" class="bk-number-input">
   <mat-label>{{ label }}</mat-label>
   <input matInput type="number" [formControl]="control" [min]="min" [max]="max" [step]="step" />
 </mat-form-field>`,
-    scss: `.bk-number-input .mat-form-field-flex { align-items: baseline; }`,
+    scss: ``,
   },
   {
     name: 'select',
@@ -116,45 +124,41 @@ const C = [
     forms: true,
     inputs: [['label', 'string', "''"], ['options', 'ReadonlyArray<{ value: string; label: string }>', '[]'], ['disabled', 'boolean', 'false']],
     outputs: ['selectionChanged'],
-    tpl: `<mat-form-field appearance="legacy" class="bk-select">
+    tpl: `<mat-form-field appearance="fill" class="bk-select">
   <mat-label>{{ label }}</mat-label>
   <mat-select [formControl]="control" [disabled]="disabled"
               (selectionChange)="selectionChanged.emit($event.value)">
     <mat-option *ngFor="let option of options" [value]="option.value">{{ option.label }}</mat-option>
   </mat-select>
 </mat-form-field>`,
-    scss: `.bk-select {
-  .mat-select-arrow { color: var(--bk-color-primary); border-width: 5px 5px 0; }
-  .mat-select-value-text { font-weight: 500; }
-  .mat-select-panel { border-radius: 2px; }
-}`,
+    scss: `.bk-select mat-select { font-weight: 500; }`,
   },
   {
     name: 'multi-select',
     mat: ['MatFormFieldModule', 'MatSelectModule'],
     forms: true,
     inputs: [['label', 'string', "''"], ['options', 'ReadonlyArray<{ value: string; label: string }>', '[]']],
-    tpl: `<mat-form-field appearance="legacy" class="bk-multi-select">
+    tpl: `<mat-form-field appearance="fill" class="bk-multi-select">
   <mat-label>{{ label }}</mat-label>
   <mat-select [formControl]="control" multiple>
     <mat-option *ngFor="let option of options" [value]="option.value">{{ option.label }}</mat-option>
   </mat-select>
 </mat-form-field>`,
-    scss: `.bk-multi-select .mat-select-arrow { margin: 0 4px; }`,
+    scss: ``,
   },
   {
     name: 'autocomplete',
     mat: ['MatFormFieldModule', 'MatInputModule', 'MatAutocompleteModule'],
     forms: true,
     inputs: [['label', 'string', "''"], ['options', 'ReadonlyArray<string>', '[]']],
-    tpl: `<mat-form-field appearance="legacy" class="bk-autocomplete">
+    tpl: `<mat-form-field appearance="fill" class="bk-autocomplete">
   <mat-label>{{ label }}</mat-label>
   <input matInput [formControl]="control" [matAutocomplete]="auto" />
-  <mat-autocomplete #auto="matAutocomplete">
+  <mat-autocomplete #auto="matAutocomplete" class="bk-autocomplete-panel">
     <mat-option *ngFor="let option of options" [value]="option">{{ option }}</mat-option>
   </mat-autocomplete>
 </mat-form-field>`,
-    scss: `.bk-autocomplete .mat-autocomplete-panel { max-height: 280px; }`,
+    scss: ``,
   },
   {
     name: 'checkbox',
@@ -163,12 +167,8 @@ const C = [
     inputs: [['label', 'string', "''"], ['disabled', 'boolean', 'false']],
     outputs: ['changed'],
     tpl: `<mat-checkbox class="bk-checkbox" [formControl]="control" [disabled]="disabled"
-              (change)="changed.emit($event.checked)">{{ label }}</mat-checkbox>`,
-    scss: `.bk-checkbox {
-  .mat-checkbox-frame { border-color: #7b8794; border-width: 1px; border-radius: 2px; }
-  .mat-checkbox-checkmark-path { stroke: #ffffff !important; }
-  .mat-checkbox-label { font-size: 14px; }
-}`,
+              (change)="changed.emit($event.checked)"><span class="bk-checkbox__label">{{ label }}</span></mat-checkbox>`,
+    scss: `.bk-checkbox__label { font-size: 14px; }`,
   },
   {
     name: 'radio-group',
@@ -181,11 +181,7 @@ const C = [
     <mat-radio-button *ngFor="let option of options" [value]="option.value">{{ option.label }}</mat-radio-button>
   </mat-radio-group>
 </fieldset>`,
-    scss: `.bk-radio-group {
-  border: 0;
-  .mat-radio-outer-circle { border-color: #7b8794; }
-  .mat-radio-label-content { padding-left: 6px; }
-}`,
+    scss: `.bk-radio-group { border: 0; }`,
   },
   {
     name: 'slide-toggle',
@@ -193,11 +189,7 @@ const C = [
     forms: true,
     inputs: [['label', 'string', "''"], ['disabled', 'boolean', 'false']],
     tpl: `<mat-slide-toggle class="bk-slide-toggle" [formControl]="control" [disabled]="disabled">{{ label }}</mat-slide-toggle>`,
-    scss: `.bk-slide-toggle {
-  .mat-slide-toggle-bar { background-color: #cbd2d9; height: 16px; border-radius: 8px; }
-  .mat-slide-toggle-thumb { height: 18px; width: 18px; }
-  &.mat-checked .mat-slide-toggle-bar { background-color: rgba(0, 51, 102, 0.4); }
-}`,
+    scss: ``,
   },
   {
     name: 'slider',
@@ -209,29 +201,26 @@ const C = [
   <mat-slider [min]="min" [max]="max" [value]="value"
               (change)="valueChanged.emit($event.value ?? 0)"></mat-slider>
 </div>`,
-    scss: `.bk-slider .mat-slider-track-fill { background-color: var(--bk-color-primary); }`,
+    scss: ``,
   },
   {
     name: 'datepicker',
     mat: ['MatFormFieldModule', 'MatInputModule', 'MatDatepickerModule', 'MatNativeDateModule'],
     forms: true,
     inputs: [['label', 'string', "''"], ['minDate', 'Date | null', 'null'], ['maxDate', 'Date | null', 'null']],
-    tpl: `<mat-form-field appearance="legacy" class="bk-datepicker">
+    tpl: `<mat-form-field appearance="fill" class="bk-datepicker">
   <mat-label>{{ label }}</mat-label>
   <input matInput [matDatepicker]="picker" [formControl]="control" [min]="minDate" [max]="maxDate" />
   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
   <mat-datepicker #picker></mat-datepicker>
 </mat-form-field>`,
-    scss: `.bk-datepicker {
-  .mat-datepicker-toggle .mat-icon-button { width: 32px; height: 32px; }
-  .mat-form-field-suffix { top: 0.2em; }
-}`,
+    scss: ``,
   },
   {
     name: 'date-range',
     mat: ['MatFormFieldModule', 'MatInputModule', 'MatDatepickerModule', 'MatNativeDateModule'],
     inputs: [['label', 'string', "'Date range'"]],
-    tpl: `<mat-form-field appearance="legacy" class="bk-date-range">
+    tpl: `<mat-form-field appearance="fill" class="bk-date-range">
   <mat-label>{{ label }}</mat-label>
   <mat-date-range-input [rangePicker]="rangePicker">
     <input matStartDate placeholder="Start" />
@@ -240,22 +229,17 @@ const C = [
   <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
   <mat-date-range-picker #rangePicker></mat-date-range-picker>
 </mat-form-field>`,
-    scss: `.bk-date-range .mat-date-range-input-separator { color: #52606d; }`,
+    scss: ``,
   },
   {
     name: 'tabs',
     mat: ['MatTabsModule'],
     inputs: [['tabs', 'ReadonlyArray<string>', '[]'], ['activeIndex', 'number', '0']],
     outputs: ['tabChanged'],
-    tpl: `<mat-tab-group class="bk-tabs" [selectedIndex]="activeIndex" (selectedIndexChange)="tabChanged.emit($event)">
+    tpl: `<mat-tab-group class="bk-tabs" color="accent" [selectedIndex]="activeIndex" (selectedIndexChange)="tabChanged.emit($event)">
   <mat-tab *ngFor="let tab of tabs" [label]="tab"></mat-tab>
 </mat-tab-group>`,
-    scss: `.bk-tabs {
-  .mat-tab-label { min-width: 120px; opacity: 1; font-weight: 500; }
-  .mat-tab-label-active { color: var(--bk-color-primary); }
-  .mat-ink-bar { height: 3px; background-color: var(--bk-color-accent); }
-  .mat-tab-header { border-bottom: 1px solid #e4e7eb; }
-}`,
+    scss: ``,
   },
   {
     name: 'table',
@@ -264,22 +248,22 @@ const C = [
     outputs: ['rowSelected'],
     tpl: `<table mat-table class="bk-table" [class.bk-table--dense]="dense" [dataSource]="dataSource">
   <ng-container *ngFor="let column of columns" [matColumnDef]="column">
-    <th mat-header-cell *matHeaderCellDef>{{ column }}</th>
-    <td mat-cell *matCellDef="let row" (click)="rowSelected.emit(row)">{{ row[column] }}</td>
+    <th mat-header-cell *matHeaderCellDef class="bk-table__header-cell">{{ column }}</th>
+    <td mat-cell *matCellDef="let row" class="bk-table__cell" (click)="rowSelected.emit(row)">{{ row[column] }}</td>
   </ng-container>
-  <tr mat-header-row *matHeaderRowDef="columns"></tr>
-  <tr mat-row *matRowDef="let row; columns: columns"></tr>
+  <tr mat-header-row *matHeaderRowDef="columns" class="bk-table__header-row"></tr>
+  <tr mat-row *matRowDef="let row; columns: columns" class="bk-table__row"></tr>
 </table>`,
     scss: `.bk-table {
   width: 100%;
+  background: transparent;
 
-  .mat-table { background: transparent; }
-  .mat-header-row { height: 44px; }
-  .mat-row { height: 52px; border-bottom: 1px solid #f5f7fa; }
-  .mat-cell { font-size: 14px; color: #1f2933; }
-  .mat-header-cell { color: #52606d; text-transform: uppercase; font-size: 11px; }
+  &__header-row { height: var(--bk-table-header-row-height); }
+  &__row { height: var(--bk-table-row-height); border-bottom: 1px solid #f5f7fa; }
+  &__cell { font-size: 14px; color: #1f2933; }
+  &__header-cell { color: var(--bk-color-ink-muted); text-transform: uppercase; font-size: 11px; }
 
-  &--dense .mat-row { height: 40px; }
+  &--dense .bk-table__row { height: var(--bk-table-row-height-dense); }
 }`,
     body: `dataSource: Record<string, unknown>[] = [];
 
@@ -294,10 +278,8 @@ const C = [
     outputs: ['pageChanged'],
     tpl: `<mat-paginator class="bk-paginator" [length]="length" [pageSize]="pageSize"
                [pageSizeOptions]="pageSizeOptionsArray" (page)="pageChanged.emit($event.pageIndex)"></mat-paginator>`,
-    scss: `.bk-paginator {
-  .mat-paginator-container { min-height: 48px; padding: 0 8px; }
-  .mat-paginator-page-size-label { color: #52606d; }
-}`,
+    // Paginator height is a density concern; the theme sets density -1.
+    scss: ``,
     body: `pageSizeOptionsArray: number[] = [10, 25, 50];
 
   ngOnChanges(): void {
@@ -328,21 +310,18 @@ const C = [
     inputs: [],
     tpl: `<h2 mat-dialog-title class="bk-confirm-dialog__title">{{ data.title }}</h2>
 <mat-dialog-content class="bk-confirm-dialog__content">{{ data.message }}</mat-dialog-content>
-<mat-dialog-actions align="end">
+<mat-dialog-actions class="bk-confirm-dialog__actions" align="end">
   <button mat-button (click)="dialogRef.close(false)">{{ data.cancelLabel }}</button>
   <button mat-raised-button color="primary" (click)="dialogRef.close(true)">{{ data.confirmLabel }}</button>
 </mat-dialog-actions>`,
-    scss: `.bk-confirm-dialog__title { font-size: 18px; }
+    // Panel chrome lives on the `bk-dialog-panel` overlay class the dialog
+    // service applies; the component only styles its own markup.
+    scss: `.bk-confirm-dialog__title {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
 
-::ng-deep .bk-confirm-dialog-panel {
-  .mat-dialog-container {
-    padding: 20px 24px;
-    border-radius: 2px;
-    box-shadow: 0 8px 24px rgba(31, 41, 51, 0.24);
-  }
-  .mat-dialog-title { margin-bottom: 8px; }
-  .mat-dialog-actions { padding-bottom: 0; }
-}`,
+.bk-confirm-dialog__actions { padding-bottom: 0; }`,
   },
   {
     name: 'card',
@@ -390,7 +369,7 @@ const C = [
   </mat-chip>
 </mat-chip-list>`,
     mat2: ['MatIconModule'],
-    scss: `.bk-chip-list .mat-chip { border-radius: 2px; font-size: 12px; }`,
+    scss: `.bk-chip-list mat-chip { border-radius: 2px; font-size: 12px; }`,
   },
   {
     name: 'badge',
@@ -435,9 +414,9 @@ const C = [
     inputs: [['value', 'number', '0'], ['label', 'string', "''"]],
     tpl: `<div class="bk-progress-bar">
   <span class="bk-progress-bar__label" *ngIf="label">{{ label }}</span>
-  <mat-progress-bar mode="determinate" [value]="value"></mat-progress-bar>
+  <mat-progress-bar mode="determinate" color="accent" [value]="value"></mat-progress-bar>
 </div>`,
-    scss: `.bk-progress-bar .mat-progress-bar-fill::after { background-color: var(--bk-color-accent); }`,
+    scss: ``,
   },
   {
     name: 'spinner',
@@ -456,7 +435,7 @@ const C = [
     tpl: `<mat-horizontal-stepper class="bk-stepper" [selectedIndex]="selectedIndex" [linear]="false">
   <mat-step *ngFor="let step of steps" [label]="step"></mat-step>
 </mat-horizontal-stepper>`,
-    scss: `.bk-stepper .mat-step-header .mat-step-icon-selected { background-color: var(--bk-color-primary); }`,
+    scss: ``,
   },
   {
     name: 'expansion-panel',
@@ -466,7 +445,7 @@ const C = [
   <mat-expansion-panel-header><mat-panel-title>{{ heading }}</mat-panel-title></mat-expansion-panel-header>
   <ng-content></ng-content>
 </mat-expansion-panel>`,
-    scss: `.bk-expansion-panel .mat-expansion-panel-header { height: 48px; }`,
+    scss: ``,
   },
   {
     name: 'menu',
@@ -474,10 +453,10 @@ const C = [
     inputs: [['items', 'ReadonlyArray<{ id: string; label: string }>', '[]'], ['triggerLabel', 'string', "'Actions'"]],
     outputs: ['itemSelected'],
     tpl: `<button mat-button class="bk-menu__trigger" [matMenuTriggerFor]="menu">{{ triggerLabel }}</button>
-<mat-menu #menu="matMenu">
+<mat-menu #menu="matMenu" class="bk-menu-panel">
   <button mat-menu-item *ngFor="let item of items" (click)="itemSelected.emit(item.id)">{{ item.label }}</button>
 </mat-menu>`,
-    scss: `.bk-menu__trigger .mat-button-wrapper { font-weight: 500; }`,
+    scss: `.bk-menu__trigger { font-weight: 500; }`,
   },
   {
     name: 'toolbar',
@@ -567,13 +546,13 @@ const C = [
   },
   {
     name: 'account-tile',
-    inputs: [['accountName', 'string', "''"], ['accountNumber', 'string', "''"], ['balance', 'number', '0'], ['available', 'number', '0']],
+    inputs: [['accountName', 'string', "''"], ['accountNumber', 'string', "''"], ['balance', 'number', '0'], ['available', 'number', '0'], ['currency', 'string', "'GBP'"]],
     outputs: ['opened'],
     tpl: `<button type="button" class="bk-account-tile" (click)="opened.emit()">
   <span class="bk-account-tile__name">{{ accountName }}</span>
   <span class="bk-account-tile__number">{{ maskedNumber }}</span>
-  <span class="bk-account-tile__balance">{{ balance | currency }}</span>
-  <span class="bk-account-tile__available">{{ available | currency }} available</span>
+  <span class="bk-account-tile__balance">{{ balance | currency: currency }}</span>
+  <span class="bk-account-tile__available">{{ available | currency: currency }} available</span>
 </button>`,
     scss: `.bk-account-tile {
   display: flex;
@@ -679,15 +658,12 @@ const C = [
     mat: ['MatFormFieldModule', 'MatInputModule'],
     forms: true,
     inputs: [['label', 'string', "'Amount'"], ['currency', 'string', "'USD'"]],
-    tpl: `<mat-form-field appearance="legacy" class="bk-amount-input">
+    tpl: `<mat-form-field appearance="fill" class="bk-amount-input">
   <mat-label>{{ label }}</mat-label>
   <span matPrefix class="bk-amount-input__prefix">{{ currency }}&nbsp;</span>
   <input matInput type="number" [formControl]="control" />
 </mat-form-field>`,
-    scss: `.bk-amount-input {
-  .mat-form-field-prefix { color: #52606d; }
-  .mat-form-field-flex { align-items: center; }
-}`,
+    scss: `.bk-amount-input__prefix { color: var(--bk-color-ink-muted); }`,
   },
   {
     name: 'file-upload',
@@ -712,12 +688,12 @@ const C = [
     forms: true,
     inputs: [['placeholder', 'string', "'Search'"]],
     outputs: ['searched'],
-    tpl: `<mat-form-field appearance="legacy" class="bk-search-field">
+    tpl: `<mat-form-field appearance="fill" class="bk-search-field">
   <mat-icon matPrefix>search</mat-icon>
   <input matInput [formControl]="control" [placeholder]="placeholder"
          (keyup.enter)="searched.emit(control.value ?? '')" />
 </mat-form-field>`,
-    scss: `.bk-search-field .mat-form-field-underline { background-color: #cbd2d9; }`,
+    scss: ``,
   },
   {
     name: 'timeline',

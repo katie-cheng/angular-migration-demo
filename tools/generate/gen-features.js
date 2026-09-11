@@ -129,7 +129,7 @@ function listTemplate(feature) {
     </div>
 
     <div class="bk-row bk-justify-end bk-items-center bk-gap-8px bk-flex-100-lt-md">
-      <mat-form-field appearance="legacy" class="${feature.name}-list__search bk-flex-240px bk-flex-auto-lt-md">
+      <mat-form-field appearance="fill" class="${feature.name}-list__search bk-flex-240px bk-flex-auto-lt-md">
         <mat-label>Search</mat-label>
         <input matInput [formControl]="search" autocomplete="off" />
         <mat-icon matSuffix>search</mat-icon>
@@ -155,7 +155,7 @@ ${
 
   <div class="${feature.name}-list__body bk-row bk-col-lt-lg bk-gap-16px">
     <mat-card class="${feature.name}-list__table-card bk-flex-grow">
-      <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+      <mat-progress-bar *ngIf="loading" mode="indeterminate" color="accent"></mat-progress-bar>
 
       <table mat-table [dataSource]="rows" matSort class="${feature.name}-list__table">
 ${headerCells}
@@ -313,18 +313,9 @@ function listStyles(feature) {
     }
   }
 
-  // Pre-MDC Material internals; these selectors disappear in v15.
-  .mat-header-cell {
+  th {
     color: var(--bk-color-ink);
     font-weight: 600;
-  }
-
-  .mat-form-field-underline {
-    background-color: rgba(0, 51, 102, 0.42);
-  }
-
-  .mat-paginator-container {
-    min-height: 52px;
   }
 }
 `;
@@ -489,7 +480,7 @@ function detailStyles(feature) {
     }
   }
 
-  .mat-card {
+  mat-card {
     padding: calc(var(--bk-spacing-unit) * 2);
   }
 }
@@ -501,7 +492,7 @@ function formTemplate(feature) {
     .filter((field) => field.type !== 'status')
     .map((field) => {
       if (field.type === 'date') {
-        return `      <mat-form-field class="bk-flex-50 bk-flex-100-lt-md" appearance="legacy">
+        return `      <mat-form-field class="bk-flex-50 bk-flex-100-lt-md" appearance="fill">
         <mat-label>${field.label}</mat-label>
         <input matInput [matDatepicker]="${camel(field.name)}Picker" formControlName="${field.name}" />
         <mat-datepicker-toggle matSuffix [for]="${camel(field.name)}Picker"></mat-datepicker-toggle>
@@ -509,13 +500,13 @@ function formTemplate(feature) {
       </mat-form-field>`;
       }
       if (field.type === 'money' || field.type === 'number') {
-        return `      <mat-form-field class="bk-flex-50 bk-flex-100-lt-md" appearance="legacy">
+        return `      <mat-form-field class="bk-flex-50 bk-flex-100-lt-md" appearance="fill">
         <mat-label>${field.label}</mat-label>
         <input matInput type="number" formControlName="${field.name}" />
         <span matPrefix *ngIf="${field.type === 'money'}">&pound;&nbsp;</span>
       </mat-form-field>`;
       }
-      return `      <mat-form-field class="bk-flex-50 bk-flex-100-lt-md" appearance="legacy">
+      return `      <mat-form-field class="bk-flex-50 bk-flex-100-lt-md" appearance="fill">
         <mat-label>${field.label}</mat-label>
         <input matInput formControlName="${field.name}" />
         <mat-error *ngIf="form.controls['${field.name}'].hasError('required')">${field.label} is required</mat-error>

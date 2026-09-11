@@ -19,10 +19,11 @@ a {
   margin: 0 auto;
 }
 
-.bk-confirm-dialog-panel .mat-dialog-container {
+// The overlay panel classes come from the ui-kit Material default-options tokens.
+.bk-confirm-dialog-panel {
   border-radius: var(--bk-radius);
 }
 
-.bk-snack--error .mat-simple-snackbar {
+.bk-snack--error > * {
   color: #fff;
 }
