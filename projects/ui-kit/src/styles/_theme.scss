@@ -89,7 +89,22 @@ $bk-theme: mat.define-light-theme(
   )
 );
 
+// The shell chrome stays at the default density; only the in-page components
+// are compacted.
+$bk-shell-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $bk-primary,
+      accent: $bk-accent,
+      warn: $bk-warn,
+    ),
+    typography: $bk-typography,
+    density: 0,
+  )
+);
+
 @include mat.all-component-themes($bk-theme);
+@include mat.toolbar-theme($bk-shell-theme);
 
 :root {
   --bk-color-primary: #003366;

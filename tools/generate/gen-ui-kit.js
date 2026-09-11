@@ -420,7 +420,7 @@ ${declarations.map((d) => `import { ${d.cls} } from './${d.file}';`).join('\n')}
  * classes through the supported default-options tokens and styles those.
  */
 const OVERLAY_PANEL_PROVIDERS = [
-  { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { panelClass: 'bk-dialog-panel' } },
+  { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { panelClass: 'bk-dialog-panel', maxWidth: '80vw' } },
   {
     provide: MAT_MENU_DEFAULT_OPTIONS,
     useValue: {
@@ -432,7 +432,16 @@ const OVERLAY_PANEL_PROVIDERS = [
     },
   },
   { provide: MAT_SELECT_CONFIG, useValue: { overlayPanelClass: 'bk-select-panel' } },
-  { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { panelClass: ['bk-snack'], duration: 4000 } },
+  {
+    provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
+    useValue: {
+      panelClass: ['bk-snack'],
+      duration: 4000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom',
+      politeness: 'assertive',
+    },
+  },
 ];
 
 const MATERIAL = [
