@@ -1,12 +1,14 @@
+import { BreakpointObserver } from '@angular/cdk/layout';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { MediaObserver } from '@angular/flex-layout';
 import { of } from 'rxjs';
 
 import { AnalyticsService } from 'analytics-sdk';
 import { AuthService } from 'auth';
 import { BankingFacade } from 'data-providers';
+
+import { NARROW } from '../core/breakpoints';
 
 import { DashboardComponent } from './dashboard.component';
 
@@ -27,8 +29,10 @@ const ACCOUNTS = [
 describe('DashboardComponent', () => {
   let fixture: ComponentFixture<DashboardComponent>;
   let facade: jasmine.SpyObj<BankingFacade>;
+  let breakpoints: { observe: jasmine.Spy };
 
   beforeEach(async () => {
+    breakpoints = { observe: jasmine.createSpy('observe').and.returnValue(of({ matches: false, breakpoints: {} })) };
     facade = jasmine.createSpyObj<BankingFacade>('BankingFacade', [
       'accounts',
       'openAccounts',
@@ -47,7 +51,7 @@ describe('DashboardComponent', () => {
         { provide: BankingFacade, useValue: facade },
         { provide: AuthService, useValue: { session: { profile: { displayName: 'Dana Whitfield' } } } },
         { provide: AnalyticsService, useValue: jasmine.createSpyObj('AnalyticsService', ['pageView']) },
-        { provide: MediaObserver, useValue: { asObservable: () => of([{ mqAlias: 'lg' }]) } },
+        { provide: BreakpointObserver, useValue: breakpoints },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
@@ -68,6 +72,16 @@ describe('DashboardComponent', () => {
   it('uses two columns on a wide viewport', () => {
     fixture.detectChanges();
     expect(fixture.componentInstance.columns).toBe(2);
+  });
+
+  it('watches the narrow breakpoint and drops to one column when it matches', () => {
+    breakpoints.observe.and.returnValue(of({ matches: true, breakpoints: {} }));
+
+    fixture = TestBed.createComponent(DashboardComponent);
+    fixture.detectChanges();
+
+    expect(breakpoints.observe).toHaveBeenCalledWith(NARROW);
+    expect(fixture.componentInstance.columns).toBe(1);
   });
 
   // FIXME(NWR-2231): started failing when the tile grid moved to fxFlex.

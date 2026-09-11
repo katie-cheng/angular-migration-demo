@@ -1,26 +1,20 @@
-<mat-card class="balance-strip"
-          fxLayout="row"
-          fxLayout.lt-md="column"
-          fxLayoutAlign="space-between center"
-          fxLayoutAlign.lt-md="start stretch"
-          fxLayoutGap="24px"
-          fxLayoutGap.lt-md="12px">
-  <div class="balance-strip__primary" fxLayout="column" fxLayoutGap="4px" fxFlex="40" fxFlex.lt-md="100">
+<mat-card class="balance-strip bk-row bk-col-lt-md bk-justify-space-between bk-items-center bk-justify-start-lt-md bk-items-stretch-lt-md bk-gap-24px bk-gap-12px-lt-md">
+  <div class="balance-strip__primary bk-col bk-gap-4px bk-flex-40 bk-flex-100-lt-md">
     <span class="balance-strip__label">Total available</span>
     <span class="balance-strip__value">{{ total | currency:'GBP' }}</span>
     <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
   </div>
 
-  <mat-divider [vertical]="true" fxHide.lt-md></mat-divider>
+  <mat-divider class="bk-hide-lt-md" [vertical]="true"></mat-divider>
 
-  <div class="balance-strip__stat" fxLayout="column" fxLayoutGap="4px" fxFlex fxHide.xs>
+  <div class="balance-strip__stat bk-col bk-gap-4px bk-flex bk-hide-xs">
     <span class="balance-strip__label">Open accounts</span>
     <span class="balance-strip__stat-value">{{ openCount }}</span>
   </div>
 
-  <mat-divider [vertical]="true" fxHide.lt-md></mat-divider>
+  <mat-divider class="bk-hide-lt-md" [vertical]="true"></mat-divider>
 
-  <div class="balance-strip__stat" fxLayout="column" fxLayoutGap="4px" fxFlex fxHide.xs>
+  <div class="balance-strip__stat bk-col bk-gap-4px bk-flex bk-hide-xs">
     <span class="balance-strip__label">Credit used</span>
     <span class="balance-strip__stat-value">{{ creditUsed | currency:'GBP' }}</span>
   </div>

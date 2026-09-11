@@ -1,17 +1,12 @@
-<section class="loans-list" fxLayout="column" fxLayoutGap="16px">
-  <header class="loans-list__header"
-          fxLayout="row"
-          fxLayout.lt-md="column"
-          fxLayoutAlign="space-between center"
-          fxLayoutAlign.lt-md="start stretch"
-          fxLayoutGap="12px">
-    <div fxLayout="column" fxLayoutGap="4px">
+<section class="loans-list bk-col bk-gap-16px">
+  <header class="loans-list__header bk-row bk-col-lt-md bk-justify-space-between bk-items-center bk-justify-start-lt-md bk-items-stretch-lt-md bk-gap-12px">
+    <div class="bk-col bk-gap-4px">
       <h1 class="loans-list__title">Loans</h1>
-      <p class="loans-list__subtitle" fxHide.lt-sm>Personal loan balances, schedules and overpayment quotes.</p>
+      <p class="loans-list__subtitle bk-hide-lt-sm">Personal loan balances, schedules and overpayment quotes.</p>
     </div>
 
-    <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="8px" fxFlex.lt-md="100">
-      <mat-form-field appearance="legacy" class="loans-list__search" fxFlex="240px" fxFlex.lt-md="auto">
+    <div class="bk-row bk-justify-end bk-items-center bk-gap-8px bk-flex-100-lt-md">
+      <mat-form-field appearance="legacy" class="loans-list__search bk-flex-240px bk-flex-auto-lt-md">
         <mat-label>Search</mat-label>
         <input matInput [formControl]="search" autocomplete="off" />
         <mat-icon matSuffix>search</mat-icon>
@@ -25,8 +20,8 @@
 
   <bk-alert-banner *ngIf="error" tone="error" [message]="error"></bk-alert-banner>
 
-  <div class="loans-list__body" fxLayout="row" fxLayout.lt-lg="column" fxLayoutGap="16px">
-    <mat-card class="loans-list__table-card" fxFlex="grow">
+  <div class="loans-list__body bk-row bk-col-lt-lg bk-gap-16px">
+    <mat-card class="loans-list__table-card bk-flex-grow">
       <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
 
       <table mat-table [dataSource]="rows" matSort class="loans-list__table">
@@ -67,7 +62,7 @@
                      (page)="onPage($event)"></mat-paginator>
     </mat-card>
 
-    <aside class="loans-list__aside" fxFlex="300px" fxFlex.lt-lg="100" fxHide.lt-md>
+    <aside class="loans-list__aside bk-flex-300px bk-flex-100-lt-lg bk-hide-lt-md">
       <bk-loans-summary [count]="total" [loading]="loading"></bk-loans-summary>
     </aside>
   </div>

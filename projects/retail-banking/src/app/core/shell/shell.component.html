@@ -1,15 +1,15 @@
-<div class="shell" fxLayout="column" fxFill>
-  <mat-toolbar color="primary" class="shell__toolbar" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
-    <button mat-icon-button (click)="toggle()" aria-label="Toggle navigation">
+<div class="shell">
+  <mat-toolbar color="primary" class="shell__toolbar bk-row bk-justify-start bk-items-center bk-gap-8px">
+    <button mat-icon-button (click)="toggle()" aria-label="Toggle navigation menu">
       <mat-icon>menu</mat-icon>
     </button>
 
-    <span class="shell__brand" fxHide.xs>Northwind Retail</span>
-    <span class="shell__brand shell__brand--short" fxShow.xs fxHide>NR</span>
+    <span class="shell__brand bk-hide-xs">Northwind Retail</span>
+    <span class="shell__brand shell__brand--short bk-show-xs bk-hide">NR</span>
 
-    <span fxFlex></span>
+    <span class="bk-flex"></span>
 
-    <button mat-icon-button routerLink="/alerts" aria-label="Alerts" fxHide.xs>
+    <button class="bk-hide-xs" mat-icon-button routerLink="/alerts" aria-label="Alerts">
       <mat-icon>notifications</mat-icon>
     </button>
 
@@ -18,7 +18,7 @@
             class="shell__profile"
             aria-label="Account menu">
       <mat-icon>account_circle</mat-icon>
-      <span fxHide.lt-md>{{ session?.profile?.displayName }}</span>
+      <span class="bk-hide-lt-md">{{ session?.profile?.displayName }}</span>
     </button>
 
     <mat-menu #profileMenu="matMenu">
@@ -33,29 +33,26 @@
     </mat-menu>
   </mat-toolbar>
 
-  <mat-sidenav-container class="shell__container" fxFlex>
+  <mat-sidenav-container class="shell__container">
     <mat-sidenav #sidenav
                  class="shell__sidenav"
                  [mode]="sidenavMode"
                  [opened]="!handset"
                  [fixedInViewport]="handset">
-      <mat-nav-list class="shell__nav" fxLayout="column">
-        <a mat-list-item
+      <mat-nav-list class="shell__nav bk-col">
+        <a class="bk-row bk-justify-start bk-items-center bk-gap-12px" mat-list-item
            *ngFor="let item of visibleNavItems()"
            [routerLink]="item.route"
            routerLinkActive="shell__nav-item--active"
-           (click)="trackNav(item)"
-           fxLayout="row"
-           fxLayoutAlign="start center"
-           fxLayoutGap="12px">
+           (click)="trackNav(item)">
           <mat-icon>{{ item.icon }}</mat-icon>
-          <span fxFlex>{{ item.label }}</span>
+          <span class="bk-flex">{{ item.label }}</span>
         </a>
       </mat-nav-list>
     </mat-sidenav>
 
     <mat-sidenav-content class="shell__content">
-      <div class="bk-page" fxLayout="column" fxLayoutGap="16px">
+      <div class="bk-page bk-col bk-gap-16px">
         <router-outlet></router-outlet>
       </div>
     </mat-sidenav-content>

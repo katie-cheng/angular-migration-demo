@@ -1,7 +1,9 @@
+import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MediaObserver } from '@angular/flex-layout';
 import { Subject, combineLatest } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
+
+import { NARROW } from '../core/breakpoints';
 
 import { AnalyticsService } from 'analytics-sdk';
 import { AuthService } from 'auth';
@@ -28,7 +30,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private readonly facade: BankingFacade,
     private readonly auth: AuthService,
     private readonly analytics: AnalyticsService,
-    private readonly media: MediaObserver
+    private readonly breakpoints: BreakpointObserver
   ) {}
 
   get greeting(): string {
@@ -39,10 +41,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.media
-      .asObservable()
+    this.breakpoints
+      .observe(NARROW)
       .pipe(
-        map((changes) => changes.some((change) => change.mqAlias === 'xs' || change.mqAlias === 'sm')),
+        map((state) => state.matches),
         takeUntil(this.destroyed$)
       )
       .subscribe((isNarrow) => (this.columns = isNarrow ? 1 : 2));

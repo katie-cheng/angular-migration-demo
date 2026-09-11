@@ -1,15 +1,12 @@
-<mat-card class="quick-actions" fxLayout="column" fxLayoutGap="12px">
+<mat-card class="quick-actions bk-col bk-gap-12px">
   <h2 class="quick-actions__title">Quick actions</h2>
   <mat-divider></mat-divider>
 
-  <div class="quick-actions__grid" fxLayout="row wrap" fxLayoutGap="8px grid" fxLayoutAlign="start stretch">
-    <div *ngFor="let action of actions" fxFlex="33" fxFlex.lt-lg="25" fxFlex.xs="50">
-      <a class="quick-actions__action"
+  <div class="quick-actions__grid bk-row bk-wrap bk-gap-8px bk-justify-start bk-items-stretch">
+    <div class="bk-flex-33 bk-flex-25-lt-lg bk-flex-50-xs" *ngFor="let action of actions">
+      <a class="quick-actions__action bk-col bk-justify-center bk-items-center bk-gap-6px"
          [routerLink]="action.route"
-         (click)="track(action)"
-         fxLayout="column"
-         fxLayoutAlign="center center"
-         fxLayoutGap="6px">
+         (click)="track(action)">
         <mat-icon>{{ action.icon }}</mat-icon>
         <span class="quick-actions__label">{{ action.label }}</span>
       </a>

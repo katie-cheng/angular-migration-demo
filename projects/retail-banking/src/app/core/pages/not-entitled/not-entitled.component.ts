@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'bk-not-entitled',
   template: `
-    <div class="not-entitled" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="12px" fxFill>
+    <div class="not-entitled bk-col bk-justify-center bk-items-center bk-gap-12px bk-fill">
       <mat-icon class="not-entitled__icon">lock</mat-icon>
       <h2>You do not have access to this area</h2>
       <p *ngIf="required">Access requires the {{ required }} entitlement.</p>

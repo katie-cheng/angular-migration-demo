@@ -65,12 +65,12 @@ cache after an accepted transfer.
 
 Fifteen lazily loaded feature areas behind entitlement guards, plus a
 dashboard and the core pages (login, step-up, not-entitled, not-found). The
-shell decides between a docked and an overlay sidenav using flex-layout's
-`MediaObserver`.
+shell decides between a docked and an overlay sidenav using the CDK
+`BreakpointObserver`.
 
-Layout across the app is expressed with `fxLayout` and friends rather than
-CSS, including the responsive `.lt-md` and `.lt-sm` suffixes. There are
-roughly eight hundred of these attributes in the templates.
+Layout is expressed with the `bk-*` utility classes from
+`projects/ui-kit/src/styles/_layout.scss`, which carry the flex-layout
+breakpoint aliases (`xs`, `lt-sm`, `lt-md`, `lt-lg`) as CSS media queries.
 
 ## Backend
 

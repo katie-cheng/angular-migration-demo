@@ -1,15 +1,15 @@
-<mat-card class="rewards-summary" fxLayout="column" fxLayoutGap="8px">
-  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+<mat-card class="rewards-summary bk-col bk-gap-8px">
+  <div class="bk-row bk-justify-start bk-items-center bk-gap-8px">
     <mat-icon class="rewards-summary__icon">redeem</mat-icon>
-    <h3 class="rewards-summary__title" fxFlex>Rewards</h3>
+    <h3 class="rewards-summary__title bk-flex">Rewards</h3>
   </div>
 
   <mat-divider></mat-divider>
 
-  <div fxLayout="row" fxLayoutAlign="space-between baseline">
+  <div class="bk-row bk-justify-space-between bk-items-baseline">
     <span class="rewards-summary__headline">{{ headline }}</span>
     <mat-spinner *ngIf="loading" diameter="16"></mat-spinner>
   </div>
 
-  <p class="rewards-summary__blurb" fxHide.lt-md>Cashback offers, points balance and redemption history.</p>
+  <p class="rewards-summary__blurb bk-hide-lt-md">Cashback offers, points balance and redemption history.</p>
 </mat-card>

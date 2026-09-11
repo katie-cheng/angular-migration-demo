@@ -3,14 +3,14 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'sbp-payroll-summary',
   template: `
-    <mat-card fxLayout="column" fxLayoutGap="8px" class="sbp-payroll">
+    <mat-card class="sbp-payroll bk-col bk-gap-8px">
       <h2>Payroll</h2>
       <mat-divider></mat-divider>
-      <div fxLayout="row" fxLayoutAlign="space-between center">
+      <div class="bk-row bk-justify-space-between bk-items-center">
         <span>Next run</span>
         <strong>28 of the month</strong>
       </div>
-      <div fxLayout="row" fxLayoutAlign="space-between center">
+      <div class="bk-row bk-justify-space-between bk-items-center">
         <span>Employees</span>
         <strong>14</strong>
       </div>

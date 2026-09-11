@@ -1,15 +1,15 @@
-<section class="disputes-detail" fxLayout="column" fxLayoutGap="16px">
+<section class="disputes-detail bk-col bk-gap-16px">
   <bk-breadcrumbs [crumbs]="crumbs"></bk-breadcrumbs>
 
-  <div *ngIf="loading" fxLayout="row" fxLayoutAlign="center center" class="disputes-detail__loading">
+  <div *ngIf="loading" class="disputes-detail__loading bk-row bk-justify-center bk-items-center">
     <mat-spinner diameter="36"></mat-spinner>
   </div>
 
   <ng-container *ngIf="dispute as dispute">
-    <mat-card class="disputes-detail__card" fxLayout="column" fxLayoutGap="12px">
-      <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between start" fxLayoutGap="12px">
-        <h2 class="disputes-detail__title" fxFlex>Dispute detail</h2>
-        <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="end center">
+    <mat-card class="disputes-detail__card bk-col bk-gap-12px">
+      <div class="bk-row bk-col-lt-md bk-justify-space-between bk-items-start bk-gap-12px">
+        <h2 class="disputes-detail__title bk-flex">Dispute detail</h2>
+        <div class="bk-row bk-gap-8px bk-justify-end bk-items-center">
           <button mat-stroked-button (click)="edit()">Edit</button>
           <button mat-raised-button color="warn" (click)="confirmRemove()">Remove</button>
         </div>
@@ -17,26 +17,26 @@
 
       <mat-divider></mat-divider>
 
-      <div class="disputes-detail__rows" fxLayout="column" fxLayoutGap="8px">
-      <div class="detail-row" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="8px">
-        <span class="detail-row__label" fxFlex="180px" fxFlex.lt-sm="auto">Transaction</span>
-        <span class="detail-row__value" fxFlex>{{ dispute.transactionRef }}</span>
+      <div class="disputes-detail__rows bk-col bk-gap-8px">
+      <div class="detail-row bk-row bk-col-lt-sm bk-gap-8px">
+        <span class="detail-row__label bk-flex-180px bk-flex-auto-lt-sm">Transaction</span>
+        <span class="detail-row__value bk-flex">{{ dispute.transactionRef }}</span>
       </div>
-      <div class="detail-row" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="8px">
-        <span class="detail-row__label" fxFlex="180px" fxFlex.lt-sm="auto">Reason</span>
-        <span class="detail-row__value" fxFlex>{{ dispute.reason }}</span>
+      <div class="detail-row bk-row bk-col-lt-sm bk-gap-8px">
+        <span class="detail-row__label bk-flex-180px bk-flex-auto-lt-sm">Reason</span>
+        <span class="detail-row__value bk-flex">{{ dispute.reason }}</span>
       </div>
-      <div class="detail-row" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="8px">
-        <span class="detail-row__label" fxFlex="180px" fxFlex.lt-sm="auto">Amount</span>
-        <span class="detail-row__value" fxFlex>{{ dispute.amount | currency:'GBP' }}</span>
+      <div class="detail-row bk-row bk-col-lt-sm bk-gap-8px">
+        <span class="detail-row__label bk-flex-180px bk-flex-auto-lt-sm">Amount</span>
+        <span class="detail-row__value bk-flex">{{ dispute.amount | currency:'GBP' }}</span>
       </div>
-      <div class="detail-row" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="8px">
-        <span class="detail-row__label" fxFlex="180px" fxFlex.lt-sm="auto">Raised</span>
-        <span class="detail-row__value" fxFlex>{{ dispute.raisedOn | date:'mediumDate' }}</span>
+      <div class="detail-row bk-row bk-col-lt-sm bk-gap-8px">
+        <span class="detail-row__label bk-flex-180px bk-flex-auto-lt-sm">Raised</span>
+        <span class="detail-row__value bk-flex">{{ dispute.raisedOn | date:'mediumDate' }}</span>
       </div>
-      <div class="detail-row" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="8px">
-        <span class="detail-row__label" fxFlex="180px" fxFlex.lt-sm="auto">Status</span>
-        <span class="detail-row__value" fxFlex><bk-status-pill [status]="dispute.status"></bk-status-pill></span>
+      <div class="detail-row bk-row bk-col-lt-sm bk-gap-8px">
+        <span class="detail-row__label bk-flex-180px bk-flex-auto-lt-sm">Status</span>
+        <span class="detail-row__value bk-flex"><bk-status-pill [status]="dispute.status"></bk-status-pill></span>
       </div>
       </div>
     </mat-card>

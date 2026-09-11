@@ -1,0 +1,264 @@
+// Layout utilities that replace @angular/flex-layout.
+//
+// The breakpoint aliases below are the ones flex-layout shipped with, so the
+// media queries here are the exact boundaries the templates used to resolve
+// through `fxLayout.lt-md`, `fxHide.xs` and friends.
+//
+//   xs     <  600px          lt-sm  <  600px        gt-xs  >=  600px
+//   sm     600 -  959px      lt-md  <  960px        gt-sm  >=  960px
+//   md     960 - 1279px      lt-lg  < 1280px        gt-md  >= 1280px
+//   lg    1280 - 1919px      lt-xl  < 1920px        gt-lg  >= 1920px
+//   xl    >= 1920px
+
+$bk-breakpoints: (
+  xs: '(max-width: 599.98px)',
+  sm: '(min-width: 600px) and (max-width: 959.98px)',
+  md: '(min-width: 960px) and (max-width: 1279.98px)',
+  lg: '(min-width: 1280px) and (max-width: 1919.98px)',
+  xl: '(min-width: 1920px)',
+  lt-sm: '(max-width: 599.98px)',
+  lt-md: '(max-width: 959.98px)',
+  lt-lg: '(max-width: 1279.98px)',
+  lt-xl: '(max-width: 1919.98px)',
+  gt-xs: '(min-width: 600px)',
+  gt-sm: '(min-width: 960px)',
+  gt-md: '(min-width: 1280px)',
+  gt-lg: '(min-width: 1920px)'
+);
+
+@mixin bk-respond-to($alias) {
+  @if not map-has-key($bk-breakpoints, $alias) {
+    @error 'Unknown breakpoint alias: #{$alias}';
+  }
+
+  @media #{map-get($bk-breakpoints, $alias)} {
+    @content;
+  }
+}
+
+$bk-responsive-aliases: xs, lt-sm, lt-md, lt-lg;
+$bk-gaps: 2px, 4px, 6px, 8px, 10px, 12px, 16px, 20px, 24px;
+$bk-flex-percents: 25, 33, 34, 40, 45, 50, 60, 66, 100;
+$bk-flex-widths: 120px, 180px, 240px, 300px;
+
+// ---------------------------------------------------------------- containers
+
+.bk-row,
+.bk-col {
+  display: flex;
+  box-sizing: border-box;
+}
+
+.bk-row {
+  flex-direction: row;
+}
+
+.bk-col {
+  flex-direction: column;
+}
+
+.bk-wrap {
+  flex-wrap: wrap;
+}
+
+.bk-fill {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+@each $alias in $bk-responsive-aliases {
+  .bk-col-#{$alias} {
+    @include bk-respond-to($alias) {
+      display: flex;
+      box-sizing: border-box;
+      flex-direction: column;
+      flex-wrap: nowrap;
+    }
+  }
+
+  .bk-row-#{$alias} {
+    @include bk-respond-to($alias) {
+      display: flex;
+      box-sizing: border-box;
+      flex-direction: row;
+    }
+  }
+}
+
+// --------------------------------------------------------------------- gaps
+
+@each $gap in $bk-gaps {
+  .bk-gap-#{$gap} {
+    gap: $gap;
+  }
+}
+
+@each $alias in $bk-responsive-aliases {
+  @each $gap in $bk-gaps {
+    .bk-gap-#{$gap}-#{$alias} {
+      @include bk-respond-to($alias) {
+        gap: $gap;
+      }
+    }
+  }
+}
+
+// ---------------------------------------------------------------- alignment
+
+$bk-justify: (
+  start: flex-start,
+  center: center,
+  end: flex-end,
+  space-between: space-between,
+  space-around: space-around,
+  space-evenly: space-evenly
+);
+
+$bk-items: (
+  start: flex-start,
+  center: center,
+  end: flex-end,
+  stretch: stretch,
+  baseline: baseline
+);
+
+@each $name, $value in $bk-justify {
+  .bk-justify-#{$name} {
+    justify-content: $value;
+  }
+}
+
+@each $name, $value in $bk-items {
+  .bk-items-#{$name} {
+    align-items: $value;
+    align-content: if($name == baseline, stretch, $value);
+  }
+}
+
+@each $alias in $bk-responsive-aliases {
+  @each $name, $value in $bk-justify {
+    .bk-justify-#{$name}-#{$alias} {
+      @include bk-respond-to($alias) {
+        justify-content: $value;
+      }
+    }
+  }
+
+  @each $name, $value in $bk-items {
+    .bk-items-#{$name}-#{$alias} {
+      @include bk-respond-to($alias) {
+        align-items: $value;
+        align-content: if($name == baseline, stretch, $value);
+      }
+    }
+  }
+}
+
+// -------------------------------------------------------------- flex items
+
+@mixin bk-flex-basis($basis, $max: null, $min: null) {
+  flex: 1 1 $basis;
+  box-sizing: border-box;
+  max-width: $max;
+  min-width: $min;
+}
+
+// Bare `fxFlex`: grow from a zero basis.
+.bk-flex {
+  flex: 1 1 0%;
+  box-sizing: border-box;
+}
+
+.bk-flex-auto {
+  flex: 1 1 auto;
+  box-sizing: border-box;
+  max-width: none;
+  min-width: 0;
+}
+
+// `fxFlex="grow"` was `flex: 1 1 100%` capped at the container width.
+.bk-flex-grow {
+  @include bk-flex-basis(100%, 100%);
+}
+
+@each $percent in $bk-flex-percents {
+  .bk-flex-#{$percent} {
+    @include bk-flex-basis(100%, percentage($percent * 0.01));
+  }
+}
+
+@each $width in $bk-flex-widths {
+  .bk-flex-#{$width} {
+    flex: 0 0 $width;
+    box-sizing: border-box;
+    max-width: $width;
+    min-width: $width;
+  }
+}
+
+@each $alias in $bk-responsive-aliases {
+  .bk-flex-auto-#{$alias} {
+    @include bk-respond-to($alias) {
+      flex: 1 1 auto;
+      box-sizing: border-box;
+      max-width: none;
+      min-width: 0;
+    }
+  }
+
+  @each $percent in $bk-flex-percents {
+    .bk-flex-#{$percent}-#{$alias} {
+      @include bk-respond-to($alias) {
+        flex: 1 1 100%;
+        box-sizing: border-box;
+        max-width: percentage($percent * 0.01);
+        min-width: 0;
+      }
+    }
+  }
+
+  @each $width in $bk-flex-widths {
+    .bk-flex-#{$width}-#{$alias} {
+      @include bk-respond-to($alias) {
+        flex: 0 0 $width;
+        box-sizing: border-box;
+        max-width: $width;
+        min-width: $width;
+      }
+    }
+  }
+}
+
+// ----------------------------------------------------------- show and hide
+
+// flex-layout hid elements with `display: none !important`; keep the weight so
+// component styles that set a display do not win.
+.bk-hide {
+  display: none !important;
+}
+
+@each $alias in $bk-responsive-aliases {
+  .bk-hide-#{$alias} {
+    @include bk-respond-to($alias) {
+      display: none !important;
+    }
+  }
+}
+
+// `fxShow.<alias>` paired with `fxHide`: revert to the element's own display.
+@each $alias in $bk-responsive-aliases {
+  .bk-show-#{$alias} {
+    @include bk-respond-to($alias) {
+      display: revert !important;
+    }
+  }
+
+  .bk-show-flex-#{$alias} {
+    @include bk-respond-to($alias) {
+      display: flex !important;
+    }
+  }
+}

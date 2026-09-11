@@ -1,10 +1,10 @@
-<mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center">
+<mat-toolbar class="bk-row bk-justify-space-between bk-items-center" color="primary">
   <span>Northwind Wealth</span>
-  <span fxHide.lt-md>Adviser: {{ advisor }}</span>
+  <span class="bk-hide-lt-md">Adviser: {{ advisor }}</span>
 </mat-toolbar>
 
-<main class="wa-shell" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="16px">
-  <wa-client-book fxFlex></wa-client-book>
+<main class="wa-shell bk-row bk-col-lt-md bk-gap-16px">
+  <wa-client-book class="bk-flex"></wa-client-book>
 </main>
 
 <router-outlet></router-outlet>

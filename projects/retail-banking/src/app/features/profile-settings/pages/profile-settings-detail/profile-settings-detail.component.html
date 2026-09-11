@@ -1,15 +1,15 @@
-<section class="profile-settings-detail" fxLayout="column" fxLayoutGap="16px">
+<section class="profile-settings-detail bk-col bk-gap-16px">
   <bk-breadcrumbs [crumbs]="crumbs"></bk-breadcrumbs>
 
-  <div *ngIf="loading" fxLayout="row" fxLayoutAlign="center center" class="profile-settings-detail__loading">
+  <div *ngIf="loading" class="profile-settings-detail__loading bk-row bk-justify-center bk-items-center">
     <mat-spinner diameter="36"></mat-spinner>
   </div>
 
   <ng-container *ngIf="preference as preference">
-    <mat-card class="profile-settings-detail__card" fxLayout="column" fxLayoutGap="12px">
-      <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between start" fxLayoutGap="12px">
-        <h2 class="profile-settings-detail__title" fxFlex>Preference detail</h2>
-        <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="end center">
+    <mat-card class="profile-settings-detail__card bk-col bk-gap-12px">
+      <div class="bk-row bk-col-lt-md bk-justify-space-between bk-items-start bk-gap-12px">
+        <h2 class="profile-settings-detail__title bk-flex">Preference detail</h2>
+        <div class="bk-row bk-gap-8px bk-justify-end bk-items-center">
           <button mat-stroked-button (click)="edit()">Edit</button>
           <button mat-raised-button color="warn" (click)="confirmRemove()">Remove</button>
         </div>
@@ -17,18 +17,18 @@
 
       <mat-divider></mat-divider>
 
-      <div class="profile-settings-detail__rows" fxLayout="column" fxLayoutGap="8px">
-      <div class="detail-row" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="8px">
-        <span class="detail-row__label" fxFlex="180px" fxFlex.lt-sm="auto">Setting</span>
-        <span class="detail-row__value" fxFlex>{{ preference.label }}</span>
+      <div class="profile-settings-detail__rows bk-col bk-gap-8px">
+      <div class="detail-row bk-row bk-col-lt-sm bk-gap-8px">
+        <span class="detail-row__label bk-flex-180px bk-flex-auto-lt-sm">Setting</span>
+        <span class="detail-row__value bk-flex">{{ preference.label }}</span>
       </div>
-      <div class="detail-row" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="8px">
-        <span class="detail-row__label" fxFlex="180px" fxFlex.lt-sm="auto">Value</span>
-        <span class="detail-row__value" fxFlex>{{ preference.value }}</span>
+      <div class="detail-row bk-row bk-col-lt-sm bk-gap-8px">
+        <span class="detail-row__label bk-flex-180px bk-flex-auto-lt-sm">Value</span>
+        <span class="detail-row__value bk-flex">{{ preference.value }}</span>
       </div>
-      <div class="detail-row" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="8px">
-        <span class="detail-row__label" fxFlex="180px" fxFlex.lt-sm="auto">Updated</span>
-        <span class="detail-row__value" fxFlex>{{ preference.updatedOn | date:'mediumDate' }}</span>
+      <div class="detail-row bk-row bk-col-lt-sm bk-gap-8px">
+        <span class="detail-row__label bk-flex-180px bk-flex-auto-lt-sm">Updated</span>
+        <span class="detail-row__value bk-flex">{{ preference.updatedOn | date:'mediumDate' }}</span>
       </div>
       </div>
     </mat-card>

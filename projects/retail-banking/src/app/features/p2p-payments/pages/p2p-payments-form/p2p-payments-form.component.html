@@ -1,22 +1,22 @@
-<section class="p2p-payments-form" fxLayout="column" fxLayoutGap="16px">
+<section class="p2p-payments-form bk-col bk-gap-16px">
   <h1 class="p2p-payments-form__title">{{ editing ? 'Edit' : 'New' }} payment</h1>
 
   <mat-card>
-    <form [formGroup]="form" (ngSubmit)="submit()" fxLayout="column" fxLayoutGap="12px">
-      <div fxLayout="row wrap" fxLayoutGap="16px grid" fxLayout.lt-md="column">
-      <mat-form-field appearance="legacy" fxFlex="50" fxFlex.lt-md="100">
+    <form class="bk-col bk-gap-12px" [formGroup]="form" (ngSubmit)="submit()">
+      <div class="bk-row bk-wrap bk-gap-16px bk-col-lt-md">
+      <mat-form-field class="bk-flex-50 bk-flex-100-lt-md" appearance="legacy">
         <mat-label>Recipient</mat-label>
         <input matInput formControlName="recipient" />
         <mat-error *ngIf="form.controls['recipient'].hasError('required')">Recipient is required</mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="legacy" fxFlex="50" fxFlex.lt-md="100">
+      <mat-form-field class="bk-flex-50 bk-flex-100-lt-md" appearance="legacy">
         <mat-label>Handle</mat-label>
         <input matInput formControlName="handle" />
         <mat-error *ngIf="form.controls['handle'].hasError('required')">Handle is required</mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="legacy" fxFlex="50" fxFlex.lt-md="100">
+      <mat-form-field class="bk-flex-50 bk-flex-100-lt-md" appearance="legacy">
         <mat-label>Amount</mat-label>
         <input matInput type="number" formControlName="amount" />
         <span matPrefix *ngIf="true">&pound;&nbsp;</span>
@@ -25,7 +25,7 @@
 
       <mat-divider></mat-divider>
 
-      <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="8px" fxLayoutAlign.lt-sm="stretch stretch">
+      <div class="bk-row bk-justify-end bk-items-center bk-gap-8px bk-justify-start-lt-sm bk-items-stretch-lt-sm">
         <button mat-stroked-button type="button" (click)="cancel()">Cancel</button>
         <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid || saving">
           {{ saving ? 'Saving...' : 'Save' }}

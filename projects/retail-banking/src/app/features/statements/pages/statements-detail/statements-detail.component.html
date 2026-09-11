@@ -1,33 +1,33 @@
-<section class="statements-detail" fxLayout="column" fxLayoutGap="16px">
+<section class="statements-detail bk-col bk-gap-16px">
   <bk-breadcrumbs [crumbs]="crumbs"></bk-breadcrumbs>
 
-  <div *ngIf="loading" fxLayout="row" fxLayoutAlign="center center" class="statements-detail__loading">
+  <div *ngIf="loading" class="statements-detail__loading bk-row bk-justify-center bk-items-center">
     <mat-spinner diameter="36"></mat-spinner>
   </div>
 
   <ng-container *ngIf="statement as statement">
-    <mat-card class="statements-detail__card" fxLayout="column" fxLayoutGap="12px">
-      <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between start" fxLayoutGap="12px">
-        <h2 class="statements-detail__title" fxFlex>Statement detail</h2>
-        <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="end center">
+    <mat-card class="statements-detail__card bk-col bk-gap-12px">
+      <div class="bk-row bk-col-lt-md bk-justify-space-between bk-items-start bk-gap-12px">
+        <h2 class="statements-detail__title bk-flex">Statement detail</h2>
+        <div class="bk-row bk-gap-8px bk-justify-end bk-items-center">
           <button mat-stroked-button (click)="back()">Back</button>
         </div>
       </div>
 
       <mat-divider></mat-divider>
 
-      <div class="statements-detail__rows" fxLayout="column" fxLayoutGap="8px">
-      <div class="detail-row" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="8px">
-        <span class="detail-row__label" fxFlex="180px" fxFlex.lt-sm="auto">Period</span>
-        <span class="detail-row__value" fxFlex>{{ statement.period }}</span>
+      <div class="statements-detail__rows bk-col bk-gap-8px">
+      <div class="detail-row bk-row bk-col-lt-sm bk-gap-8px">
+        <span class="detail-row__label bk-flex-180px bk-flex-auto-lt-sm">Period</span>
+        <span class="detail-row__value bk-flex">{{ statement.period }}</span>
       </div>
-      <div class="detail-row" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="8px">
-        <span class="detail-row__label" fxFlex="180px" fxFlex.lt-sm="auto">Issued</span>
-        <span class="detail-row__value" fxFlex>{{ statement.issuedOn | date:'mediumDate' }}</span>
+      <div class="detail-row bk-row bk-col-lt-sm bk-gap-8px">
+        <span class="detail-row__label bk-flex-180px bk-flex-auto-lt-sm">Issued</span>
+        <span class="detail-row__value bk-flex">{{ statement.issuedOn | date:'mediumDate' }}</span>
       </div>
-      <div class="detail-row" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="8px">
-        <span class="detail-row__label" fxFlex="180px" fxFlex.lt-sm="auto">Format</span>
-        <span class="detail-row__value" fxFlex>{{ statement.format }}</span>
+      <div class="detail-row bk-row bk-col-lt-sm bk-gap-8px">
+        <span class="detail-row__label bk-flex-180px bk-flex-auto-lt-sm">Format</span>
+        <span class="detail-row__value bk-flex">{{ statement.format }}</span>
       </div>
       </div>
     </mat-card>

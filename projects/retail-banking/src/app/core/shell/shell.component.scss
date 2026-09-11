@@ -1,4 +1,6 @@
 .shell {
+  display: flex;
+  flex-direction: column;
   height: 100vh;
 
   &__toolbar {
@@ -12,6 +14,8 @@
   }
 
   &__container {
+    flex: 1 1 auto;
+    min-height: 0;
     background: transparent;
   }
 

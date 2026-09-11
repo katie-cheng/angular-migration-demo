@@ -1,15 +1,15 @@
-<section class="onboarding-detail" fxLayout="column" fxLayoutGap="16px">
+<section class="onboarding-detail bk-col bk-gap-16px">
   <bk-breadcrumbs [crumbs]="crumbs"></bk-breadcrumbs>
 
-  <div *ngIf="loading" fxLayout="row" fxLayoutAlign="center center" class="onboarding-detail__loading">
+  <div *ngIf="loading" class="onboarding-detail__loading bk-row bk-justify-center bk-items-center">
     <mat-spinner diameter="36"></mat-spinner>
   </div>
 
   <ng-container *ngIf="application as application">
-    <mat-card class="onboarding-detail__card" fxLayout="column" fxLayoutGap="12px">
-      <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between start" fxLayoutGap="12px">
-        <h2 class="onboarding-detail__title" fxFlex>Application detail</h2>
-        <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="end center">
+    <mat-card class="onboarding-detail__card bk-col bk-gap-12px">
+      <div class="bk-row bk-col-lt-md bk-justify-space-between bk-items-start bk-gap-12px">
+        <h2 class="onboarding-detail__title bk-flex">Application detail</h2>
+        <div class="bk-row bk-gap-8px bk-justify-end bk-items-center">
           <button mat-stroked-button (click)="edit()">Edit</button>
           <button mat-raised-button color="warn" (click)="confirmRemove()">Remove</button>
         </div>
@@ -17,22 +17,22 @@
 
       <mat-divider></mat-divider>
 
-      <div class="onboarding-detail__rows" fxLayout="column" fxLayoutGap="8px">
-      <div class="detail-row" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="8px">
-        <span class="detail-row__label" fxFlex="180px" fxFlex.lt-sm="auto">Product</span>
-        <span class="detail-row__value" fxFlex>{{ application.product }}</span>
+      <div class="onboarding-detail__rows bk-col bk-gap-8px">
+      <div class="detail-row bk-row bk-col-lt-sm bk-gap-8px">
+        <span class="detail-row__label bk-flex-180px bk-flex-auto-lt-sm">Product</span>
+        <span class="detail-row__value bk-flex">{{ application.product }}</span>
       </div>
-      <div class="detail-row" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="8px">
-        <span class="detail-row__label" fxFlex="180px" fxFlex.lt-sm="auto">Stage</span>
-        <span class="detail-row__value" fxFlex>{{ application.stage }}</span>
+      <div class="detail-row bk-row bk-col-lt-sm bk-gap-8px">
+        <span class="detail-row__label bk-flex-180px bk-flex-auto-lt-sm">Stage</span>
+        <span class="detail-row__value bk-flex">{{ application.stage }}</span>
       </div>
-      <div class="detail-row" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="8px">
-        <span class="detail-row__label" fxFlex="180px" fxFlex.lt-sm="auto">Started</span>
-        <span class="detail-row__value" fxFlex>{{ application.startedOn | date:'mediumDate' }}</span>
+      <div class="detail-row bk-row bk-col-lt-sm bk-gap-8px">
+        <span class="detail-row__label bk-flex-180px bk-flex-auto-lt-sm">Started</span>
+        <span class="detail-row__value bk-flex">{{ application.startedOn | date:'mediumDate' }}</span>
       </div>
-      <div class="detail-row" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="8px">
-        <span class="detail-row__label" fxFlex="180px" fxFlex.lt-sm="auto">Status</span>
-        <span class="detail-row__value" fxFlex><bk-status-pill [status]="application.status"></bk-status-pill></span>
+      <div class="detail-row bk-row bk-col-lt-sm bk-gap-8px">
+        <span class="detail-row__label bk-flex-180px bk-flex-auto-lt-sm">Status</span>
+        <span class="detail-row__value bk-flex"><bk-status-pill [status]="application.status"></bk-status-pill></span>
       </div>
       </div>
     </mat-card>
