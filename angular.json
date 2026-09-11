@@ -232,10 +232,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "retail-banking:build:production"
+              "buildTarget": "retail-banking:build:production"
             },
             "development": {
-              "browserTarget": "retail-banking:build:development"
+              "buildTarget": "retail-banking:build:development"
             }
           },
           "defaultConfiguration": "development",
@@ -246,7 +246,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "retail-banking:build"
+            "buildTarget": "retail-banking:build"
           }
         },
         "test": {
@@ -344,10 +344,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "small-business-portal:build:production"
+              "buildTarget": "small-business-portal:build:production"
             },
             "development": {
-              "browserTarget": "small-business-portal:build:development"
+              "buildTarget": "small-business-portal:build:development"
             }
           },
           "defaultConfiguration": "development",
@@ -358,7 +358,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "small-business-portal:build"
+            "buildTarget": "small-business-portal:build"
           }
         },
         "test": {
@@ -456,10 +456,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "wealth-advisor:build:production"
+              "buildTarget": "wealth-advisor:build:production"
             },
             "development": {
-              "browserTarget": "wealth-advisor:build:development"
+              "buildTarget": "wealth-advisor:build:development"
             }
           },
           "defaultConfiguration": "development",
@@ -470,7 +470,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "wealth-advisor:build"
+            "buildTarget": "wealth-advisor:build"
           }
         },
         "test": {
