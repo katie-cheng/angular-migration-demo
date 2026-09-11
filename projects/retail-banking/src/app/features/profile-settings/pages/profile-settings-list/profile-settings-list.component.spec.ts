@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -7,6 +7,7 @@ import { of, throwError } from 'rxjs';
 
 import { ProfileSettingsListComponent } from './profile-settings-list.component';
 import { ProfileSettingsService } from '../../profile-settings.service';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('ProfileSettingsListComponent', () => {
   let fixture: ComponentFixture<ProfileSettingsListComponent>;
@@ -19,9 +20,9 @@ describe('ProfileSettingsListComponent', () => {
 
     await TestBed.configureTestingModule({
       declarations: [ProfileSettingsListComponent],
-      imports: [HttpClientTestingModule, ReactiveFormsModule, RouterTestingModule],
-      providers: [{ provide: ProfileSettingsService, useValue: service }],
       schemas: [NO_ERRORS_SCHEMA],
+      imports: [ReactiveFormsModule, RouterTestingModule],
+      providers: [{ provide: ProfileSettingsService, useValue: service }, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
     }).compileComponents();
 
     fixture = TestBed.createComponent(ProfileSettingsListComponent);

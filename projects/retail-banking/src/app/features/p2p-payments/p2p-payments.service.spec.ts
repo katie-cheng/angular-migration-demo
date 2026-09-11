@@ -1,7 +1,8 @@
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 
 import { P2pPaymentsService } from './p2p-payments.service';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('P2pPaymentsService', () => {
   let service: P2pPaymentsService;
@@ -9,8 +10,7 @@ describe('P2pPaymentsService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [P2pPaymentsService],
+      providers: [P2pPaymentsService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
     });
     service = TestBed.inject(P2pPaymentsService);
     http = TestBed.inject(HttpTestingController);

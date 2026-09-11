@@ -1,10 +1,11 @@
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 
 import { AUTH_CONFIG, DEFAULT_AUTH_CONFIG } from './auth.config';
 import { AuthService } from './auth.service';
 import { LoginResponse, Session } from './auth.models';
 import { SessionStore } from './session-store.service';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 function loginResponse(overrides: Partial<LoginResponse> = {}): LoginResponse {
   return {
@@ -33,8 +34,7 @@ describe('AuthService', () => {
   beforeEach(() => {
     window.localStorage.clear();
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [{ provide: AUTH_CONFIG, useValue: DEFAULT_AUTH_CONFIG }],
+      providers: [{ provide: AUTH_CONFIG, useValue: DEFAULT_AUTH_CONFIG }, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
     });
     service = TestBed.inject(AuthService);
     http = TestBed.inject(HttpTestingController);

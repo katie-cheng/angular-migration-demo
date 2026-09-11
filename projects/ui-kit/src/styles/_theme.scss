@@ -6,17 +6,17 @@
 // The component paint below is expressed with public Material APIs only:
 // component inputs, the element/attribute selectors Material publishes as a
 // component's API, overlay panel classes we own, and design tokens.
+//
+// Theming system: Material 2 (`mat.m2-*`). Angular Material 18 ships the
+// Material 3 theme API alongside M2 and keeps M2 fully supported; this theme
+// deliberately stays on M2 so the version upgrade does not change how the
+// three applications look. Moving to `mat.define-theme` / M3 is a design
+// decision with its own review and is tracked in docs/KNOWN-DEBT.md.
 
 @use '@angular/material' as mat;
 
-// TODO(v15): As of v15 mat.legacy-core no longer includes default typography styles.
-//  The following line adds:
-//    1. Default typography styles for all components
-//    2. Styles for typography hierarchy classes (e.g. .mat-headline-1)
-//  If you specify typography styles for the components you use elsewhere, you should delete this line.
-//  If you don't need the default component typographies but still want the hierarchy styles,
-//  you can delete this line and instead use:
-//    `@include mat.legacy-typography-hierarchy(mat.define-typography-config());`
+// Default typography styles for all components plus the typography hierarchy
+// classes (e.g. .mat-headline-1) the applications use directly.
 @include mat.all-component-typographies();
 @include mat.core();
 
@@ -70,23 +70,23 @@ $bk-accent-palette: (
   ),
 );
 
-$bk-primary: mat.define-palette($bk-primary-palette, 500);
-$bk-accent: mat.define-palette($bk-accent-palette, 500);
-$bk-warn: mat.define-palette(mat.$red-palette, 700);
+$bk-primary: mat.m2-define-palette($bk-primary-palette, 500);
+$bk-accent: mat.m2-define-palette($bk-accent-palette, 500);
+$bk-warn: mat.m2-define-palette(mat.$m2-red-palette, 700);
 
-$bk-typography: mat.define-typography-config(
+$bk-typography: mat.m2-define-typography-config(
   $font-family: '"Inter", "Helvetica Neue", Arial, sans-serif',
-  $headline-5: mat.define-typography-level(28px, 36px, 600),
-  $headline-6: mat.define-typography-level(20px, 28px, 600),
-  $subtitle-1: mat.define-typography-level(16px, 24px, 500),
-  $body-2: mat.define-typography-level(14px, 22px, 400),
-  $caption: mat.define-typography-level(12px, 18px, 400),
-  $button: mat.define-typography-level(14px, 36px, 600, $letter-spacing: 0.2px),
+  $headline-5: mat.m2-define-typography-level(28px, 36px, 600),
+  $headline-6: mat.m2-define-typography-level(20px, 28px, 600),
+  $subtitle-1: mat.m2-define-typography-level(16px, 24px, 500),
+  $body-2: mat.m2-define-typography-level(14px, 22px, 400),
+  $caption: mat.m2-define-typography-level(12px, 18px, 400),
+  $button: mat.m2-define-typography-level(14px, 36px, 600, $letter-spacing: 0.2px),
 );
 
 // Density -1 is the step that keeps form fields and the paginator at the
 // compact heights this design system asks for.
-$bk-theme: mat.define-light-theme(
+$bk-theme: mat.m2-define-light-theme(
   (
     color: (
       primary: $bk-primary,
@@ -100,7 +100,7 @@ $bk-theme: mat.define-light-theme(
 
 // The shell chrome stays at the default density; only the in-page components
 // are compacted.
-$bk-shell-theme: mat.define-light-theme(
+$bk-shell-theme: mat.m2-define-light-theme(
   (
     color: (
       primary: $bk-primary,

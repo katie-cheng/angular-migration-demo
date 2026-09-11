@@ -1,8 +1,9 @@
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 
 import { LegacyCoreProvider } from './legacy-core.provider';
 import { DEFAULT_PROVIDER_ROUTING, PROVIDER_ROUTING } from './provider.tokens';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('LegacyCoreProvider', () => {
   let provider: LegacyCoreProvider;
@@ -11,8 +12,7 @@ describe('LegacyCoreProvider', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [{ provide: PROVIDER_ROUTING, useValue: DEFAULT_PROVIDER_ROUTING }],
+      providers: [{ provide: PROVIDER_ROUTING, useValue: DEFAULT_PROVIDER_ROUTING }, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
     });
     provider = TestBed.inject(LegacyCoreProvider);
     http = TestBed.inject(HttpTestingController);

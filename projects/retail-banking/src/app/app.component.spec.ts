@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -8,6 +8,7 @@ import { AnalyticsService, RouteAnalytics } from 'analytics-sdk';
 import { AuthService, SessionStore } from 'auth';
 
 import { AppComponent } from './app.component';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('AppComponent', () => {
   let analytics: jasmine.SpyObj<AnalyticsService>;
@@ -18,8 +19,9 @@ describe('AppComponent', () => {
     routeAnalytics = jasmine.createSpyObj<RouteAnalytics>('RouteAnalytics', ['start']);
 
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule],
       declarations: [AppComponent],
+      schemas: [NO_ERRORS_SCHEMA],
+      imports: [RouterTestingModule],
       providers: [
         { provide: AnalyticsService, useValue: analytics },
         { provide: RouteAnalytics, useValue: routeAnalytics },
@@ -28,8 +30,9 @@ describe('AppComponent', () => {
           provide: SessionStore,
           useValue: { changes: () => of(null), events: () => of() },
         },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
       ],
-      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   });
 
