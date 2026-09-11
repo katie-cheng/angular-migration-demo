@@ -101,7 +101,11 @@ export class SessionStore implements OnDestroy {
     }
     try {
       const parsed = JSON.parse(raw) as Session;
-      if (parsed && parsed.tokens && parsed.tokens.expiresAt > Date.now()) {
+      const usable =
+        !!parsed &&
+        !!parsed.tokens &&
+        (parsed.tokens.expiresAt > Date.now() || !!parsed.tokens.refreshToken);
+      if (usable) {
         this.session$.next(parsed);
       } else {
         window.localStorage.removeItem(this.config.storageKey);

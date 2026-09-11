@@ -24,7 +24,22 @@ export async function readSession(page: Page): Promise<Record<string, unknown> |
   return raw ? JSON.parse(raw) : null;
 }
 
-export async function capturedTelemetry(page: Page): Promise<Array<{ events: Array<{ name: string }> }>> {
+export async function capturedTelemetry(
+  page: Page,
+  correlationId?: string
+): Promise<Array<{ events: Array<{ name: string; correlationId?: string }> }>> {
   const response = await page.request.get('http://localhost:4300/api/telemetry/_captured');
-  return response.json();
+  const batches = (await response.json()) as Array<{
+    events: Array<{ name: string; correlationId?: string }>;
+  }>;
+  if (!correlationId) {
+    return batches;
+  }
+  // The collector is shared by every worker, so scope to this session.
+  return batches
+    .map((batch) => ({
+      ...batch,
+      events: (batch.events || []).filter((event) => event.correlationId === correlationId),
+    }))
+    .filter((batch) => batch.events.length > 0);
 }

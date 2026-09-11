@@ -11,6 +11,7 @@ export class AccountTileComponent {
   @Input() accountNumber: string = '';
   @Input() balance: number = 0;
   @Input() available: number = 0;
+  @Input() currency: string = 'GBP';
   @Output() readonly opened = new EventEmitter<string>();
 
   get maskedNumber(): string {

@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-import { capturedTelemetry, signIn } from './fixtures';
+import { capturedTelemetry, readSession, signIn } from './fixtures';
 
 test.describe('analytics', () => {
   test('sends nothing until consent is granted', async ({ page }) => {
@@ -8,7 +8,9 @@ test.describe('analytics', () => {
     await signIn(page);
     await page.goto('/rewards');
 
-    const batches = await capturedTelemetry(page);
+    const session = await readSession(page);
+    const correlationId = String((session as any)?.correlationId);
+    const batches = await capturedTelemetry(page, correlationId);
     const names = batches.flatMap((batch) => (batch.events || []).map((event) => event.name));
     expect(names).not.toContain('page_view');
   });

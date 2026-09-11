@@ -18,7 +18,7 @@ test.describe('session lifecycle', () => {
     });
 
     await page.goto('/accounts');
-    await expect(page.getByRole('heading', { name: /accounts/i })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1, name: /accounts/i })).toBeVisible();
 
     const session = await readSession(page);
     expect(String((session as any)?.tokens?.accessToken)).toContain('mock-access');

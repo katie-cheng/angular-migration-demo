@@ -5,7 +5,7 @@ import { signIn } from './fixtures';
 test.describe('provider adapters', () => {
   test('shows ledger balances as major units', async ({ page }) => {
     await signIn(page);
-    await expect(page.getByText(/£2,483\.19/)).toBeVisible();
+    await expect(page.locator('.bk-account-tile__balance', { hasText: '£2,483.19' })).toBeVisible();
   });
 
   test('lists open accounts and leaves closed ones out of the dashboard', async ({ page }) => {
